@@ -1,7 +1,7 @@
-Aysha Plan & Timeline
-Role: In-between; second hand for both front and backend, as well as site features.
+#Aysha Plan & Timeline
+#Role: In-between; second hand for both front and backend, as well as site features.
 
-Toggle Button - Estimate: 1hr
+##Toggle Button - Estimate: 1hr
 [ ] Find appropriate documentation
 [ ] Implement code block with project
 
