@@ -33,21 +33,24 @@ Text that can be added by a user to another user's post.  Admin can delete comme
 ### User
 Read-only, registered, and admin are different user-roles.  Certain roles have certain permissions.
 
-## 4. High Level Requirement
+## 4. High Level Requirements
 
-> - View posts (anyone).
-> - Create an outfit (MEMBER, ADMIN).
-> - Edit an outfit (MEMBER, ADMIN).
-> - Post an outfit (MEMBER, ADMIN).
-> - Delete (hide) an outfit (MEMBER, ADMIN).
-> - Take down a post (MEMBER, ADMIN).
-> - Delete a post (ADMIN).
-> - Comment on a post (MEMBER, ADMIN).
-> - Delete a comment (ADMIN).
+- View posts (anyone).
+- Create an outfit (MEMBER, ADMIN).
+- Edit an outfit (MEMBER, ADMIN).
+- Post an outfit (MEMBER, ADMIN).
+- Delete (hide) an outfit (MEMBER, ADMIN).
+- Take down a post (MEMBER, ADMIN).
+- Delete a post (ADMIN).
+- Comment on a post (MEMBER, ADMIN).
+- Delete a comment (ADMIN).
 
 ## 5. User Stories/Scenarios
+
 As a casual user, I want to view all outfits so I can see what I can incorporate in my own personal style.
+
 As an authenticated user, I want to create an outfit so I can save it for future viewing.
+
 As an administrator, I want to have the option to modify the Forum so we can have a clean, fun experience for all.
 
 ### Create an outfit
