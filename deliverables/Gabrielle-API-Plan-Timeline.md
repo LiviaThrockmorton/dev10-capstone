@@ -4,14 +4,14 @@ API Plan with TimeLine
 ## Duck-[Estimate: 2hrs]
 ### Model
 ### Data
-[ ] Mapper
-[ ] JdbcTemplateRepository
+[] Mapper
+[] JdbcTemplateRepository
 [ ] Repository(Interface)
 [ ] JdbcTemplateRepositoryTest
-###Domain
+### Domain
 [ ] Service
 [ ] ServiceTest
-###Controller
+### Controller
 
 ## Outfit -[Estimate: 2hrs]
 ### Model
@@ -45,10 +45,10 @@ API Plan with TimeLine
 [ ] JdbcTemplateRepository
 [ ] Repository(Interface)
 [ ] JdbcTemplateRepositoryTest
-###Domain
+### Domain
 [ ] Service
 [ ] ServiceTest
-###Controller
+### Controller
 
 ## Clothing Item -[Estimate: 2hrs]
 ### Model
@@ -87,6 +87,7 @@ API Plan with TimeLine
 
 
 ## Database  -[Estimate: 3hrs]
+### Create schema diagram
 ### Use Model category to create tables
 ### include app_user, app_role, app_user_role
 
