@@ -5,13 +5,13 @@ Toggle Button - Estimate: 1hr
 [ ] Find appropriate documentation
 [ ] Implement code block with project
 
-Animations = Estimate: 2hrs
+Animations - Estimate: 2hrs
 [ ] Find appropriate documentation
 [ ] Decide animation style(s) for necessary objects
     - Which direction would the animation begin? 
-[ ] 
+    - Which pages?
  
- Miscellaneous Site Features:
+ Miscellaneous Site Features - Estimate: ~4hrs
  [ ] Centered prompt for the home page
  [ ] the Forum: comment cards + user. stream it. or use a Feature List. or a Post.
  [ ] Hide/Unhide button for deletion - use a bagde 
