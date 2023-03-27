@@ -1,5 +1,17 @@
-# *API Plan with TimeLine*
-# Learn Lombok: [Estimate: 2hrs]
+# **API Plan with TimeLine**
+
+
+----------------------------------
+## Database  -[Estimate: 3hrs]
+### Create schema diagram
+### Use Model category to create tables
+### include app_user, app_role, app_user_role
+--------------------------------------------
+
+
+# Learn Lombok?: [Estimate: 2hrs]
+
+___________________________
 # Objects: 
 ## Duck-[Estimate: 2hrs]
 ### Model
@@ -75,6 +87,7 @@
 -  ServiceTest
 ### Controller
 
+================
 
 
 
@@ -86,17 +99,12 @@
 ### Validations.java (in domain package)  -[Estimate: 2hrs]
 
 
-## Database  -[Estimate: 3hrs]
-### Create schema diagram
-### Use Model category to create tables
-### include app_user, app_role, app_user_role
-
 ## App.java  -[Estimate: 0.25 hrs]
 ### SpringApplication.run
 
 
 ## TestHelper.java
-### if needed
+> if needed
 
 ## HTTP Requests  -[Estimate: 3hrs]
 ## Pom.xml   -[Estimate: .25hrs]
