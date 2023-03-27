@@ -4,76 +4,76 @@ API Plan with TimeLine
 ## Duck-[Estimate: 2hrs]
 ### Model
 ### Data
-[] Mapper
-[] JdbcTemplateRepository
-[ ] Repository(Interface)
-[ ] JdbcTemplateRepositoryTest
+####  Mapper
+####  JdbcTemplateRepository
+####  Repository(Interface)
+####  JdbcTemplateRepositoryTest
 ### Domain
-[ ] Service
-[ ] ServiceTest
+####  Service
+####  ServiceTest
 ### Controller
 
 ## Outfit -[Estimate: 2hrs]
 ### Model
 ### Data
-[ ] Mapper
-[ ] JdbcTemplateRepository
-[ ] Repository(Interface)
-[ ] JdbcTemplateRepositoryTest
+####  Mapper
+####  JdbcTemplateRepository
+####  Repository(Interface)
+####  JdbcTemplateRepositoryTest
 ### Domain
-[ ] Service
-[ ] ServiceTest
-###Controller
+####  Service
+####  ServiceTest
+### Controller
 
 ## UserOutfit -[Estimate: 2hrs]
 ### Model
 ### Data
-[ ] Mapper
-[ ] JdbcTemplateRepository
-[ ] Repository(Interface)
-[ ] JdbcTemplateRepositoryTest
+####  Mapper
+####  JdbcTemplateRepository
+####  Repository(Interface)
+####  JdbcTemplateRepositoryTest
 ### Domain
-[ ] Service
-[ ] ServiceTest
+####  Service
+####  ServiceTest
 ### Controller
 
 
 ## Users -[Estimate: 2hrs]
 ### Model
 ### Data
-[ ] Mapper
-[ ] JdbcTemplateRepository
-[ ] Repository(Interface)
-[ ] JdbcTemplateRepositoryTest
+####  Mapper
+####  JdbcTemplateRepository
+####  Repository(Interface)
+####  JdbcTemplateRepositoryTest
 ### Domain
-[ ] Service
-[ ] ServiceTest
+####  Service
+####  ServiceTest
 ### Controller
 
 ## Clothing Item -[Estimate: 2hrs]
 ### Model
 ### Data
-[ ] Mapper
-[ ] JdbcTemplateRepository
-[ ] Repository(Interface)
-[ ] JdbcTemplateRepositoryTest
+####  Mapper
+####  JdbcTemplateRepository
+####  Repository(Interface)
+####  JdbcTemplateRepositoryTest
 ### Domain
-[ ] Service
-[ ] ServiceTest
-###Controller
+####  Service
+####  ServiceTest
+### Controller
 
 
 ## Comment -[Estimate: 2hrs]
 ### Model
 ### Data
-[ ] Mapper
-[ ] JdbcTemplateRepository
-[ ] Repository(Interface)
-[ ] JdbcTemplateRepositoryTest
+####  Mapper
+####  JdbcTemplateRepository
+####  Repository(Interface)
+####  JdbcTemplateRepositoryTest
 ### Domain
-[ ] Service
-[ ] ServiceTest
-###Controller
+####  Service
+####  ServiceTest
+### Controller
 
 
 
