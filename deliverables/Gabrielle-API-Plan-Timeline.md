@@ -99,11 +99,11 @@ ___________________________
 ### - Validations.java (in domain package)  -[Estimate: 2hrs]
 
 ## - App.java  -[Estimate: 0.25 hrs]
-### - SpringApplication.run
+### -- SpringApplication.run
 
 
 ## TestHelper.java
-*if needed*
+> *if needed*
 -------------------------------
 ## - HTTP Requests  -[Estimate: 3hrs]
 ## - Pom.xml   -[Estimate: .25hrs]
@@ -111,9 +111,10 @@ ___________________________
 
 ## - Security:  -[Estimate: 4hrs]
 
+______________________________________
+----------------------------------
 
-
-Total Time Estimation: 31.5hrs*
-*Please note I am notoriously bad at estimating how long a task takes
+# Total Time Estimation: 31.5hrs*
+## *Please note I am notoriously bad at estimating how long a task takes
 
 
