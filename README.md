@@ -50,7 +50,7 @@ As a casual user, I want to view all outfits so I can see what I can incorporate
 As an authenticated user, I want to create an outfit so I can save it for future viewing.
 As an administrator, I want to have the option to modify the Forum so we can have a clean, fun experience for all.
 
-Create an outfit
+### Create an outfit
 - Create an outfit that users can save.
 - Suggested data:
     - Duck (character)
@@ -60,12 +60,12 @@ Create an outfit
 - Precondition: User must be logged in with the “signed in”/“registered user” role
 - Post-condition: If the user is “registered”, the outfit can be saved.
 
-Delete an outfit
+### Delete an outfit
 - Delete an outfit of your own that had been saved.
 - Precondition: User must be logged in with the “signed in”/“registered user” role OR If user is logged in as “ADMIN”, any outfit can be deleted.
 - Post-condition: Data is not deleted, just hidden just in case the user changes their mind. *VISIBLE TO THE ADMIN*
 
-Add comment to Forum
+### Add comment to Forum
 - The Forum is a place for other “registered users” to share their outfits with the community
 - Suggested data:
     - commentId
@@ -75,7 +75,7 @@ Add comment to Forum
 - Precondition: Precondition: User must be logged in with the “signed in”/“registered user” role
 - Post-condition: If the user is “registered”, the comment will be saved and posted to the Forum
 
-Delete comment from Forum
+### Delete comment from Forum
 - The Forum is a place for other “registered users” to share their outfits with the community
 - Suggested data:
     - commentId
@@ -85,7 +85,7 @@ Delete comment from Forum
 - Precondition: User must be logged in with the “signed in”/“registered user” role OR If user is logged in as “ADMIN”, any comment from any user can be deleted.
 - Post-condition: If the user is “registered”, the comment will be deleted. 
 
-Browse Outfits
+### Browse Outfits
 - How to display the outfits:
     - Outfits saved will be posted in the Forum 
     - If the user is NOT “registered” or “ADMIN”, they can only view the Forum and scroll through the outfits saved.
