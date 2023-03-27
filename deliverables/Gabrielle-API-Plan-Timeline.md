@@ -106,7 +106,7 @@ Module 10-Slides 1-10
 
 
 
-Total Time Estimation: 31.5hrs##
-##Please note I am notoriously bad at estimating how long a task takes
+Total Time Estimation: 31.5hrs*
+*Please note I am notoriously bad at estimating how long a task takes
 
 
