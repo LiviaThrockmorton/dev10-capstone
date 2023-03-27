@@ -19,14 +19,73 @@ Sara is tired of playing dress-up by herself.  She wants to play with new clothe
 Hance likes playing computer games and seeing different art styles.  He especially likes games with animals.  He plays Dress-Up Duck to see how it compares to other online games, and decides to keep his outfits to himself because he doesn't feel like reading comments or making comments.
 
 ## 3. Glossary
+
 ### Duck
+A character that can be dressed up.  A user can choose from multiple characters before creating an outfit.
 ### Outfit
+A collection of a duck and clothing items.  An outfit requires at least one clothing item, but no more than three.  Outfits can be saved by a user that is signed-in, and once a user saves an oufit they can post it if they choose.
 ### Clothing Item
+Hats, shirts, and bottoms that can be worn by a duck.  Clothing items can be combined in multiple ways, but there can only be one of each kind.
 ### Post
+An outfit that is made public for anyone to see.  Comments can be made on posts.
 ### Comment
+Text that can be added by a user to another user's post.  Admin can delete comments.
 ### User
+Read-only, registered, and admin are different user-roles.  Certain roles have certain permissions.
+
+## 4. High Level Requirement
+
+> - View posts (anyone).
+> - Create an outfit (MEMBER, ADMIN).
+> - Edit an outfit (MEMBER, ADMIN).
+> - Post an outfit (MEMBER, ADMIN).
+> - Delete (hide) an outfit (MEMBER, ADMIN).
+> - Take down a post (MEMBER, ADMIN).
+> - Delete a post (ADMIN).
+> - Comment on a post (MEMBER, ADMIN).
+> - Delete a comment (ADMIN).
 
 ## 5. User Stories/Scenarios
 As a casual user, I want to view all outfits so I can see what I can incorporate in my own personal style.
 As an authenticated user, I want to create an outfit so I can save it for future viewing.
 As an administrator, I want to have the option to modify the Forum so we can have a clean, fun experience for all.
+
+Create an outfit
+- Create an outfit that users can save.
+- Suggested data:
+    - Duck (character)
+    - Shirt, pants, hat (outfit has to include *at least* one clothing item)
+    - outfitId (an outfitId is needed, because we’ll need to get that Id for the Forum)
+    - userId (obvious need)
+- Precondition: User must be logged in with the “signed in”/“registered user” role
+- Post-condition: If the user is “registered”, the outfit can be saved.
+
+Delete an outfit
+- Delete an outfit of your own that had been saved.
+- Precondition: User must be logged in with the “signed in”/“registered user” role OR If user is logged in as “ADMIN”, any outfit can be deleted.
+- Post-condition: Data is not deleted, just hidden just in case the user changes their mind. *VISIBLE TO THE ADMIN*
+
+Add comment to Forum
+- The Forum is a place for other “registered users” to share their outfits with the community
+- Suggested data:
+    - commentId
+    - userId
+    - outfitId
+    - dateTime (to show when a comment was posted)
+- Precondition: Precondition: User must be logged in with the “signed in”/“registered user” role
+- Post-condition: If the user is “registered”, the comment will be saved and posted to the Forum
+
+Delete comment from Forum
+- The Forum is a place for other “registered users” to share their outfits with the community
+- Suggested data:
+    - commentId
+    - userId
+    - outfitId
+    - dateTime (to show when a comment was posted)
+- Precondition: User must be logged in with the “signed in”/“registered user” role OR If user is logged in as “ADMIN”, any comment from any user can be deleted.
+- Post-condition: If the user is “registered”, the comment will be deleted. 
+
+Browse Outfits
+- How to display the outfits:
+    - Outfits saved will be posted in the Forum 
+    - If the user is NOT “registered” or “ADMIN”, they can only view the Forum and scroll through the outfits saved.
