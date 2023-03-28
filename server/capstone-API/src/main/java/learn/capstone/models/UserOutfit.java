@@ -9,6 +9,15 @@ public class UserOutfit {
 
     private int outfitId;
 
+    private Outfit outfit;
+
+    public Outfit getOutfit() {
+        return outfit;
+    }
+
+    public void setOutfit(Outfit outfit) {
+        this.outfit = outfit;
+    }
 
     public int getAppUserId() {
         return appUserId;

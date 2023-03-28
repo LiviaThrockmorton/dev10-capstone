@@ -7,9 +7,9 @@ import java.util.List;
 public class Outfit {
 
     private int outfitId;
-    private String shirtId;
-    private String pantsId;
-    private String hatId;
+    private int shirtId;
+    private int pantsId;
+    private int hatId;
     private LocalDate dateCreated;
     private int duckId;
     private List<ClothingItem> items = new ArrayList<>();
@@ -33,27 +33,27 @@ public class Outfit {
         this.outfitId = outfitId;
     }
 
-    public String getShirtId() {
+    public int getShirtId() {
         return shirtId;
     }
 
-    public void setShirtId(String shirtId) {
+    public void setShirtId(int shirtId) {
         this.shirtId = shirtId;
     }
 
-    public String getPantsId() {
+    public int getPantsId() {
         return pantsId;
     }
 
-    public void setPantsId(String pantsId) {
+    public void setPantsId(int pantsId) {
         this.pantsId = pantsId;
     }
 
-    public String getHatId() {
+    public int getHatId() {
         return hatId;
     }
 
-    public void setHatId(String hatId) {
+    public void setHatId(int hatId) {
         this.hatId = hatId;
     }
 

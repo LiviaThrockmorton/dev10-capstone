@@ -53,13 +53,7 @@ public class Comment {
         this.outfitId = outfitId;
     }
 
-    public String getRegion() {
-        return dateTime;
-    }
 
-    public void setRegion(String dateTime) {
-        this.dateTime = dateTime;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -74,4 +68,12 @@ public class Comment {
         return Objects.hash(commentId, userId, content, outfitId, dateTime, hidden);
     }
 
-}
+    public String getDateTime() {
+        return dateTime;
+    }
+
+    public void setDateTime(String dateTime) {
+        this.dateTime = dateTime;
+    }}
+
+
