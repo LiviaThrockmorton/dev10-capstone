@@ -30,7 +30,7 @@ create table app_user_authority (
 		foreign key (app_authority_id)
 		references app_authority(app_authority_id)
 );
- 
+
 -- data
 insert into app_authority (`name`) values
 	('USER'),
