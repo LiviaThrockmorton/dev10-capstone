@@ -8,7 +8,7 @@ duck_id int primary key auto_increment,
 duck_image varchar(1000),
 hidden bit not null default(1)
 );
- 
+
 create table app_user (
 app_user_id int primary key auto_increment,
 username varchar(100) not null unique,
