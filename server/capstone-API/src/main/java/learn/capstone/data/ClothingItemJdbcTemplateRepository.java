@@ -1,14 +1,17 @@
 package learn.capstone.data;
 
 
+import learn.capstone.data.mappers.ClothingItemMapper;
 import learn.capstone.models.ClothingItem;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.PreparedStatement;
 import java.sql.Statement;
+import java.util.List;
 
 @Repository
 public class ClothingItemJdbcTemplateRepository implements ClothingItemRepository {
@@ -19,11 +22,44 @@ public class ClothingItemJdbcTemplateRepository implements ClothingItemRepositor
         this.jdbcTemplate = jdbcTemplate;
     }
 
+
+
+    @Override
+    public List<ClothingItem> findByType(String itemType) {
+
+        final String sql = "select item_id, clothing_item_image, hidden "
+                + "from clothing_item "
+                + "where item_type = ?;";
+
+        return jdbcTemplate.query(sql, new ClothingItemMapper(), itemType);
+    }
+
+    @Override
+    @Transactional
+    public ClothingItem findById(int itemId) {
+
+        final String sql = "select item_type, clothing_item_image, hidden "
+                + "from clothing_item "
+                + "where item_id = ?;";
+
+        ClothingItem clothingItem = jdbcTemplate.query(sql, new ClothingItemMapper(), itemId).stream()
+                .findFirst().orElse(null);
+
+
+
+        return clothingItem;
+    }
+
+
+
+
+
+
     @Override
     public ClothingItem add(ClothingItem item) {
 
-        String sql = "insert into item (`item_type`, clothingItemImage, outfit_id) " +
-                "values (?,?,?);";
+        String sql = "insert into clothing_item (item_id, item_type, clothing_item_image, hidden) values\n" +
+                "(?, ?, ?, ?);";
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
 
@@ -45,14 +81,12 @@ public class ClothingItemJdbcTemplateRepository implements ClothingItemRepositor
 
     public boolean update(ClothingItem item) {
 
-        String sql = "update item set " +
-                "`item_type` = ?, " +
-                "clothingItemImage = ? " +
-                "where item_id = ?;";
+        String sql = "update item set item_type = ?, clothing_item_image = ?, hidden = ? where item_id = ?;";
 
         return jdbcTemplate.update(sql,
                 item.getItemType(),
                 item.getClothingItemImage(),
+                item.getHidden(),
                 item.getItemId()) > 0;
     }
 
