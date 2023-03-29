@@ -1,7 +1,7 @@
 # Livia Scheduled Tasks
 
 ## Tuesday March 28th, 2023
-- Wireframe 3hrs
+- X Wireframe 3hrs
 - SVG and Canvas research and prototyping 5hrs
 
 ## Wednesday March 29th, 2023
