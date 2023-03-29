@@ -36,3 +36,10 @@
     transform: rotate(360deg);
   }
 }
+
+.rectangle {
+  fill:red;
+  stroke:black;
+  stroke-width:5;
+  opacity:0.5;
+}

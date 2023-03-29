@@ -2,12 +2,12 @@
 
 ## Tuesday March 28th, 2023
 - X Wireframe 3hrs
-- SVG and Canvas research and prototyping 5hrs
+- X SVG and Canvas research and prototyping 5hrs
 
 ## Wednesday March 29th, 2023
 - SVG and Canvas prototyping 2hrs
-- Create react app and general setup 2hrs
-- Make nav and components for each page, connect with router 2hrs
+- X Create react app and general setup 2hrs
+- X Make nav and components for each page, connect with router 2hrs
 
 ## Thursday March 30th, 2023
 - Implement bootswatch 1hr
@@ -42,6 +42,7 @@
 ## Thursday April 6th, 2023
 - Work on presentation 3hrs
 - Refine clothing items, maybe add a few more 5hrs
+- Make site icon
 
 ## Friday April 7th, 2023
 - Present!
