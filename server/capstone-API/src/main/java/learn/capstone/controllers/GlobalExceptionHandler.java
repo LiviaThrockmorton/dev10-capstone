@@ -1,23 +1,30 @@
 package learn.capstone.controllers;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.web.HttpMediaTypeNotSupportedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+
 @ControllerAdvice
 public class GlobalExceptionHandler {
-
-    // TODO what other exception types should we handle?
-
-    // "Catch all" handler
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<ErrorResponse> handleException(DataIntegrityViolationException ex) {
+        return ErrorResponse.build("Something went wrong in the database. " +
+                "Please ensure that any referenced records exist. Your request failed. :(");
+    }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<ErrorResponse> handleException(Exception ex) {
-        // TODO log this exception
+    public ResponseEntity<ErrorResponse> handleException(Exception ex) throws Exception {
+        // log this error...
 
-        return new ResponseEntity<>(
-                new ErrorResponse("Sorry, something unexpected went wrong."),
-                HttpStatus.INTERNAL_SERVER_ERROR);
+        if (ex instanceof HttpMessageNotReadableException || ex instanceof HttpMediaTypeNotSupportedException) {
+            throw ex; // return
+        }
+
+        return ErrorResponse.build("Something went wrong on our end. Your request failed. :(");
     }
 }
