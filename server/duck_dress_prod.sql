@@ -30,7 +30,7 @@ outfit_id int primary key auto_increment,
 duck_id int not null,
 app_user_id int not null,
 date_created date not null,
-clothing_items varchar(1000),
+item_id int not null,
 posted bit not null,
 hidden bit not null,
 	constraint fk_duck_id
@@ -38,7 +38,10 @@ hidden bit not null,
         references duck(duck_id),
 	constraint fk_app_user_id
 		foreign key (app_user_id)
-        references app_user(app_user_id)
+        references app_user(app_user_id),
+	constraint fk_item_id
+		foreign key (item_id)
+        references clothing_item(item_id)
 );
 
 create table user_outfit (
