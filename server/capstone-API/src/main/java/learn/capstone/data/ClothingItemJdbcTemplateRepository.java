@@ -27,7 +27,7 @@ public class ClothingItemJdbcTemplateRepository implements ClothingItemRepositor
     @Override
     public List<ClothingItem> findByType(String itemType) {
 
-        final String sql = "select item_id, clothing_item_image, hidden "
+        final String sql = "select item_id, item_type, clothing_item_image, hidden "
                 + "from clothing_item "
                 + "where item_type = ?;";
 
@@ -38,7 +38,7 @@ public class ClothingItemJdbcTemplateRepository implements ClothingItemRepositor
     @Transactional
     public ClothingItem findById(int itemId) {
 
-        final String sql = "select item_type, clothing_item_image, hidden "
+        final String sql = "select item_id, item_type, clothing_item_image, hidden "
                 + "from clothing_item "
                 + "where item_id = ?;";
 
@@ -58,8 +58,8 @@ public class ClothingItemJdbcTemplateRepository implements ClothingItemRepositor
     @Override
     public ClothingItem add(ClothingItem item) {
 
-        String sql = "insert into clothing_item (item_id, item_type, clothing_item_image, hidden) values\n" +
-                "(?, ?, ?, ?);";
+        String sql = "insert into clothing_item (item_type, clothing_item_image, hidden) values\n" +
+                "(?, ?, ?);";
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
 
@@ -81,7 +81,7 @@ public class ClothingItemJdbcTemplateRepository implements ClothingItemRepositor
 
     public boolean update(ClothingItem item) {
 
-        String sql = "update item set item_type = ?, clothing_item_image = ?, hidden = ? where item_id = ?;";
+        String sql = "update clothing_item set item_type = ?, clothing_item_image = ?, hidden = ? where item_id = ?;";
 
         return jdbcTemplate.update(sql,
                 item.getItemType(),
@@ -91,7 +91,7 @@ public class ClothingItemJdbcTemplateRepository implements ClothingItemRepositor
     }
 
     public boolean deleteById(int itemId) {
-        String sql = "delete from item where item_id = ?;";
+        String sql = "delete from clothing_item where item_id = ?;";
         return jdbcTemplate.update(sql, itemId) > 0;
     }
 }
