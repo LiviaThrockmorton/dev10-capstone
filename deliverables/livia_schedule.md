@@ -5,7 +5,7 @@
 - X SVG and Canvas research and prototyping 5hrs
 
 ## Wednesday March 29th, 2023
-- SVG and Canvas prototyping 2hrs
+- X SVG and Canvas prototyping 2hrs
 - X Create react app and general setup 2hrs
 - X Make nav and components for each page, connect with router 2hrs
 
