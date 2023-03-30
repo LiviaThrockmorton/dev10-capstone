@@ -33,7 +33,7 @@ public class DuckService {
         }
 
         if (duck.getDuckId() != 0) {
-            result.addMessage("duckId cannot be set for `add` operation", ResultType.INVALID);
+            result.addMessage("Id cannot be set for `add` operation", ResultType.INVALID);
             return result;
         }
 
@@ -49,12 +49,12 @@ public class DuckService {
         }
 
         if (duck.getDuckId() <= 0) {
-            result.addMessage("Security Clearance Id must be set for `update` operation", ResultType.INVALID);
+            result.addMessage("Duck Id must be set for `update` operation", ResultType.INVALID);
             return result;
         }
 
         if (!repository.update(duck)) {
-            String msg = String.format("Security ClearanceId: %s, not found", duck.getDuckId());
+            String msg = String.format("Duck Id: %s, not found", duck.getDuckId());
             result.addMessage(msg, ResultType.NOT_FOUND);
         }
 
@@ -68,7 +68,7 @@ public class DuckService {
         }
 
         if (!repository.deleteById(duckId)) {
-            String msg = String.format("Security ClearanceId: %s, not found", duckId);
+            String msg = String.format("Duck Id: %s, not found", duckId);
             result.addMessage(msg, ResultType.NOT_FOUND);
         }
 
@@ -84,7 +84,7 @@ public class DuckService {
         Result<Duck> result = new Result<>();
         int count = repository.getUsageCount(duckId);
         if(count >0){
-            result.addMessage("This Security Clearance is in use in " + count + " places. It cannot be deleted at this time.", ResultType.INVALID);
+            result.addMessage("This Duck is in use in " + count + " outfits. It cannot be deleted at this time.", ResultType.INVALID);
         }
         return result;
     }
@@ -95,25 +95,13 @@ public class DuckService {
     private Result<Duck> validate(Duck duck) {
         Result<Duck> result = new Result<>();
         if (duck == null) {
-            result.addMessage("Security Clearance cannot be null", ResultType.INVALID);
+            result.addMessage("Duck cannot be null", ResultType.INVALID);
             return result;
         }
 
         if (Validations.isNullOrBlank(duck.getDuckImage())) {
-            result.addMessage("Security Clearance duckImage is required", ResultType.INVALID);
+            result.addMessage("Image is required", ResultType.INVALID);
         }
-
-        List<Duck> existingDucks = repository.findAll();
-        for(Duck sc : existingDucks){
-            //if ids don't match
-            if(sc.getDuckId() !=duck.getDuckId()){
-                //duckImages can't match
-                if(duck.getDuckImage().equalsIgnoreCase(sc.getDuckImage())){
-                    result.addMessage("This security clearance duckImage already exists. To make changes, please update the existing security clearance.", ResultType.INVALID);
-                }
-            }
-        }
-
 
         return result;
 

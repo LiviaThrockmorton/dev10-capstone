@@ -10,6 +10,8 @@ public interface OutfitRepository {
 
     Outfit findById(int outfitId);
 
+//    Outfit findByUser(int outfitId);
+
     Outfit add(Outfit outfit);
 
     boolean update(Outfit outfit);

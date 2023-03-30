@@ -12,7 +12,8 @@ public class DuckMapper implements RowMapper<Duck> {
     public Duck mapRow(ResultSet resultSet, int i) throws SQLException {
         Duck duck = new Duck();
         duck.setDuckId(resultSet.getInt("duck_id"));
-        duck.setDuckImage(resultSet.getString("duck_duckImage"));
+        duck.setDuckImage(resultSet.getString("duck_image"));
+        duck.setHidden(resultSet.getBoolean("hidden"));
         return duck;
     }
 }

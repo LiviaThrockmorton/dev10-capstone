@@ -19,6 +19,9 @@ public class OutfitMapper implements RowMapper<Outfit> {
             outfit.setDateCreated(resultSet.getDate("dateCreated").toLocalDate());
         }
         outfit.setDuckId(resultSet.getInt("duck_id"));
+        outfit.setPosted(resultSet.getBoolean("posted"));
+        outfit.setHidden(resultSet.getBoolean("hidden"));
+
         return outfit;
     }
 }

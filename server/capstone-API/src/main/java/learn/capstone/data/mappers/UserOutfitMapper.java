@@ -12,7 +12,7 @@ public class UserOutfitMapper  implements RowMapper<UserOutfit> {
     public UserOutfit mapRow(ResultSet resultSet, int i) throws SQLException {
 
         UserOutfit UserOutfit = new UserOutfit();
-        UserOutfit.setAppUserId(resultSet.getInt("appUser_id"));
+        UserOutfit.setAppUserId(resultSet.getInt("app_user_id"));
 
         OutfitMapper outfitMapper = new OutfitMapper();
         UserOutfit.setOutfit(outfitMapper.mapRow(resultSet, i));
