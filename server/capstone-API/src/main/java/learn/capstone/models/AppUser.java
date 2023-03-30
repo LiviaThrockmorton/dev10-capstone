@@ -39,11 +39,22 @@ import java.util.List;
         public AppUser() {
         }
 
-        public AppUser(String username, String password, Collection<String> authorityNames) {
+        public AppUser(int appUserId, String username, String password, ArrayList<GrantedAuthority> authorities, String email, boolean hidden, List<UserOutfit> outfits,  Collection<String> authorityNames) {
+            this.appUserId = appUserId;
             this.username = username;
             this.password = password;
+            this.authorities = authorities;
+            this.email = email;
+            this.hidden = hidden;
+            this.outfits = outfits;
             addAuthorities(authorityNames);
         }
+
+//        public AppUser(String username, String password, Collection<String> authorityNames) {
+//            this.username = username;
+//            this.password = password;
+//            addAuthorities(authorityNames);
+//        }
 
         public int getAppUserId() {
             return appUserId;

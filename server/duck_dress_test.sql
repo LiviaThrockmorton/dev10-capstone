@@ -97,12 +97,12 @@ delete from outfit;
 alter table outfit auto_increment = 1;
 
 -- inserts
-insert into outfit (outfit_id, shirt_id, pants_id, hat_id, date, duck_id, posted, app_user_id, hidden) values
-(1, 1, 1, 1, 03-28-2023, 1, true, 1, false),
-(2, 2, 3, 5, 03-21-2023, 2, true, 2, true),
-(3, 3, 5, 4, 02-28-2023, 3, false, 3, false),
-(4, 5, 2, 3, 01-02-2023, 4, true, 4, true),
-(5, 4, 4, 2, 11-28-2022, 5, false, 5, false);
+insert into outfit (outfit_id, shirt_id, pants_id, hat_id, date_created, duck_id, posted, hidden) values
+(1, 1, 1, 1, 03-28-2023, 1, true, false),
+(2, 2, 3, 5, 03-21-2023, 2, true, true),
+(3, 3, 5, 4, 02-28-2023, 3, false, false),
+(4, 5, 2, 3, 01-02-2023, 4, true, true),
+(5, 4, 4, 2, 11-28-2022, 5, false, false);
 
 insert into comments (comment_id, user_id, content, outfit_id, date_time, hidden) values
 (1, 1, 'I really liked my duck! So cute.', 1, 03-28-2023, 0),
