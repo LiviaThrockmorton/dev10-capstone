@@ -2,7 +2,7 @@ use duck_dress_test;
 
 -- Change this later ^^^ 
 -- use duck_dress_prod
-
+-- also remember to change in the application.properties! 
 
 drop table if exists app_user_role;
 drop table if exists app_role;
