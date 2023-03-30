@@ -10,7 +10,7 @@
 - X Make nav and components for each page, connect with router 2hrs
 
 ## Thursday March 30th, 2023
-- Implement bootswatch 1hr
+- X Implement bootswatch 1hr
 - Create service and fetch posts 3hrs
 - Homepage 2hrs
 - Create account 3hrs
