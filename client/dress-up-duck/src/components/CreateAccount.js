@@ -37,7 +37,7 @@ function CreateAccount() {
                     <Link to="/login" className="btn btn-outline-secondary">here</Link>
                 </h5>
 
-                <form>
+                <form onSubmit={handleSubmit}>
                     <div className="form-group">
                         <label htmlFor="username">Username:</label>
                         <input type="text" onChange={(event) => setUsername(event.target.value)} className="form-control mb-4" id="username" placeholder="Enter a unique username" />
@@ -58,7 +58,7 @@ function CreateAccount() {
                         <input type="enail" onChange={(event) => setEmail(event.target.value)} className="form-control mb-4" id="email" />
                     </div>
 
-                    <button type="submit" className="btn btn-primary" onClick={handleSubmit}>Submit</button>
+                    <button type="submit" className="btn btn-primary">Submit</button>
                 </form>
 
                 <p id="validatePassword" className="text-danger d-none">Passwords don't match, try again</p>

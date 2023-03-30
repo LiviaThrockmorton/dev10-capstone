@@ -20,7 +20,7 @@ function Login() {
                     <Link to="/create-account" className="btn btn-outline-secondary">here</Link>
                 </h5>
 
-                <form>
+                <form onSubmit={handleSubmit}>
                     <div className="form-group">
                         <label htmlFor="username">Username:</label>
                         <input type="text" onChange={(event) => setUsername(event.target.value)} className="form-control mb-4" id="username" />
@@ -31,10 +31,10 @@ function Login() {
                         <input type="password" onChange={(event) => setPassword(event.target.value)} className="form-control mb-4" id="password" />
                     </div>
 
-                    <button type="submit" className="btn btn-primary" onClick={handleSubmit}>Submit</button>
+                    <button type="submit" className="btn btn-primary">Submit</button>
                 </form>
 
-                <p id="validatePassword" className="text-danger d-none">Passwords don't match, try again</p>
+                <p id="validate" className="text-danger d-none">Login attempt failed, try again</p>
             </div>
 
 

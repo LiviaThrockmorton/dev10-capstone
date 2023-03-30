@@ -10,11 +10,13 @@ function Home() {
                     <h5 className="text-center">Create new outfits, get inspiration from others, and more</h5>
                 </div>
 
-                <div className="col-6 bg-image" style={{ backgroundImage: `url(${background})` }}>
-                    <Link to="/create-account" className="btn btn-primary">Sign Up</Link>
-                    <Link to="/login" className="btn btn-primary">Log In</Link>
-                    <Link to="/forum" className="btn btn-primary">Forum</Link>
-                    <Link to="/dress-up-duck" className="btn btn-primary">Dress Up!</Link>
+                <div className="col-6 bg-image" style={{ backgroundImage: `url(${background})`, backgroundPosition: "center", backgroundSize: "cover", height: "1000px" }}>
+                    <div className="d-flex align-items-center flex-column mt-5" style={{ backgroundColor: "rgba(255,255,255, .75)"}}>
+                        <Link to="/create-account" className="btn btn-primary mb-4 mt-5">Sign Up</Link>
+                        <Link to="/login" className="btn btn-primary mb-4">Log In</Link>
+                        <Link to="/forum" className="btn btn-primary mb-4">Forum</Link>
+                        <Link to="/dress-up-duck" className="btn btn-primary mb-4">Dress Up!</Link>
+                    </div>
                 </div>
             </div>
         </div>
