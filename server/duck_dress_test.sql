@@ -18,6 +18,16 @@ hidden bit not null default(1)
 -- hidden bit not null default(1)
 -- );
 
+create table app_user (
+	app_user_id int primary key auto_increment,
+    username varchar(50) not null unique,
+    password_hash varchar(2048) not null,     
+-- authorities varchar(100),           
+	email varchar(260),
+	hidden bit not null default(1),
+	enabled bit not null default(1)
+);
+
 create table clothing_item (
 item_id int primary key auto_increment,
 item_type varchar(50),
