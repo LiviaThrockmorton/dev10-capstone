@@ -14,14 +14,17 @@ import java.util.List;
         private String username;
         private String password;
         private ArrayList<GrantedAuthority> authorities = new ArrayList<>();
+        private String email;
 
-        public String getEmail() {
-            return email;
-        }
 
-        public void setEmail(String email) {
-            this.email = email;
-        }
+
+        private boolean hidden;
+
+
+        // TODO I think this is supposed to be here?
+        private List<UserOutfit> outfits = new ArrayList<>();
+
+
 
         public List<UserOutfit> getOutfits() {
             return outfits;
@@ -31,8 +34,7 @@ import java.util.List;
             this.outfits = outfits;
         }
 
-        private String email;
-        private List<UserOutfit> outfits = new ArrayList<>();
+
 
         public AppUser() {
         }
@@ -58,6 +60,23 @@ import java.util.List;
         public void setPassword(String password) {
             this.password = password;
         }
+
+        public String getEmail() {
+            return email;
+        }
+
+        public void setEmail(String email) {
+            this.email = email;
+        }
+
+        public boolean getHidden() {
+            return hidden;
+        }
+
+        public void setHidden(boolean hidden) {
+            this.hidden = hidden;
+        }
+
 
         @Override
         public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -93,6 +112,7 @@ import java.util.List;
         public boolean isEnabled() {
             return true;
         }
+
 
         public void addAuthorities(Collection<String> authorityNames) {
             authorities.clear();

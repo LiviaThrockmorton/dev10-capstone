@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
-import static learn.capstone.TestHelper.makeOutfit;
 import static learn.capstone.TestHelper.makeResult;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
@@ -26,9 +25,9 @@ class ClothingItemServiceTest {
 
     @Test
     void shouldAdd() {
-        Result<ClothingItem> expected = makeResult(new ClothingItem(0, "Shirt", "ClothingItemImage", true));
+        Result<ClothingItem> expected = makeResult(new ClothingItem(7, "Shirt", "ClothingItemImage", true));
 
-        when(itemRepository.add(any())).thenReturn(new ClothingItem(0, "Shirt", "ClothingItemImage", true));
+        when(itemRepository.add(any())).thenReturn(new ClothingItem(7, "Shirt", "ClothingItemImage", true));
 
 
         ClothingItem arg = new ClothingItem(0, "Shirt", "ClothingItemImage", true);

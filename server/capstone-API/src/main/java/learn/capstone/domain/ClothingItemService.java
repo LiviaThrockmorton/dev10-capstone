@@ -81,7 +81,7 @@ public class ClothingItemService {
             result.addMessage("Image is required", ResultType.INVALID);
             return result;
         }
-        if ((!item.getItemType().equalsIgnoreCase("hat")) || (!item.getItemType().equalsIgnoreCase("pants")) ||(!item.getItemType().equalsIgnoreCase("shirt"))){
+        if (!(item.getItemType().equalsIgnoreCase("hat") || item.getItemType().equalsIgnoreCase("pants") ||item.getItemType().equalsIgnoreCase("shirt"))){
             result.addMessage("Invalid item, only hat, pants, and shirt are allowed.", ResultType.INVALID);
             return result;
         }
