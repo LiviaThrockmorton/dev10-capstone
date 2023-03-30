@@ -9,13 +9,23 @@ duck_image varchar(1000),
 hidden bit not null default(1)
 );
 
+-- create table app_user (
+-- app_user_id int primary key auto_increment,
+-- username varchar(100) not null unique,
+-- password_hash varchar(100),
+-- authorities varchar(100),
+-- email varchar(260),
+-- hidden bit not null default(1)
+-- );
+
 create table app_user (
-app_user_id int primary key auto_increment,
-username varchar(100) not null unique,
-password_hash varchar(100),
-authorities varchar(100),
-email varchar(260),
-hidden bit not null default(1)
+	app_user_id int primary key auto_increment,
+    username varchar(50) not null unique,
+    password_hash varchar(2048) not null,     
+-- authorities varchar(100),           
+	email varchar(260),
+	hidden bit not null default(1),
+	enabled bit not null default(1)
 );
 
 create table clothing_item (
@@ -28,7 +38,7 @@ hidden bit not null
 create table outfit (
 outfit_id int primary key auto_increment,
 duck_id int not null,
-app_user_id int not null,
+-- app_user_id int not null,
 date_created date not null,
 item_id int not null,
 posted bit not null,
@@ -36,9 +46,9 @@ hidden bit not null,
 	constraint fk_duck_id
 		foreign key (duck_id)
         references duck(duck_id),
-	constraint fk_app_user_id
-		foreign key (app_user_id)
-        references app_user(app_user_id),
+-- 	constraint fk_app_user_id
+-- 		foreign key (app_user_id)
+--         references app_user(app_user_id),
 	constraint fk_item_id
 		foreign key (item_id)
         references clothing_item(item_id)
@@ -87,12 +97,12 @@ delete from outfit;
 alter table outfit auto_increment = 1;
 
 -- inserts
-insert into outfit (outfit_id, shirt_id, pants_id, hat_id, date, duck_id, posted, app_user_id, hidden) values
-(1, 1, 1, 1, 03-28-2023, 1, true, 1, false),
-(2, 2, 3, 5, 03-21-2023, 2, true, 2, true),
-(3, 3, 5, 4, 02-28-2023, 3, false, 3, false),
-(4, 5, 2, 3, 01-02-2023, 4, true, 4, true),
-(5, 4, 4, 2, 11-28-2022, 5, false, 5, false);
+insert into outfit (outfit_id, shirt_id, pants_id, hat_id, date_created, duck_id, posted, hidden) values
+(1, 1, 1, 1, 03-28-2023, 1, true, false),
+(2, 2, 3, 5, 03-21-2023, 2, true, true),
+(3, 3, 5, 4, 02-28-2023, 3, false, false),
+(4, 5, 2, 3, 01-02-2023, 4, true, true),
+(5, 4, 4, 2, 11-28-2022, 5, false, false);
 
 insert into comments (comment_id, user_id, content, outfit_id, date_time, hidden) values
 (1, 1, 'I really liked my duck! So cute.', 1, 03-28-2023, 0),

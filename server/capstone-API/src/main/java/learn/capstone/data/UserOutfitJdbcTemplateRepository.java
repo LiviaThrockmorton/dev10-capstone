@@ -16,7 +16,7 @@ public class UserOutfitJdbcTemplateRepository implements UserOutfitRepository {
     @Override
     public boolean add(UserOutfit appUserOutfit) {
 
-        final String sql = "insert into appUser_outfit (appUser_id, outfit_id) values "
+        final String sql = "insert into user_outfit (app_user_id, outfit_id) values "
                 + "(?,?);";
 
         return jdbcTemplate.update(sql,
@@ -27,8 +27,8 @@ public class UserOutfitJdbcTemplateRepository implements UserOutfitRepository {
     @Override
     public boolean update(UserOutfit appUserOutfit) {
 
-        final String sql = "update appUser_outfit set "
-                + "where appUser_id = ? and outfit_id = ?;";
+        final String sql = "update user_outfit set "
+                + "where app_user_id = ? and outfit_id = ?;";
 
         return jdbcTemplate.update(sql,
                 appUserOutfit.getAppUserId(),
@@ -39,8 +39,8 @@ public class UserOutfitJdbcTemplateRepository implements UserOutfitRepository {
     @Override
     public boolean deleteByKey(int appUserId, int outfitId) {
 
-        final String sql = "delete from appUser_outfit "
-                + "where appUser_id = ? and outfit_id = ?;";
+        final String sql = "delete from user_outfit "
+                + "where app_user_id = ? and outfit_id = ?;";
 
         return jdbcTemplate.update(sql, appUserId, outfitId) > 0;
     }

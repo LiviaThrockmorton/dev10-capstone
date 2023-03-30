@@ -4,9 +4,12 @@ package learn.capstone.controllers;
 import learn.capstone.domain.ClothingItemService;
 import learn.capstone.domain.Result;
 import learn.capstone.models.ClothingItem;
+import learn.capstone.models.Outfit;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @CrossOrigin(origins = {"http://localhost:3000"})
@@ -18,6 +21,17 @@ public class ClothingItemController {
     public ClothingItemController(ClothingItemService service) {
         this.service = service;
     }
+
+    @GetMapping("/{itemType}")
+    public List<ClothingItem> findByType(@PathVariable String itemType) {
+        return service.findByType(itemType);
+    }
+
+    @GetMapping("/{outfitId}")
+    public ClothingItem findById(@PathVariable int itemId) {
+        return service.findById(itemId);
+    }
+
 
     @PostMapping
     public ResponseEntity<Object> add(@RequestBody ClothingItem item) {

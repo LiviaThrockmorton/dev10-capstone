@@ -35,7 +35,7 @@ public class OutfitJdbcTemplateRepository implements OutfitRepository {
     @Transactional
     public Outfit findById(int outfitId) {
 
-        final String sql = "select outfit_id, shirt_id, pants_id, hat_id, date_created, duck_id "
+        final String sql = "select outfit_id, shirt_id, pants_id, hat_id, date_created, duck_id, posted, hidden "
                 + "from outfit "
                 + "where outfit_id = ?;";
 
@@ -50,10 +50,28 @@ public class OutfitJdbcTemplateRepository implements OutfitRepository {
         return outfit;
     }
 
+//    @Override
+//    public Outfit findByUser(int AppUserId) {
+//
+//        final String sql = "select outfit_id, shirt_id, pants_id, hat_id, date_created, duck_id, posted, hidden "
+//                + "from outfit "
+//                + "where user_id = ?;";
+//
+//        Outfit outfit = jdbcTemplate.query(sql, new OutfitMapper(), outfitId).stream()
+//                .findFirst().orElse(null);
+//
+//        if (outfit != null) {
+//
+//            addClothingItems(outfit);
+//        }
+//
+//        return outfit;
+//    }
+
     @Override
     public Outfit add(Outfit outfit) {
 
-        final String sql = "insert into outfit (shirt_id, pants_id, hat_id, dateCreated, duck_id) "
+        final String sql = "insert into outfit (shirt_id, pants_id, hat_id, dateCreated, duck_id, posted, hidden ) "
                 + " values (?,?,?,?,?);";
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
@@ -64,6 +82,8 @@ public class OutfitJdbcTemplateRepository implements OutfitRepository {
             ps.setInt(3, outfit.getHatId());
             ps.setDate(4, outfit.getDateCreated() == null ? null : Date.valueOf(outfit.getDateCreated()));
             ps.setInt(5, outfit.getDuckId());
+            ps.setBoolean(6, outfit.getPosted());
+            ps.setBoolean(7, outfit.getHidden());
             return ps;
         }, keyHolder);
 
@@ -105,7 +125,7 @@ public class OutfitJdbcTemplateRepository implements OutfitRepository {
 
     private void addClothingItems(Outfit outfit) {
 
-        String sql = "select item_id, `duckImage`, clothingItemImage, outfit_id " +
+        String sql = "select item_id, item_type, clothing_item_image, hidden " +
                 "from item where outfit_id = ?;";
 
         var outfitClothingItems = jdbcTemplate.query(sql, new ClothingItemMapper(), outfit.getOutfitId());

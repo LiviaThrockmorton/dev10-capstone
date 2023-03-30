@@ -1,6 +1,6 @@
 package learn.capstone.domain;
 
-import learn.capstone.data.UserOutfitRepository;
+
 import learn.capstone.data.DuckRepository;
 import learn.capstone.models.*;
 import org.junit.jupiter.api.Test;
@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 
-import learn.capstone.data.OutfitRepository;
+
 import learn.capstone.data.ClothingItemRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,11 +56,11 @@ class DuckServiceTest {
 
     @Test
     void add() {
-        Duck clearance = new Duck(0, "DuckImage");
+        Duck clearance = new Duck(0, "DuckImage", false);
         Result<Duck> expected = makeResult(makeDuck());
         when(repository.add(clearance)).thenReturn(makeDuck());
 
-        Duck arg = new Duck(0,"DuckImage");
+        Duck arg = new Duck(0,"DuckImage", false);
         Result<Duck> actual = service.add(arg);
 
         assertEquals(expected, actual);
@@ -69,34 +69,18 @@ class DuckServiceTest {
     @Test
     void shouldNotAddBlankDuckImage() {
 
-        Result<Duck> expected = makeResult("Security Clearance duckImage is required", ResultType.INVALID);
+        Result<Duck> expected = makeResult("Image is required", ResultType.INVALID);
 
-        Duck arg = new Duck(0, "\t");
+        Duck arg = new Duck(0, "\t", false);
         Result<Duck> actual = service.add(arg);
 
         assertEquals(expected, actual);
     }
 
-    @Test
-    void shouldNotAddDuplicateDuckImage() {
-
-        Result<Duck> expected = makeResult("This security clearance duckImage already exists. To make changes, please update the existing security clearance.", ResultType.INVALID);
-
-
-        List<Duck> ducks = new ArrayList<>();
-        ducks.add(makeDuck());
-
-        Duck arg = new Duck(4, "DuckImage");
-        when(repository.findAll()).thenReturn(ducks);
-
-        Result<Duck> actual = service.add(arg);
-
-        assertEquals(expected, actual);
-    }
 
     @Test
     void shouldUpdate() {
-        Duck duck = new Duck(1, "TEST");
+        Duck duck = new Duck(1, "TEST", false);
 
         when(repository.update(duck)).thenReturn(true);
         Result<Duck> actual = service.update(duck);
@@ -105,7 +89,7 @@ class DuckServiceTest {
 
     @Test
     void shouldNotUpdateMissing() {
-        Duck duck = new Duck(35, "TEST");
+        Duck duck = new Duck(35, "TEST", true);
 
         when(repository.update(duck)).thenReturn(false);
         Result<Duck> actual = service.update(duck);
@@ -114,7 +98,7 @@ class DuckServiceTest {
 
     @Test
     void shouldNotUpdateWhenInvalid() {
-        Duck duck = new Duck(35, null);
+        Duck duck = new Duck(35, null, false);
 
         Result<Duck> actual = service.update(duck);
         assertEquals(ResultType.INVALID, actual.getType());
@@ -146,7 +130,7 @@ class DuckServiceTest {
     @Test
     void shouldNotDeleteMissing() {
         when (repository.deleteById(15)).thenReturn(false);
-        Result<Duck> expected = makeResult("Security ClearanceId: 15, not found", ResultType.NOT_FOUND);
+        Result<Duck> expected = makeResult("Duck Id: 15, not found", ResultType.NOT_FOUND);
         Result<Duck> actual = service.deleteById(15);
         assertEquals(expected, actual);
     }
@@ -154,7 +138,7 @@ class DuckServiceTest {
 
 
     public Duck makeDuck(){
-        return new Duck(3, "DuckImage");
+        return new Duck(3, "DuckImage", true);
     }
 
 }

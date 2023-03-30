@@ -13,8 +13,17 @@ public class Outfit {
     private LocalDate dateCreated;
     private int duckId;
     private List<ClothingItem> items = new ArrayList<>();
+    private boolean posted;
 
     private boolean hidden;
+
+    public boolean getPosted() {
+        return posted;
+    }
+
+    public void setPosted(boolean posted) {
+        this.posted = posted;
+    }
 
     public boolean getHidden() {
         return hidden;

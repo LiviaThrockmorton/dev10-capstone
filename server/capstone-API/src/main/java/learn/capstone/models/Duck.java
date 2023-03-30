@@ -38,9 +38,10 @@ public class Duck {
     public Duck() {
     }
 
-    public Duck(int duckId, String duckImage) {
+    public Duck(int duckId, String duckImage, boolean hidden) {
         this.duckId = duckId;
         this.duckImage = duckImage;
+        this.hidden = hidden;
     }
 
     @Override
