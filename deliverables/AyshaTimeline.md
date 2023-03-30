@@ -5,6 +5,7 @@
 [ ] Find appropriate documentation
 [ ] Implement code block with project
 
+
 Animations - Estimate: 2hrs
 [ ] Find appropriate documentation
 [ ] Decide animation style(s) for necessary objects
