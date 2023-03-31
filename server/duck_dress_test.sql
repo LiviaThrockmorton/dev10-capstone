@@ -212,16 +212,16 @@ insert into duck (duck_id, duck_image, hidden) values
 (5, '[INSERT URL HERE]', 0);
 
 insert into shirts (shirt_id, item_type, clothing_item_image, hidden) values
-(1, 'Shirt', '[INSERT URL HERE]', 0),
-(2, 'Shirt', '[INSERT URL HERE]', 0);
+(1, 'shirt', '[INSERT URL HERE]', 0),
+(2, 'shirt', '[INSERT URL HERE]', 0);
 
 insert into pants (pants_id, item_type, clothing_item_image, hidden) values
-(1, 'Pants', '[INSERT URL HERE]', 0),
-(2, 'Pants', '[INSERT URL HERE]', 0);
+(1, 'pants', '[INSERT URL HERE]', 1),
+(2, 'pants', '[INSERT URL HERE]', 0);
 
 insert into hats (hat_id, item_type, clothing_item_image, hidden) values
-(1, 'Hat', '[INSERT URL HERE]', 0),
-(2, 'Hat', '[INSERT URL HERE]', 0);
+(1, 'hat', '[INSERT URL HERE]', 0),
+(2, 'hat', '[INSERT URL HERE]', 0);
 
 insert into clothing_item (shirt_id, pants_id, hat_id) values 
 (1, null, null),

@@ -28,7 +28,16 @@ public class ClothingItemJdbcTemplateRepository implements ClothingItemRepositor
     @Override
     public List<ClothingItem> findByType(String itemType) {
 
-        final String sql = "";
+        final String sql = "select i.item_id,\n" +
+                "coalesce(s.item_type, p.item_type, h.item_type) as `type`,\n" +
+                "coalesce(s.clothing_item_image, p.clothing_item_image, h.clothing_item_image) clothing_item_image,\n" +
+                "( CASE WHEN h.hidden IS NOT NULL THEN h.hidden ELSE (CASE WHEN p.hidden IS NOT NULL THEN p.hidden ELSE s.hidden END) END\n" +
+                ") hidden\n" +
+                "from clothing_item i\n" +
+                "left outer join shirts s on s.shirt_id = i.shirt_id\n" +
+                "left outer join pants p on p.pants_id = i.pants_id\n" +
+                "left outer join hats h on h.hat_id = i.hat_id\n" +
+                "having `type` = ?;";
 
         return jdbcTemplate.query(sql, new ClothingItemMapper(), itemType);
     }
@@ -37,8 +46,15 @@ public class ClothingItemJdbcTemplateRepository implements ClothingItemRepositor
     @Transactional
     public ClothingItem findById(int itemId) {
 
-        final String sql = "select item_id, item_type, clothing_item_image, hidden "
-                + "from clothing_items "
+        final String sql = "select i.item_id,\n" +
+                "coalesce(s.item_type, p.item_type, h.item_type) as item_type,\n" +
+                "coalesce(s.clothing_item_image, p.clothing_item_image, h.clothing_item_image) clothing_item_image,\n" +
+                "( CASE WHEN h.hidden IS NOT NULL THEN h.hidden ELSE (CASE WHEN p.hidden IS NOT NULL THEN p.hidden ELSE s.hidden END) END\n" +
+                ") hidden\n" +
+                "from clothing_item i\n" +
+                "left outer join shirts s on s.shirt_id = i.shirt_id\n" +
+                "left outer join pants p on p.pants_id = i.pants_id\n" +
+                "left outer join hats h on h.hat_id = i.hat_id"
                 + "where item_id = ?;";
 
         ClothingItem clothingItem = jdbcTemplate.query(sql, new ClothingItemMapper(), itemId).stream()

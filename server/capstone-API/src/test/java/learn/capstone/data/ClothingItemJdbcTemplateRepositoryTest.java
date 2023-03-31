@@ -40,8 +40,8 @@ class ClothingItemJdbcTemplateRepositoryTest {
 
     @Test
     void shouldFindHat() {
-        ClothingItem hat = repository.findById(1);
-        assertEquals(1, hat.getItemId());
+        ClothingItem hat = repository.findById(5);
+        assertEquals(5, hat.getItemId());
         assertEquals(false, hat.getHidden());
     }
 
