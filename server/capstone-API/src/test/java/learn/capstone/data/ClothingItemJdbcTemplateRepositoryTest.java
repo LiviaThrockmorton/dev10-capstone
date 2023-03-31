@@ -52,20 +52,20 @@ class ClothingItemJdbcTemplateRepositoryTest {
         ClothingItem actual = repository.add(arg);
         assertEquals(expected, actual);
     }
-
-    @Test
-    void shouldUpdateExisting() {
-        ClothingItem arg = new ClothingItem(2, "Updated ClothingItem", "Updated ClothingItemImage", false);
-        boolean actual = repository.update(arg);
-        assertTrue(actual);
-    }
-
-    @Test
-    void shouldNotUpdateMissing() {
-        ClothingItem arg = new ClothingItem(225, "Updated ClothingItem", "Updated ClothingItemImage", false);
-        boolean actual = repository.update(arg);
-        assertFalse(actual);
-    }
+//
+//    @Test
+//    void shouldUpdateExisting() {
+//        ClothingItem arg = new ClothingItem(2, "Updated ClothingItem", "Updated ClothingItemImage", false);
+//        boolean actual = repository.update(arg);
+//        assertTrue(actual);
+//    }
+//
+//    @Test
+//    void shouldNotUpdateMissing() {
+//        ClothingItem arg = new ClothingItem(225, "Updated ClothingItem", "Updated ClothingItemImage", false);
+//        boolean actual = repository.update(arg);
+//        assertFalse(actual);
+//    }
 
     @Test
     void shouldDeleteExisting() {

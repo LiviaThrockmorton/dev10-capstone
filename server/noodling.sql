@@ -42,26 +42,9 @@ hat_id int,
         references hats(hat_id)
 );
 
--- create table outfit (
--- outfit_id int primary key auto_increment,
--- duck_id int not null,
--- -- app_user_id int not null,
--- date_created date not null,
--- item_id int not null,
--- posted bit not null,
--- hidden bit not null,
--- 	constraint fk_duck_id
--- 		foreign key (duck_id)
---         references duck(duck_id),
--- 	constraint fk_item_id
--- 		foreign key (item_id)
---         references clothing_items(item_id)
--- );
 
 
-insert into hats (hat_id, item_type, clothing_item_image, hidden) values
-(1, 'Hat', '[INSERT URL HERE]', 0),
-(2, 'Hat', '[INSERT URL HERE]', 0);
+
 
 insert into shirts (shirt_id, item_type, clothing_item_image, hidden) values
 (3, 'Shirt', '[INSERT URL HERE]', 0),
@@ -70,3 +53,15 @@ insert into shirts (shirt_id, item_type, clothing_item_image, hidden) values
 insert into pants (pants_id, item_type, clothing_item_image, hidden) values
 (5, 'Pants', '[INSERT URL HERE]', 0),
 (6, 'Pants', '[INSERT URL HERE]', 0);
+
+insert into hats (hat_id, item_type, clothing_item_image, hidden) values
+(1, 'Hat', '[INSERT URL HERE]', 0),
+(2, 'Hat', '[INSERT URL HERE]', 0);
+
+insert into clothing_item (shirt_id, pants_id, hat_id) values 
+(3, 0, 0),
+(3, 0, 0),
+(0, 5, 0),
+(0, 6, 0),
+(0, 0, 1),
+(0, 0, 2);
