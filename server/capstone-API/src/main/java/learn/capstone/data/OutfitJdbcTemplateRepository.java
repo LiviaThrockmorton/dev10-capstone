@@ -26,8 +26,7 @@ public class OutfitJdbcTemplateRepository implements OutfitRepository {
 
     @Override
     public List<Outfit> findAll() {
-        final String sql = "select outfit_id, shirt_id, pants_id, hat_id, date_created, duck_id "
-                + "from outfit limit 1000;";
+        final String sql = "";
         return jdbcTemplate.query(sql, new OutfitMapper());
     }
 
@@ -42,48 +41,39 @@ public class OutfitJdbcTemplateRepository implements OutfitRepository {
         Outfit outfit = jdbcTemplate.query(sql, new OutfitMapper(), outfitId).stream()
                 .findFirst().orElse(null);
 
-        if (outfit != null) {
-
-            addClothingItems(outfit);
-        }
-
-        return outfit;
-    }
-
-//    @Override
-//    public Outfit findByUser(int AppUserId) {
-//
-//        final String sql = "select outfit_id, shirt_id, pants_id, hat_id, date_created, duck_id, posted, hidden "
-//                + "from outfit "
-//                + "where user_id = ?;";
-//
-//        Outfit outfit = jdbcTemplate.query(sql, new OutfitMapper(), outfitId).stream()
-//                .findFirst().orElse(null);
-//
 //        if (outfit != null) {
 //
 //            addClothingItems(outfit);
 //        }
-//
-//        return outfit;
-//    }
+
+        return outfit;
+    }
+
+    @Override
+        public List<Outfit> findByUser(int AppUserId) {
+            final String sql = "select outfit_id, shirt_id, pants_id, hat_id, date_created, duck_id "
+                    + "from outfit limit 1000" +
+                    "where user_id = ?;";
+            return jdbcTemplate.query(sql, new OutfitMapper());
+        }
 
     @Override
     public Outfit add(Outfit outfit) {
 
-        final String sql = "insert into outfit (shirt_id, pants_id, hat_id, dateCreated, duck_id, posted, hidden ) "
+        final String sql = "insert into outfit (app_user_id, shirt_id, pants_id, hat_id, date_created, duck_id, posted, hidden) "
                 + " values (?,?,?,?,?);";
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
         int rowsAffected = jdbcTemplate.update(connection -> {
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, outfit.getShirtId());
-            ps.setInt(2, outfit.getPantsId());
-            ps.setInt(3, outfit.getHatId());
-            ps.setDate(4, outfit.getDateCreated() == null ? null : Date.valueOf(outfit.getDateCreated()));
-            ps.setInt(5, outfit.getDuckId());
-            ps.setBoolean(6, outfit.getPosted());
-            ps.setBoolean(7, outfit.getHidden());
+            ps.setInt(1, outfit.getUser_id());
+            ps.setInt(2, outfit.getShirtId());
+            ps.setInt(3, outfit.getPantsId());
+            ps.setInt(4, outfit.getHatId());
+            ps.setDate(5, outfit.getDateCreated() == null ? null : Date.valueOf(outfit.getDateCreated()));
+            ps.setInt(6, outfit.getDuckId());
+            ps.setBoolean(7, outfit.getPosted());
+            ps.setBoolean(8, outfit.getHidden());
             return ps;
         }, keyHolder);
 
@@ -99,11 +89,14 @@ public class OutfitJdbcTemplateRepository implements OutfitRepository {
     public boolean update(Outfit outfit) {
 
         final String sql = "update outfit set "
+                + "duck_id = ? "
+                + "app_user_id = ? "
+                + "date_created = ?, "
                 + "shirt_id = ?, "
                 + "pants_id = ?, "
                 + "hat_id = ?, "
-                + "dateCreated = ?, "
-                + "duck_id = ? "
+                + "posted = ?, "
+                + "hidden = ? "
                 + "where outfit_id = ?;";
 
         return jdbcTemplate.update(sql,
@@ -118,7 +111,7 @@ public class OutfitJdbcTemplateRepository implements OutfitRepository {
     @Override
     @Transactional
     public boolean deleteById(int outfitId) {
-        jdbcTemplate.update("delete from appUser_outfit where outfit_id = ?;", outfitId);
+        jdbcTemplate.update("delete from comment where outfit_id = ?;", outfitId);
         return jdbcTemplate.update("delete from outfit where outfit_id = ?;", outfitId) > 0;
     }
 
@@ -128,7 +121,7 @@ public class OutfitJdbcTemplateRepository implements OutfitRepository {
         String sql = "select item_id, item_type, clothing_item_image, hidden " +
                 "from item where outfit_id = ?;";
 
-        var outfitClothingItems = jdbcTemplate.query(sql, new ClothingItemMapper(), outfit.getOutfitId());
-        outfit.setItems(outfitClothingItems);
+//        var outfitClothingItems = jdbcTemplate.query(sql, new ClothingItemMapper(), outfit.getOutfitId());
+//        outfit.setItems(outfitClothingItems);
     }
 }

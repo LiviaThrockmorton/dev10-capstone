@@ -7,7 +7,7 @@ use duck_dress_test;
 create table duck (
 duck_id int primary key auto_increment,
 duck_image varchar(1000),
-hidden bit not null default(1)
+hidden boolean not null default(false)
 );
 
 -- create table app_user (
@@ -16,7 +16,7 @@ hidden bit not null default(1)
 -- password_hash varchar(100),
 -- authorities varchar(100),
 -- email varchar(260),
--- hidden bit not null default(1)
+-- hidden boolean not null default(false),
 -- );
 
 create table app_user (
@@ -25,8 +25,8 @@ create table app_user (
     password_hash varchar(2048) not null,     
 -- authorities varchar(100),           
 	email varchar(260),
-	hidden bit not null default(1),
-	enabled bit not null default(1)
+	hidden boolean not null default(false),
+	enabled boolean not null default(false)
 );
 
 
@@ -49,7 +49,7 @@ create table clothing_item (
 item_id int primary key auto_increment,
 item_type varchar(50),
 clothing_item_image varchar(1000),
-hidden bit not null
+hidden boolean not null default(false)
 );
 
 
@@ -61,8 +61,8 @@ date_created date not null,
 shirt_id int not null,
 pants_id int not null,
 hat_id int not null,
-posted bit not null,
-hidden bit not null,
+posted boolean not null default(false),
+hidden boolean not null default(false),
 	constraint fk_duck_id
 		foreign key (duck_id)
         references duck(duck_id),
@@ -99,7 +99,7 @@ app_user_id int not null,
 outfit_id int not null,
 content varchar(500),
 date_time date not null,
-hidden bit not null,
+hidden boolean not null default(false),
 constraint fk_comment_app_user_id
 		foreign key (app_user_id)
         references app_user(app_user_id),

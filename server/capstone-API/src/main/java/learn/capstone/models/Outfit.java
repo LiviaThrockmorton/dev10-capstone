@@ -8,14 +8,15 @@ public class Outfit {
 
     private int outfitId;
 
+    private int duckId;
     private int user_id;
 
     private int shirtId;
     private int pantsId;
     private int hatId;
     private LocalDate dateCreated;
-    private int duckId;
-    private List<ClothingItem> items = new ArrayList<>();
+
+//    private List<ClothingItem> items = new ArrayList<>();
     private boolean posted;
 
     private boolean hidden;
@@ -94,11 +95,11 @@ public class Outfit {
         this.duckId = duckId;
     }
 
-    public List<ClothingItem> getItems() {
-        return items;
-    }
-
-    public void setItems(List<ClothingItem> items) {
-        this.items = items;
-    }
+//    public List<ClothingItem> getItems() {
+//        return items;
+//    }
+//
+//    public void setItems(List<ClothingItem> items) {
+//        this.items = items;
+//    }
 }
