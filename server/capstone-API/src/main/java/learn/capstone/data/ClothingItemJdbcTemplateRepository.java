@@ -28,9 +28,7 @@ public class ClothingItemJdbcTemplateRepository implements ClothingItemRepositor
     @Override
     public List<ClothingItem> findByType(String itemType) {
 
-        final String sql = "select item_id, item_type, clothing_item_image, hidden "
-                + "from clothing_item "
-                + "where item_type = ?;";
+        final String sql = "";
 
         return jdbcTemplate.query(sql, new ClothingItemMapper(), itemType);
     }
