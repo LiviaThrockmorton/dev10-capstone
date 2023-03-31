@@ -126,9 +126,9 @@ constraint fk_outfit_id
 );
 
 
-drop table if exists app_user_authority;
-drop table if exists app_authority;
--- drop table if exists app_user;
+-- drop table if exists app_user_authority;
+-- drop table if exists app_authority;
+-- -- drop table if exists app_user;
 
 -- create table app_user (
 --     app_user_id int primary key auto_increment,
