@@ -3,7 +3,7 @@ import background from "./images/sink_ducklings.jpg";
 
 function Home() {
     return (
-        <div className="container w-100 h-100">
+        <div className="container w-100">
             <div className="row">
                 <div className="col-6">
                     <h1 className="text-center">Dress-Up Duck</h1>
