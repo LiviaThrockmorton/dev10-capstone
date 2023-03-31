@@ -22,12 +22,12 @@ public class ClothingItemController {
         this.service = service;
     }
 
-    @GetMapping("/{itemType}")
+    @GetMapping("/type/{itemType}")
     public List<ClothingItem> findByType(@PathVariable String itemType) {
         return service.findByType(itemType);
     }
 
-    @GetMapping("/{outfitId}")
+    @GetMapping("/{itemId}")
     public ClothingItem findById(@PathVariable int itemId) {
         return service.findById(itemId);
     }
