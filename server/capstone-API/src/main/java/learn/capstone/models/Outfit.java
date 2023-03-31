@@ -7,6 +7,9 @@ import java.util.List;
 public class Outfit {
 
     private int outfitId;
+
+    private int user_id;
+
     private int shirtId;
     private int pantsId;
     private int hatId;
@@ -40,6 +43,15 @@ public class Outfit {
 
     public void setOutfitId(int outfitId) {
         this.outfitId = outfitId;
+    }
+
+
+    public int getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
     }
 
     public int getShirtId() {

@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.PreparedStatement;
 import java.sql.Statement;
-import java.sql.Types;
 import java.util.List;
 
 @Repository
@@ -24,20 +23,12 @@ public class ClothingItemJdbcTemplateRepository implements ClothingItemRepositor
     }
 
 
-
     @Override
     public List<ClothingItem> findByType(String itemType) {
 
-        final String sql = "select i.item_id,\n" +
-                "coalesce(s.item_type, p.item_type, h.item_type) as `type`,\n" +
-                "coalesce(s.clothing_item_image, p.clothing_item_image, h.clothing_item_image) clothing_item_image,\n" +
-                "( CASE WHEN h.hidden IS NOT NULL THEN h.hidden ELSE (CASE WHEN p.hidden IS NOT NULL THEN p.hidden ELSE s.hidden END) END\n" +
-                ") hidden\n" +
-                "from clothing_item i\n" +
-                "left outer join shirts s on s.shirt_id = i.shirt_id\n" +
-                "left outer join pants p on p.pants_id = i.pants_id\n" +
-                "left outer join hats h on h.hat_id = i.hat_id\n" +
-                "having `type` = ?;";
+        final String sql = "select item_id, item_type, clothing_item_image, hidden "
+                + "from clothing_item "
+                + "where item_type = ?;";
 
         return jdbcTemplate.query(sql, new ClothingItemMapper(), itemType);
     }
@@ -46,125 +37,32 @@ public class ClothingItemJdbcTemplateRepository implements ClothingItemRepositor
     @Transactional
     public ClothingItem findById(int itemId) {
 
-        final String sql = "select i.item_id,\n" +
-                "coalesce(s.item_type, p.item_type, h.item_type) as item_type,\n" +
-                "coalesce(s.clothing_item_image, p.clothing_item_image, h.clothing_item_image) clothing_item_image,\n" +
-                "( CASE WHEN h.hidden IS NOT NULL THEN h.hidden ELSE (CASE WHEN p.hidden IS NOT NULL THEN p.hidden ELSE s.hidden END) END\n" +
-                ") hidden\n" +
-                "from clothing_item i\n" +
-                "left outer join shirts s on s.shirt_id = i.shirt_id\n" +
-                "left outer join pants p on p.pants_id = i.pants_id\n" +
-                "left outer join hats h on h.hat_id = i.hat_id"
+        final String sql = "select item_id, item_type, clothing_item_image, hidden "
+                + "from clothing_item "
                 + "where item_id = ?;";
 
         ClothingItem clothingItem = jdbcTemplate.query(sql, new ClothingItemMapper(), itemId).stream()
                 .findFirst().orElse(null);
 
 
+
         return clothingItem;
     }
-
 
 
     @Override
     public ClothingItem add(ClothingItem item) {
 
-
-        //set 3 ids to zero
-
-        int shirtId = 0;
-        int pantsId = 0;
-        int hatId = 0;
-
-
-        if (item.getItemType().equalsIgnoreCase("shirt")) {
-            String sql = "insert into shirt (item_type, clothing_item_image, hidden) values (?, ?, ?)";
-
-            KeyHolder keyHolder = new GeneratedKeyHolder();
-
-            int rowsAffected = jdbcTemplate.update(conn -> {
-                PreparedStatement statement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-                statement.setString(1, item.getItemType());
-                statement.setString(2, item.getClothingItemImage());
-                statement.setBoolean(3, item.getHidden());
-                return statement;
-            }, keyHolder);
-
-            if (rowsAffected > 0) {
-                shirtId = (keyHolder.getKey().intValue());
-                ;
-            }
-        }
-
-        //repeat for pants and hat here
-        if (item.getItemType().equalsIgnoreCase("pants")) {
-            String sql = "insert into pants (item_type, clothing_item_image, hidden) values (?, ?, ?)";
-
-            KeyHolder keyHolder = new GeneratedKeyHolder();
-
-            int rowsAffected = jdbcTemplate.update(conn -> {
-                PreparedStatement statement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-                statement.setString(1, item.getItemType());
-                statement.setString(2, item.getClothingItemImage());
-                statement.setBoolean(3, item.getHidden());
-                return statement;
-            }, keyHolder);
-
-            if (rowsAffected > 0) {
-                pantsId = (keyHolder.getKey().intValue());
-                ;
-            }
-        }
-        if (item.getItemType().equalsIgnoreCase("hat")) {
-            String sql = "insert into hat (item_type, clothing_item_image, hidden) values (?, ?, ?)";
-
-            KeyHolder keyHolder = new GeneratedKeyHolder();
-
-            int rowsAffected = jdbcTemplate.update(conn -> {
-                PreparedStatement statement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-                statement.setString(1, item.getItemType());
-                statement.setString(2, item.getClothingItemImage());
-                statement.setBoolean(3, item.getHidden());
-                return statement;
-            }, keyHolder);
-
-            if (rowsAffected > 0) {
-                hatId = (keyHolder.getKey().intValue());
-                ;
-            }
-        }
-
-
-        String sql = "insert into clothing_item (shirt_id, pants_id, hat_id) values\n" +
+        String sql = "insert into clothing_item (item_type, clothing_item_image, hidden) values\n" +
                 "(?, ?, ?);";
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
 
-        int finalShirtId = shirtId;
-        int finalPantsId = pantsId;
-        int finalHatId = hatId;
         int rowsAffected = jdbcTemplate.update(conn -> {
             PreparedStatement statement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-
-            if (finalShirtId <= 0){
-                statement.setNull(1, Types.INTEGER);
-            }
-            else {
-                statement.setInt(1, finalShirtId);
-            }
-            if (finalPantsId <= 0){
-                statement.setNull(2, Types.INTEGER);
-            }
-            else {
-                statement.setInt(2, finalPantsId);
-            }
-            if (finalHatId <= 0){
-                statement.setNull(3, Types.INTEGER);
-            }
-            else {
-                statement.setInt(3, finalHatId);
-            }
-
+            statement.setString(1, item.getItemType());
+            statement.setString(2, item.getClothingItemImage());
+            statement.setBoolean(3, item.getHidden());
             return statement;
         }, keyHolder);
 
@@ -188,7 +86,15 @@ public class ClothingItemJdbcTemplateRepository implements ClothingItemRepositor
     }
 
     public boolean deleteById(int itemId) {
-        String sql = "delete from clothing_item where item_id = ?;";
+        String sql = "update clothing_item set hidden = 1 where item_id = ?;";
         return jdbcTemplate.update(sql, itemId) > 0;
+    }
+
+
+    @Override
+    public int getUsageCount(int itemId) {
+        int count = jdbcTemplate.queryForObject(
+                "select count(*) from outfit where item_id = ?;", Integer.class, itemId);
+        return count;
     }
 }

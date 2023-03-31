@@ -3,6 +3,7 @@ package learn.capstone.domain;
 
 import learn.capstone.data.ClothingItemRepository;
 import learn.capstone.models.ClothingItem;
+import learn.capstone.models.Duck;
 import learn.capstone.models.Outfit;
 import org.springframework.stereotype.Service;
 
@@ -56,11 +57,25 @@ public class ClothingItemService {
         return result;
     }
 
-    public Result<Void> deleteById(int itemId) {
-        boolean success = itemRepository.deleteById(itemId);
-        Result<Void> result = new Result<>();
-        if (!success) {
-            result.addMessage("Item id " + itemId + " not found", ResultType.NOT_FOUND);
+    public Result<ClothingItem> deleteById(int itemId) {
+        Result<ClothingItem> result = numberOfUsages(itemId);
+        if (!result.isSuccess()) {
+            return result;
+        }
+
+        if (!itemRepository.deleteById(itemId)) {
+            String msg = String.format("Duck Id: %s, not found", itemId);
+            result.addMessage(msg, ResultType.NOT_FOUND);
+        }
+
+        return result;
+    }
+
+    private Result<ClothingItem> numberOfUsages(int itemId) {
+        Result<ClothingItem> result = new Result<>();
+        int count = itemRepository.getUsageCount(itemId);
+        if(count >0){
+            result.addMessage("This item is in use in " + count + " outfits. It cannot be deleted at this time.", ResultType.INVALID);
         }
         return result;
     }
@@ -90,4 +105,8 @@ public class ClothingItemService {
 
         return result;
     }
+
+
+
+
 }
