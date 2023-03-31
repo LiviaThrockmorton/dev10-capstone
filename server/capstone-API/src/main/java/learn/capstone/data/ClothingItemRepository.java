@@ -18,4 +18,6 @@ public interface ClothingItemRepository {
     boolean update(ClothingItem item);
 
     boolean deleteById(int itemId);
+
+    int getUsageCount(int duckId);
 }

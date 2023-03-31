@@ -1,7 +1,3 @@
-drop database if exists noodling;
-create database noodling;
-use noodling;
-
 
 drop database if exists duck_dress_test;
 create database duck_dress_test;
@@ -128,7 +124,7 @@ constraint fk_outfit_id
 
 -- drop table if exists app_user_authority;
 -- drop table if exists app_authority;
--- -- drop table if exists app_user;
+-- drop table if exists app_user;
 
 -- create table app_user (
 --     app_user_id int primary key auto_increment,
@@ -216,16 +212,16 @@ insert into duck (duck_id, duck_image, hidden) values
 (5, '[INSERT URL HERE]', 0);
 
 insert into shirts (shirt_id, item_type, clothing_item_image, hidden) values
-(1, 'Shirt', '[INSERT URL HERE]', 0),
-(2, 'Shirt', '[INSERT URL HERE]', 0);
+(1, 'shirt', '[INSERT URL HERE]', 0),
+(2, 'shirt', '[INSERT URL HERE]', 0);
 
 insert into pants (pants_id, item_type, clothing_item_image, hidden) values
-(1, 'Pants', '[INSERT URL HERE]', 0),
-(2, 'Pants', '[INSERT URL HERE]', 0);
+(1, 'pants', '[INSERT URL HERE]', 0),
+(2, 'pants', '[INSERT URL HERE]', 0);
 
 insert into hats (hat_id, item_type, clothing_item_image, hidden) values
-(1, 'Hat', '[INSERT URL HERE]', 0),
-(2, 'Hat', '[INSERT URL HERE]', 0);
+(1, 'hat', '[INSERT URL HERE]', 0),
+(2, 'hat', '[INSERT URL HERE]', 0);
 
 insert into clothing_item (shirt_id, pants_id, hat_id) values 
 (1, null, null),

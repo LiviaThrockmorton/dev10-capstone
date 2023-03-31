@@ -21,16 +21,16 @@ import java.util.List;
         private boolean hidden;
 
 
-        // TODO I think this is supposed to be here?
-        private List<UserOutfit> outfits = new ArrayList<>();
+//        // TODO I think this is supposed to be here?
+        private List<Outfit> outfits = new ArrayList<>();
 
 
 
-        public List<UserOutfit> getOutfits() {
+        public List<Outfit> getOutfits() {
             return outfits;
         }
 
-        public void setOutfits(List<UserOutfit> outfits) {
+        public void setOutfits(List<Outfit> outfits) {
             this.outfits = outfits;
         }
 
@@ -39,7 +39,7 @@ import java.util.List;
         public AppUser() {
         }
 
-        public AppUser(int appUserId, String username, String password, ArrayList<GrantedAuthority> authorities, String email, boolean hidden, List<UserOutfit> outfits,  Collection<String> authorityNames) {
+        public AppUser(int appUserId, String username, String password, ArrayList<GrantedAuthority> authorities, String email, boolean hidden, List<Outfit> outfits,  Collection<String> authorityNames) {
             this.appUserId = appUserId;
             this.username = username;
             this.password = password;
