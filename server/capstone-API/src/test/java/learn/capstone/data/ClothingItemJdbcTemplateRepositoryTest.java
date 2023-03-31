@@ -35,13 +35,13 @@ class ClothingItemJdbcTemplateRepositoryTest {
         // can't predict order
         // if delete is first, we're down to 2
         // if add is first, we may go as high as 3
-        assertTrue(items.size() >= 2 && items.size() <= 4);
+        assertTrue(items.size() >= 1 && items.size() <= 3);
     }
 
     @Test
     void shouldFindHat() {
-        ClothingItem hat = repository.findById(1);
-        assertEquals(1, hat.getItemId());
+        ClothingItem hat = repository.findById(5);
+        assertEquals(5, hat.getItemId());
         assertEquals(false, hat.getHidden());
     }
 
