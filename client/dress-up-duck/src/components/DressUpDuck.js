@@ -14,7 +14,8 @@ function DressUpDuck({handleDelete}) {
     useEffect(() => {
         findAll()
             .then(setDucks)
-            .catch(document.getElementById("duckError").classList.remove("d-none"));
+            .then(document.getElementById("duckError").classList.add("d-none"))
+            .catch(error => document.getElementById("duckError").classList.remove("d-none"));
     }, [navigate]);
 
     return (
@@ -22,8 +23,10 @@ function DressUpDuck({handleDelete}) {
             <div className="row">
                 <div className="col-6">
                     <div className="row mb-2">
-                        <div className="col">Ducks</div>
-                        {ducks.map(d => <Duck key={d.id} duck={d} handleDelete={handleDelete} canDelete={canDelete} />)}
+                        <div className="col-1 mt-4">Ducks</div>
+                        <div className="col d-flex flex-row">
+                            {ducks.map(d => <Duck key={d.id} duck={d} handleDelete={handleDelete} canDelete={canDelete} />)}
+                        </div>
                         <p id="duckError" className="col text-danger d-none">The ducks got loose!</p>
                     </div>
                     
@@ -40,5 +43,4 @@ function DressUpDuck({handleDelete}) {
 
 export default DressUpDuck;
 
-// /api/duck
 // /api/item/{itemtype}
