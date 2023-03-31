@@ -4,8 +4,8 @@ use duck_dress_test;
 -- use duck_dress_prod
 -- also remember to change in the application.properties! 
 
-drop table if exists app_user_role;
-drop table if exists app_role;
+drop table if exists app_user_authority;
+drop table if exists app_authority;
 -- drop table if exists app_user;
 
 -- create table app_user (
@@ -17,14 +17,14 @@ drop table if exists app_role;
 
 
 
-create table app_role (
-    app_role_id int primary key auto_increment,
+create table app_authority (
+    app_authority_id int primary key auto_increment,
     `name` varchar(50) not null unique
 );
 
-create table app_user_role (
+create table app_user_authority (
     app_user_id int not null,
-    app_role_id int not null,
+    app_authority_id int not null,
     constraint pk_app_user_authority
         primary key (app_user_id, app_authority_id),
     constraint fk_app_user_authority_user_id

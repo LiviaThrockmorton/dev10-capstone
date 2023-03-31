@@ -95,11 +95,11 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository{
     @Override
     public boolean update(AppUser appUser) {
 
-        final String sql = "update appUser set "
+        final String sql = "update app_user set "
                 + "username = ?, "
                 + "email = ?, "
                 + "hidden = ?"
-                + "where appUser_id = ?";
+                + "where app_user_id = ?";
 
         return jdbcTemplate.update(sql, appUser.getUsername(), appUser.getEmail(), appUser.getHidden(), appUser.getAppUserId()) > 0;
     }
