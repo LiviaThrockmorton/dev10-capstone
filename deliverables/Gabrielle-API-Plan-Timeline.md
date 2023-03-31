@@ -115,6 +115,6 @@ ______________________________________
 ----------------------------------
 
 # Total Time Estimation: 31.5hrs*
-## *Please note I am notoriously bad at estimating how long a task takes
+*Please note I am notoriously bad at estimating how long a task takes
 
 
