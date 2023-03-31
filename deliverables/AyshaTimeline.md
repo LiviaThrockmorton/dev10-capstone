@@ -4,8 +4,12 @@
 ##Toggle Button - Estimate: 1hr
 [ ] Find appropriate documentation
 [ ] Implement code block with project
+<<<<<<< Updated upstream
 
 
+=======
+ 
+>>>>>>> Stashed changes
 Animations - Estimate: 2hrs
 [ ] Find appropriate documentation
 [ ] Decide animation style(s) for necessary objects
