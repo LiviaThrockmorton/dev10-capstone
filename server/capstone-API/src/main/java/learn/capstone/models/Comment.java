@@ -1,15 +1,17 @@
 package learn.capstone.models;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Comment {
 
     private int commentId;
-    private String userId;
+    private int userId;
     private String content;
-    private String outfitId;
-    private String dateTime;
+    private int outfitId;
+    private LocalDateTime dateTime;
     private boolean hidden;
+
 
     public boolean getHidden() {
         return hidden;
@@ -19,8 +21,6 @@ public class Comment {
         this.hidden = hidden;
     }
 
-
-
     public int getCommentId() {
         return commentId;
     }
@@ -29,11 +29,11 @@ public class Comment {
         this.commentId = commentId;
     }
 
-    public String getUserId() {
+    public int getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 
@@ -45,14 +45,21 @@ public class Comment {
         this.content = content;
     }
 
-    public String getOutfitId() {
+    public int getOutfitId() {
         return outfitId;
     }
 
-    public void setOutfitId(String outfitId) {
+    public void setOutfitId(int outfitId) {
         this.outfitId = outfitId;
     }
 
+    public LocalDateTime getDateTime() {
+        return dateTime;
+    }
+
+    public void setDateTime(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
+    }
 
 
     @Override
@@ -60,20 +67,11 @@ public class Comment {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Comment comment = (Comment) o;
-        return commentId == comment.commentId && hidden == comment.hidden && Objects.equals(userId, comment.userId) && Objects.equals(content, comment.content) && Objects.equals(outfitId, comment.outfitId) && Objects.equals(dateTime, comment.dateTime);
+        return commentId == comment.commentId && userId == comment.userId && content == comment.content && outfitId == comment.outfitId && hidden == comment.hidden && Objects.equals(dateTime, comment.dateTime);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(commentId, userId, content, outfitId, dateTime, hidden);
     }
-
-    public String getDateTime() {
-        return dateTime;
-    }
-
-    public void setDateTime(String dateTime) {
-        this.dateTime = dateTime;
-    }}
-
-
+}
