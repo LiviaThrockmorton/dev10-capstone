@@ -50,11 +50,11 @@ import java.util.List;
             addAuthorities(authorityNames);
         }
 
-//        public AppUser(String username, String password, Collection<String> authorityNames) {
-//            this.username = username;
-//            this.password = password;
-//            addAuthorities(authorityNames);
-//        }
+        public AppUser(String username, String password, Collection<String> authorityNames) {
+            this.username = username;
+            this.password = password;
+            addAuthorities(authorityNames);
+        }
 
         public int getAppUserId() {
             return appUserId;

@@ -73,7 +73,7 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository{
     @Override
     public AppUser add(AppUser appUser) {
 
-        final String sql = "insert into appUser (username, email, hidden) values (?,?, ?);";
+        final String sql = "insert into appUser (username, email, hidden, enabled) values (?,?,?);";
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
         int rowsAffected = jdbcTemplate.update(connection -> {
@@ -108,7 +108,7 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository{
     @Transactional
     public boolean deleteById(int appUserId) {
         jdbcTemplate.update("delete from comment where app_user_id = ?", appUserId);
-        jdbcTemplate.update("delete from user_outfit where app_user_id = ?", appUserId);
+        jdbcTemplate.update("delete from outfit where app_user_id = ?", appUserId);
         return jdbcTemplate.update("delete from app_user where app_user_id = ?", appUserId) > 0;
     }
 
