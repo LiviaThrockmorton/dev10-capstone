@@ -9,7 +9,7 @@ public class Outfit {
     private int outfitId;
 
     private int duckId;
-    private int user_id;
+    private int userId;
 
     private int shirtId;
     private int pantsId;
@@ -47,12 +47,12 @@ public class Outfit {
     }
 
 
-    public int getUser_id() {
-        return user_id;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public int getShirtId() {

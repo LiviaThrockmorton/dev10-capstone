@@ -13,7 +13,7 @@ public class OutfitMapper implements RowMapper<Outfit> {
         Outfit outfit = new Outfit();
         outfit.setOutfitId(resultSet.getInt("outfit_id"));
         outfit.setDuckId(resultSet.getInt("duck_id"));
-        outfit.setUser_id(resultSet.getInt("app_user_id"));
+        outfit.setUserId(resultSet.getInt("app_user_id"));
 
         if (resultSet.getDate("date_created") != null) {
             outfit.setDateCreated(resultSet.getDate("date_created").toLocalDate());

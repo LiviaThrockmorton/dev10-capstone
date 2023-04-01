@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -26,7 +27,17 @@ public class OutfitJdbcTemplateRepository implements OutfitRepository {
 
     @Override
     public List<Outfit> findAll() {
-        final String sql = "";
+        final String sql = "select outfit_id, " +
+                "app_user_id,  " +
+                "shirt_id,  " +
+                "pants_id,  " +
+                "hat_id,  " +
+                "date_created,  " +
+                "duck_id,  " +
+                "posted,  " +
+                "hidden  " +
+                "from outfit " +
+                "order by date_created desc;";
         return jdbcTemplate.query(sql, new OutfitMapper());
     }
 
@@ -34,9 +45,18 @@ public class OutfitJdbcTemplateRepository implements OutfitRepository {
     @Transactional
     public Outfit findById(int outfitId) {
 
-        final String sql = "select outfit_id, shirt_id, pants_id, hat_id, date_created, duck_id, posted, hidden "
-                + "from outfit "
-                + "where outfit_id = ?;";
+        final String sql = "select outfit_id, " +
+                "app_user_id,  " +
+                "shirt_id,  " +
+                "pants_id,  " +
+                "hat_id,  " +
+                "date_created,  " +
+                "duck_id,  " +
+                "posted,  " +
+                "hidden  " +
+                "from outfit " +
+                "where outfit_id = ? " +
+                "order by date_created desc;";
 
         Outfit outfit = jdbcTemplate.query(sql, new OutfitMapper(), outfitId).stream()
                 .findFirst().orElse(null);
@@ -50,10 +70,19 @@ public class OutfitJdbcTemplateRepository implements OutfitRepository {
     }
 
     @Override
-        public List<Outfit> findByUser(int AppUserId) {
-            final String sql = "select outfit_id, shirt_id, pants_id, hat_id, date_created, duck_id "
-                    + "from outfit limit 1000" +
-                    "where user_id = ?;";
+        public List<Outfit> findByUser(int userId) {
+            final String sql = "select outfit_id, " +
+                    "app_user_id,  " +
+                    "shirt_id,  " +
+                    "pants_id,  " +
+                    "hat_id,  " +
+                    "date_created,  " +
+                    "duck_id,  " +
+                    "posted,  " +
+                    "hidden  " +
+                    "from outfit " +
+                    "where app_user_id = ? " +
+                    "order by date_created desc;";
             return jdbcTemplate.query(sql, new OutfitMapper());
         }
 
@@ -61,16 +90,17 @@ public class OutfitJdbcTemplateRepository implements OutfitRepository {
     public Outfit add(Outfit outfit) {
 
         final String sql = "insert into outfit (app_user_id, shirt_id, pants_id, hat_id, date_created, duck_id, posted, hidden) "
-                + " values (?,?,?,?,?);";
+                + " values (?,?,?,?,?,?,?,?);";
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
         int rowsAffected = jdbcTemplate.update(connection -> {
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, outfit.getUser_id());
+            ps.setInt(1, outfit.getUserId());
             ps.setInt(2, outfit.getShirtId());
             ps.setInt(3, outfit.getPantsId());
             ps.setInt(4, outfit.getHatId());
-            ps.setDate(5, outfit.getDateCreated() == null ? null : Date.valueOf(outfit.getDateCreated()));
+//            ps.setDate(5, outfit.getDateCreated() == null ? null : Date.valueOf(outfit.getDateCreated()));
+            ps.setDate(5, Date.valueOf(LocalDate.now()));
             ps.setInt(6, outfit.getDuckId());
             ps.setBoolean(7, outfit.getPosted());
             ps.setBoolean(8, outfit.getHidden());

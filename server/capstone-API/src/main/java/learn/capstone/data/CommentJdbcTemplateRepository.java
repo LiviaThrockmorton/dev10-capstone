@@ -30,7 +30,9 @@
 //                .findFirst()
 //                .orElse(null);
 //    }
-//
+
+// TODO add a findHidden
+//TODO add a find by outfitId?
 //    @Override
 //    public Comment add(Comment comment) {
 //

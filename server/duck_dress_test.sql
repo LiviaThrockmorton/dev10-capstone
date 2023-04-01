@@ -232,9 +232,3 @@ delimiter ;
 set sql_safe_updates = 0;
 call set_known_good_state();
 set sql_safe_updates = 1;
-
-
--- Error Code: 1451. Cannot delete or update a parent row: a foreign key constraint fails
- -- (`duck_dress_test`.`app_user_authority`, CONSTRAINT `fk_app_user_authority_authority_id` 
--- FOREIGN KEY (`app_authority_id`) REFERENCES `app_authority` (`app_authority_id`))
-
