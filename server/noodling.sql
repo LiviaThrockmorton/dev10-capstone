@@ -236,7 +236,7 @@ insert into outfit (outfit_id, shirt_id, pants_id, hat_id, date_created, duck_id
 (2, 2, 2, 2, '2023-03-21', 2, true, true),
 (3, 1, 2, 2, '2023-02-28', 3, false, false),
 (4, 2, 2, 1, '2023-01-02', 4, true, true),
-(5, 1, 1, 2, '2023-11-28', 5, false, false);
+(5, 1, 1, 2, '2022-11-28', 5, false, false);
 
 
 insert into comments (comment_id, app_user_id, content, outfit_id, date_time, hidden) values
