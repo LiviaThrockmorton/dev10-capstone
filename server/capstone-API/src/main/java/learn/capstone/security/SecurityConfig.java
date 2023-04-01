@@ -31,6 +31,27 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.POST, "/api/duck/**").hasAnyAuthority("USER", "ADMIN")
                 .antMatchers(HttpMethod.PUT, "/api/duck/**").hasAnyAuthority("USER", "ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/api/duck/**").hasAuthority("ADMIN")
+
+          
+                .antMatchers(HttpMethod.GET, "/api/item/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/item/**").hasAnyAuthority("USER", "ADMIN")
+                .antMatchers(HttpMethod.PUT, "/api/item/**").hasAnyAuthority("USER", "ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/api/item/**").hasAuthority("ADMIN")
+
+
+                .antMatchers(HttpMethod.GET, "/api/outfit/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/outfit/**").hasAnyAuthority("USER", "ADMIN")
+                .antMatchers(HttpMethod.PUT, "/api/outfit/**").hasAnyAuthority("USER", "ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/api/outfit/**").hasAuthority("ADMIN")
+
+
+                .antMatchers(HttpMethod.GET, "/api/comment/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/comment/**").hasAnyAuthority("USER", "ADMIN")
+                .antMatchers(HttpMethod.PUT, "/api/comment/**").hasAnyAuthority("USER", "ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/api/comment/**").hasAuthority("ADMIN")
+
+
+                
                 .antMatchers("/**").denyAll()
                 .and()
                 .addFilter(new JwtRequestFilter(manager(config), converter))

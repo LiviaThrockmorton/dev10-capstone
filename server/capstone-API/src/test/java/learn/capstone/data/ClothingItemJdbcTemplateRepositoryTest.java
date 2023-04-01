@@ -20,7 +20,6 @@ class ClothingItemJdbcTemplateRepositoryTest {
     ClothingItemJdbcTemplateRepository repository;
 
     @Autowired
-
     private JdbcTemplate jdbcTemplate;
 
 //    @Autowired

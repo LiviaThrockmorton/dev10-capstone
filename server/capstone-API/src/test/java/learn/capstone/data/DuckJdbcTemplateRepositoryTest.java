@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.util.List;
 
@@ -20,13 +21,29 @@ class DuckJdbcTemplateRepositoryTest {
     @Autowired
     DuckJdbcTemplateRepository repository;
 
+
     @Autowired
-    KnownGoodState knownGoodState;
+    private JdbcTemplate jdbcTemplate;
+
+//    @Autowired
+//    KnownGoodState knownGoodState;
+//
+//    @BeforeEach
+//    void setup() {
+//        knownGoodState.set();
+//    }
+
+
+    static boolean hasSetup = false;
 
     @BeforeEach
     void setup() {
-        knownGoodState.set();
+        if (!hasSetup) {
+            hasSetup = true;
+            jdbcTemplate.update("call set_known_good_state();");
+        }
     }
+
 
 
     @Test
