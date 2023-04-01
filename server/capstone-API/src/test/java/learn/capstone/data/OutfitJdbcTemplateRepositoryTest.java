@@ -88,8 +88,8 @@ class OutfitJdbcTemplateRepositoryTest {
         Outfit outfit = new Outfit();
         outfit.setShirtId(1);
         outfit.setHatId(1);
-        outfit.setDateCreated(LocalDate.of(1985, 8, 15));
-        outfit.setDuckId(66);
+        outfit.setDateCreated(LocalDate.of(2022, 8, 15));
+        outfit.setDuckId(99);
         return outfit;
     }
 }
