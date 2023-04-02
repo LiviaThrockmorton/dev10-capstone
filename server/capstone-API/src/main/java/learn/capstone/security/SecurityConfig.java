@@ -22,7 +22,7 @@ public class SecurityConfig {
     public SecurityFilterChain getChain(HttpSecurity http, AuthenticationConfiguration config) throws Exception {
         http.csrf().disable();
         http.cors();
-        http.authorizeRequests().antMatchers("/**").permitAll();
+        //http.authorizeRequests().antMatchers("/**").permitAll();
 
         http.authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/authenticate").permitAll()
