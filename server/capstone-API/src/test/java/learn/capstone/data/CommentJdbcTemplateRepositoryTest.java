@@ -11,8 +11,8 @@ import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-//@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
+//@SpringBootTest
 class CommentJdbcTemplateRepositoryTest {
 
     final static int NEXT_LOCATION_ID = 7;

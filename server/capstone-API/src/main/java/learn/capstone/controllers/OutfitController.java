@@ -30,7 +30,7 @@ public class OutfitController {
         return service.findById(outfitId);
     }
 
-    @GetMapping("/user/{userId}")
+    @GetMapping("/byUser/{userId}")
     public List <Outfit> findByUser(@PathVariable int userId) {
         return service.findByUser(userId);
     }

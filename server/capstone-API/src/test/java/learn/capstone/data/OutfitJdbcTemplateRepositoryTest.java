@@ -11,8 +11,8 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-//@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
+//@SpringBootTest
 class OutfitJdbcTemplateRepositoryTest {
 
     final static int NEXT_ID = 6;

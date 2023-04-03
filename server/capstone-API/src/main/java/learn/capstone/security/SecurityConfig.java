@@ -1,5 +1,6 @@
 package learn.capstone.security;
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -10,6 +11,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
+@ConditionalOnWebApplication
 public class SecurityConfig {
 
     private final JwtConverter converter;
@@ -30,6 +32,7 @@ public class SecurityConfig {
 
                 .antMatchers(HttpMethod.GET, "/api/item/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/duck/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/comment/admin").hasAuthority("ADMIN")
                 .antMatchers(HttpMethod.GET, "/api/comment/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/outfit/**").permitAll()
 

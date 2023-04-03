@@ -2,6 +2,7 @@ package learn.capstone.controllers;
 
 import learn.capstone.models.AppUser;
 import learn.capstone.security.JwtConverter;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -18,6 +19,7 @@ import java.util.HashMap;
 
 @RestController
 @CrossOrigin
+@ConditionalOnWebApplication
 public class AuthController {
 
     private final AuthenticationManager manager;
