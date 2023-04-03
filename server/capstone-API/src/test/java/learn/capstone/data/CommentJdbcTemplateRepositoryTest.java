@@ -65,7 +65,7 @@ class CommentJdbcTemplateRepositoryTest {
         comment.setContent("Test Comment");
         comment.setOutfitId(1);
         comment.setHidden(false);
-        comment.setDateTime(LocalDateTime.of(2023,2,2,12,25));
+        comment.setDateTime(LocalDateTime.of(2023,2,2,12,25, 00));
         return comment;
     }
 }

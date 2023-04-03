@@ -25,7 +25,7 @@ public class CommentJdbcTemplateRepository implements CommentRepository {
     @Override
     public Comment findById(int commentId) {
 
-        final String sql = "select comment_id, app_user_id, content, outfit_id, dateTime, hidden "
+        final String sql = "select comment_id, app_user_id, content, outfit_id, date_time, hidden "
                 + "from comments "
                 + "where comment_id = ? and hidden = 0;";
 
