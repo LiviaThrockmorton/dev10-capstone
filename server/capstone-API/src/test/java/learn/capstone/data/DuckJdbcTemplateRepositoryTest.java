@@ -12,8 +12,8 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
-//@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
+//@SpringBootTest
 class DuckJdbcTemplateRepositoryTest {
 
 

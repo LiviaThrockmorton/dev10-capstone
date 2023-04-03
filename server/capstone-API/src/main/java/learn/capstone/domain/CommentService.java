@@ -26,7 +26,7 @@ public class CommentService {
         return repository.findByOutfit(outfitId);
     }
 
-    public List <Comment> findByHidden(boolean hidden) {
+    public List <Comment> findByHidden() {
         return repository.findByHidden();
     }
 
@@ -75,7 +75,7 @@ public class CommentService {
         Result<Comment> result = new Result<>();
 
         if (comment == null) {
-            result.addMessage("comment cannot be null", ResultType.INVALID);
+            result.addMessage("Comment cannot be null", ResultType.INVALID);
             return result;
         }
 
@@ -84,7 +84,7 @@ public class CommentService {
         }
 
         if (Validations.isNullOrBlank(comment.getContent())) {
-            result.addMessage("content is required", ResultType.INVALID);
+            result.addMessage("Content is required", ResultType.INVALID);
         }
 
         if ((comment.getOutfitId()) ==0) {

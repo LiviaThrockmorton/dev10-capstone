@@ -1,7 +1,14 @@
+import React from "react";
+import ForumPost from "./ForumPost";
+import ForumMain from "./ForumMain";
+
 function Forum() {
-    return (
-        <div>Forum</div>
-    )
+  return (
+    <>
+      {/* <ForumPost /> */}
+      <ForumMain />
+    </>
+  );
 }
 
 export default Forum;

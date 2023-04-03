@@ -1,24 +1,22 @@
-//package learn.capstone.domain;
-//
-//import learn.capstone.data.AppUserRepository;
-//import learn.capstone.models.AppUser;
-//import org.junit.jupiter.api.Test;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.boot.test.context.SpringBootTest;
-//import org.springframework.boot.test.mock.mockito.MockBean;
-//
-//import static org.junit.jupiter.api.Assertions.assertEquals;
-//import static org.mockito.Mockito.when;
-//
-//@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
-//class AppUserServiceTest {
-//
-//    @Autowired
-//    AppUserService service;
-//
-//    @MockBean
-//    AppUserRepository appUserRepository;
-//
+package learn.capstone.domain;
+
+import learn.capstone.data.AppUserRepositoryInterface;
+import learn.capstone.security.AppUserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
+class AppUserServiceTest {
+
+    @Autowired
+    AppUserService service;
+
+    @MockBean
+    AppUserRepositoryInterface appUserRepositoryInterface;
+
 //    @Test
 //    void shouldAdd() {
 //        AppUser appUser = new AppUser(0, "TEST", "Long DuckImage Test");
@@ -85,5 +83,5 @@
 //        actual = service.update(appUser);
 //        assertEquals(ResultType.INVALID, actual.getType());
 //    }
-//
-//}
+
+}

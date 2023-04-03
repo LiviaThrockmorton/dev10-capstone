@@ -1,5 +1,6 @@
 package learn.capstone.security;
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -10,6 +11,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
+@ConditionalOnWebApplication
 public class SecurityConfig {
 
     private final JwtConverter converter;
@@ -19,52 +21,28 @@ public class SecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http, AuthenticationConfiguration config) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity http, AuthenticationConfiguration authConfig) throws Exception {
         http.csrf().disable();
         http.cors();
-//        http.authorizeRequests().antMatchers("/**").permitAll();
 
         http.authorizeRequests()
-                .antMatchers(HttpMethod.POST, "/authenticate").permitAll()
-                .antMatchers(HttpMethod.POST, "/refresh").authenticated()
-
-                .antMatchers(HttpMethod.GET, "/api/item/**").permitAll()
-                .antMatchers(HttpMethod.GET, "/api/duck/**").permitAll()
-                .antMatchers(HttpMethod.GET, "/api/comment/**").permitAll()
-                .antMatchers(HttpMethod.GET, "/api/outfit/**").permitAll()
-
-
-
-                .antMatchers(HttpMethod.POST, "/api/duck/**").hasAnyAuthority("USER", "ADMIN")
-                .antMatchers(HttpMethod.PUT, "/api/duck/**").hasAnyAuthority("USER", "ADMIN")
-
-                .antMatchers(HttpMethod.POST, "/api/item/**").hasAnyAuthority("USER", "ADMIN")
-                .antMatchers(HttpMethod.PUT, "/api/item/**").hasAnyAuthority("USER", "ADMIN")
-
-                .antMatchers(HttpMethod.POST, "/api/outfit/**").hasAnyAuthority("USER", "ADMIN")
-                .antMatchers(HttpMethod.PUT, "/api/outfit/**").hasAnyAuthority("USER", "ADMIN")
-
-                .antMatchers(HttpMethod.POST, "/api/comment/**").hasAnyAuthority("USER", "ADMIN")
-                .antMatchers(HttpMethod.PUT, "/api/comment/**").hasAnyAuthority("USER", "ADMIN")
-
-
-                .antMatchers(HttpMethod.DELETE, "/api/duck/**").hasAuthority("ADMIN")
-                .antMatchers(HttpMethod.DELETE, "/api/item/**").hasAuthority("ADMIN")
-                .antMatchers(HttpMethod.DELETE, "/api/outfit/**").hasAuthority("ADMIN")
-                .antMatchers(HttpMethod.DELETE, "/api/comment/**").hasAuthority("ADMIN")
-
+                .antMatchers("/authenticate").permitAll()
+                .antMatchers("/create_account").permitAll()
+                .antMatchers("/refresh_token").authenticated()
+                .antMatchers(HttpMethod.GET, "/api/admin/**").hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.GET, "/api/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/**").hasAnyAuthority("USER", "ADMIN")
+                .antMatchers(HttpMethod.PUT, "/api/**").hasAnyAuthority("USER", "ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/api/**").hasAuthority("ADMIN")
 
                 .antMatchers("/**").denyAll()
-                .and()
-                .addFilter(new JwtRequestFilter(manager(config), converter))
-                .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-
+                .and().addFilter(new JwtRequestFilter(authenticationManager(authConfig), converter))
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         return http.build();
     }
 
     @Bean
-    public AuthenticationManager manager(AuthenticationConfiguration config) throws Exception {
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
     }
 }

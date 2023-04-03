@@ -7,128 +7,101 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
-    public class AppUser implements UserDetails {
+public class AppUser implements UserDetails {
 
-        private int appUserId;
-        private String username;
-        private String password;
-        private ArrayList<GrantedAuthority> authorities = new ArrayList<>();
-        private String email;
+    private int appUserId;
+    private String username;
+    private String password;
 
+    private String email;
 
-
-        private boolean hidden;
-
-
-//        // TODO I think this is supposed to be here?
-        private List<Outfit> outfits = new ArrayList<>();
+    private boolean hidden;
 
 
+    private final boolean enabled;
+    private final Collection<GrantedAuthority> authorities;
 
-        public List<Outfit> getOutfits() {
-            return outfits;
-        }
-
-        public void setOutfits(List<Outfit> outfits) {
-            this.outfits = outfits;
-        }
-
-
-
-        public AppUser() {
-        }
-
-        public AppUser(int appUserId, String username, String password, ArrayList<GrantedAuthority> authorities, String email, boolean hidden, List<Outfit> outfits,  Collection<String> authorityNames) {
-            this.appUserId = appUserId;
-            this.username = username;
-            this.password = password;
-            this.authorities = authorities;
-            this.email = email;
-            this.hidden = hidden;
-            this.outfits = outfits;
-            addAuthorities(authorityNames);
-        }
-
-        public AppUser(String username, String password, Collection<String> authorityNames) {
-            this.username = username;
-            this.password = password;
-            addAuthorities(authorityNames);
-        }
-
-        public int getAppUserId() {
-            return appUserId;
-        }
-
-        public void setAppUserId(int appUserId) {
-            this.appUserId = appUserId;
-        }
-
-        public void setUsername(String username) {
-            this.username = username;
-        }
-
-        public void setPassword(String password) {
-            this.password = password;
-        }
-
-        public String getEmail() {
-            return email;
-        }
-
-        public void setEmail(String email) {
-            this.email = email;
-        }
-
-        public boolean getHidden() {
-            return hidden;
-        }
-
-        public void setHidden(boolean hidden) {
-            this.hidden = hidden;
-        }
-
-
-        @Override
-        public Collection<? extends GrantedAuthority> getAuthorities() {
-            return authorities;
-        }
-
-        @Override
-        public String getPassword() {
-            return password;
-        }
-
-        @Override
-        public String getUsername() {
-            return username;
-        }
-
-        @Override
-        public boolean isAccountNonExpired() {
-            return true;
-        }
-
-        @Override
-        public boolean isAccountNonLocked() {
-            return true;
-        }
-
-        @Override
-        public boolean isCredentialsNonExpired() {
-            return true;
-        }
-
-        @Override
-        public boolean isEnabled() {
-            return true;
-        }
-
-
-        public void addAuthorities(Collection<String> authorityNames) {
-            authorities.clear();
-            for (String name : authorityNames) {
-                authorities.add(new SimpleGrantedAuthority(name));
-            }
-        }
+    public AppUser(int appUserId, String username, String password, boolean enabled, List<String> roles) {
+        this.appUserId = appUserId;
+        this.username = username;
+        this.password = password;
+        this.enabled = enabled;
+        this.authorities = convertRolesToAuthorities(roles);
     }
+
+
+    public AppUser(int appUserId, String username, String password, String email, boolean hidden, boolean enabled, List<String> roles) {
+        this.appUserId = appUserId;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.hidden = hidden;
+        this.enabled = enabled;
+        this.authorities = convertRolesToAuthorities(roles);;
+    }
+
+    private static Collection<GrantedAuthority> convertRolesToAuthorities(List<String> roles) {
+        return roles.stream().map(r -> new SimpleGrantedAuthority(r)).collect(Collectors.toList());
+    }
+
+    @Override
+    public Collection<GrantedAuthority> getAuthorities() {
+        return new ArrayList<>(authorities);
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return username;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public int getAppUserId() {
+        return appUserId;
+    }
+
+    public void setAppUserId(int appUserId) {
+        this.appUserId = appUserId;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public boolean getHidden() {
+        return hidden;
+    }
+
+    public void setHidden(boolean hidden) {
+        this.hidden = hidden;
+    }
+}
