@@ -36,6 +36,9 @@ public class CommentController {
         return ErrorResponse.build(result);
     }
 
+    //TODO find by outfit
+    //TODO find hidden
+
     @PutMapping("/{commentId}")
     public ResponseEntity<Object> update(@PathVariable int commentId, @RequestBody Comment comment) {
         if (commentId != comment.getCommentId()) {

@@ -28,18 +28,30 @@ public class ClothingItemJdbcTemplateRepository implements ClothingItemRepositor
 
         final String sql = "select item_id, item_type, clothing_item_image, hidden "
                 + "from clothing_item "
-                + "where item_type = ?;";
+                + "where item_type = ?" +
+                "and hidden = false;";
 
         return jdbcTemplate.query(sql, new ClothingItemMapper(), itemType);
     }
+
+    //    @Override
+    //    public List<ClothingItem> findByType(String itemType, boolean showHidden) {
+    //
+    //        String sql = "select item_id, item_type, clothing_item_image, hidden "
+    //                + "from clothing_item "
+    //                + "where item_type = ?";
+    //                if(!showHidden){
+    //                sql +=
+    //                "and hidden = false;";}
+    //
+    //        return jdbcTemplate.query(sql, new ClothingItemMapper(), itemType);
+    //    }
 
     @Override
     @Transactional
     public ClothingItem findById(int itemId) {
 
-        final String sql = "select item_id, item_type, clothing_item_image, hidden "
-                + "from clothing_item "
-                + "where item_id = ?;";
+        final String sql = "select item_id, item_type, clothing_item_image, hidden from clothing_item where item_id = ? and hidden = false;;";
 
         ClothingItem clothingItem = jdbcTemplate.query(sql, new ClothingItemMapper(), itemId).stream()
                 .findFirst().orElse(null);

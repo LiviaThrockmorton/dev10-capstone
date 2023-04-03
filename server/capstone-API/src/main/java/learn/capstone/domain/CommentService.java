@@ -1,20 +1,33 @@
 package learn.capstone.domain;
 
 import learn.capstone.data.CommentRepository;
+import learn.capstone.data.OutfitRepository;
 import learn.capstone.models.Comment;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class CommentService {
 
     private final CommentRepository repository;
+    private final OutfitRepository outfitRepository;
 
-    public CommentService(CommentRepository repository) {
+    public CommentService(CommentRepository repository, OutfitRepository outfitRepository) {
         this.repository = repository;
+        this.outfitRepository = outfitRepository;
     }
 
     public Comment findById(int commentId) {
         return repository.findById(commentId);
+    }
+
+    public List<Comment> findByOutfit(int outfitId) {
+        return repository.findByOutfit(outfitId);
+    }
+
+    public List <Comment> findByHidden(boolean hidden) {
+        return repository.findByHidden();
     }
 
     public Result<Comment> add(Comment comment) {
@@ -55,6 +68,8 @@ public class CommentService {
     public boolean deleteById(int commentId) {
         return repository.deleteById(commentId);
     }
+
+    //TODO look into more validations for comments
 
     private Result<Comment> validate(Comment comment) {
         Result<Comment> result = new Result<>();

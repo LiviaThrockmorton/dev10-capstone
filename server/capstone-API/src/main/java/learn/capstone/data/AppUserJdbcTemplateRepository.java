@@ -24,7 +24,7 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository{
 
     public AppUser findByUsername(String username) {
 
-        String sql = "select app_user_id, username, password_hash, email, hidden from app_user where username = ?;";
+        String sql = "select app_user_id, username, password_hash, email, hidden from app_user where username = ? and hidden = 0;";
         AppUser user = jdbcTemplate.query(sql, new AppUserMapper(), username).stream()
                 .findFirst().orElse(null);
 
@@ -53,13 +53,13 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository{
 
     @Override
     public List<AppUser> findAll() {
-        final String sql = "select app_user_id, username, password_hash, email, hidden from app_user;";
+        final String sql = "select app_user_id, username, password_hash, email, hidden from app_user where hidden = 0;";
         return jdbcTemplate.query(sql, new AppUserMapper());
     }
 
     @Override
     public AppUser findById(int appUserId) {
-        String sql = "select app_user_id, username, password_hash, email, hidden from app_user where app_user_id = ?;";
+        String sql = "select app_user_id, username, password_hash, email, hidden from app_user where app_user_id = ? and hidden = 0;";
         AppUser user = jdbcTemplate.query(sql, new AppUserMapper(), appUserId).stream()
                 .findFirst().orElse(null);
 
@@ -111,5 +111,7 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository{
         jdbcTemplate.update("delete from outfit where app_user_id = ?", appUserId);
         return jdbcTemplate.update("delete from app_user where app_user_id = ?", appUserId) > 0;
     }
+
+
 
 }
