@@ -15,6 +15,7 @@ import Outfit from './components/Outfit';
 import Profile from './components/Profile';
 import NotFound from './components/NotFound';
 import ForumPost from './components/ForumPost';
+import ToggleSwitch from './components/toggleSwitch';
 import { useState, useEffect } from 'react';
 
 const LOCAL_STORAGE_TOKEN_KEY = "dressUpDuckToken";
