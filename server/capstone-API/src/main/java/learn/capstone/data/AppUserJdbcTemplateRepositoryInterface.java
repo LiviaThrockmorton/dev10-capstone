@@ -3,7 +3,6 @@ package learn.capstone.data;
 import learn.capstone.data.mappers.AppUserMapper;
 import learn.capstone.models.AppUser;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
@@ -14,11 +13,11 @@ import java.sql.Statement;
 import java.util.List;
 
 @Repository
-public class AppUserJdbcTemplateRepository implements AppUserRepository{
+public class AppUserJdbcTemplateRepositoryInterface implements AppUserRepositoryInterface {
     private final JdbcTemplate jdbcTemplate;
 
 
-    public AppUserJdbcTemplateRepository(JdbcTemplate jdbcTemplate) {
+    public AppUserJdbcTemplateRepositoryInterface(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 

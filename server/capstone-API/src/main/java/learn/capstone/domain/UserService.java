@@ -1,10 +1,9 @@
 package learn.capstone.domain;
 
 
-import learn.capstone.data.AppUserRepository;
+import learn.capstone.data.AppUserRepositoryInterface;
 import learn.capstone.models.AppUser;
 
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,20 +11,20 @@ import java.util.List;
 @Service
 public class UserService {
 
-    private final AppUserRepository appUserRepository;
+    private final AppUserRepositoryInterface appUserRepositoryInterface;
 
 
-    public UserService(AppUserRepository appUserRepository) {
-        this.appUserRepository = appUserRepository;
+    public UserService(AppUserRepositoryInterface appUserRepositoryInterface) {
+        this.appUserRepositoryInterface = appUserRepositoryInterface;
 
     }
 
     public List<AppUser> findAll() {
-        return appUserRepository.findAll();
+        return appUserRepositoryInterface.findAll();
     }
 
     public AppUser findById(int appUserId) {
-        return appUserRepository.findById(appUserId);
+        return appUserRepositoryInterface.findById(appUserId);
     }
 
 
@@ -41,7 +40,7 @@ public class UserService {
             return result;
         }
 
-        appUser = appUserRepository.add(appUser);
+        appUser = appUserRepositoryInterface.add(appUser);
         result.setPayload(appUser);
         return result;
     }
@@ -57,7 +56,7 @@ public class UserService {
             return result;
         }
 
-        if (!appUserRepository.update(appUser)) {
+        if (!appUserRepositoryInterface.update(appUser)) {
             String msg = String.format("appUserId: %s, not found", appUser.getAppUserId());
             result.addMessage(msg, ResultType.NOT_FOUND);
         }
@@ -66,7 +65,7 @@ public class UserService {
     }
 
     public boolean deleteById(int appUserId) {
-        return appUserRepository.deleteById(appUserId);
+        return appUserRepositoryInterface.deleteById(appUserId);
     }
 //
 
