@@ -12,11 +12,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 import org.springframework.boot.test.context.SpringBootTest;
 
-//@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
-
-
-
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
+//@SpringBootTest
 class OutfitServiceTest {
 
     @Autowired
@@ -42,6 +39,8 @@ class OutfitServiceTest {
 
         outfit.setOutfitId(0);
         outfit.setShirtId(0);
+        outfit.setHatId(0);
+        outfit.setPantsId(0);
         result = service.add(outfit);
         assertEquals(ResultType.INVALID, result.getType());
     }

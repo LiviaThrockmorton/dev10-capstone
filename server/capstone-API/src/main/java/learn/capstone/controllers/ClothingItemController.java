@@ -55,12 +55,15 @@ public class ClothingItemController {
     }
 
     @DeleteMapping("/{itemId}")
-    public ResponseEntity<Object> deleteById(@PathVariable int itemId) {
-//        Result<Void> result = service.deleteById(itemId);
-//        if (result.isSuccess()) {
-//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//        }
-//        return ErrorResponse.build(result);
-        return null;
+    public ResponseEntity<Object> deleteById(@PathVariable int itemId, @RequestBody ClothingItem item) {
+        if (itemId != item.getItemId()) {
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
+        Result<ClothingItem> result = service.update(item);
+        if (result.isSuccess()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return ErrorResponse.build(result);
+
     }
 }

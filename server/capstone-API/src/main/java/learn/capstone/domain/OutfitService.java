@@ -92,9 +92,9 @@ public class OutfitService {
             result.addMessage("Date cannot be set to in the future.", ResultType.INVALID);
         }
 
-//        if (outfit.getDuckId() < 0 || outfit.getDuckId() > 100) {
-//            result.addMessage("duckId must be between 0 and 100", ResultType.INVALID);
-//        }
+        if (outfit.getOutfitId() < 0 || outfit.getOutfitId() > 100) {
+            result.addMessage("Outfit Id must be between 0 and 100", ResultType.INVALID);
+        }
 
         return result;
     }

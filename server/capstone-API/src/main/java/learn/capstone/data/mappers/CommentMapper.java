@@ -3,8 +3,10 @@ package learn.capstone.data.mappers;
 import learn.capstone.models.Comment;
 import org.springframework.jdbc.core.RowMapper;
 
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 public class CommentMapper implements RowMapper<Comment> {
@@ -17,7 +19,8 @@ public class CommentMapper implements RowMapper<Comment> {
         comment.setUserId(resultSet.getInt("outfit_id"));
         comment.setContent(resultSet.getString("content"));
         comment.setOutfitId(resultSet.getInt("outfit_id"));
-        comment.setDateTime(LocalDateTime.parse(resultSet.getString("date_time")));
+        Timestamp sqlDate = resultSet.getTimestamp("date_time");
+        comment.setDateTime(sqlDate.toLocalDateTime());
         return comment;
     }
 }
