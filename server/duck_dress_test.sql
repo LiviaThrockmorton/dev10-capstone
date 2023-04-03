@@ -188,9 +188,9 @@ insert into app_user_authority
 insert into duck (duck_id, duck_image, hidden) values
 (1, '/svgs/yellow-duck.svg', 0),
 (2, '/svgs/brown-duck.svg', 0),
-(3, '[INSERT URL HERE]', 0),
+(3, '[INSERT URL HERE]', 1),
 (4, '[INSERT URL HERE]', 1),
-(5, '[INSERT URL HERE]', 0);
+(5, '[INSERT URL HERE]', 1);
 
 insert into clothing_item (item_id, item_type, clothing_item_image, hidden) values
 (1, 'shirt', '[INSERT URL HERE]', 0),
