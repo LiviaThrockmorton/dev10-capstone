@@ -122,8 +122,8 @@ public class OutfitJdbcTemplateRepository implements OutfitRepository {
     public boolean update(Outfit outfit) {
 
         final String sql = "update outfit set "
-                + "duck_id = ? "
-                + "app_user_id = ? "
+                + "duck_id = ?, "
+                + "app_user_id = ?, "
                 + "date_created = ?, "
                 + "shirt_id = ?, "
                 + "pants_id = ?, "
@@ -133,18 +133,21 @@ public class OutfitJdbcTemplateRepository implements OutfitRepository {
                 + "where outfit_id = ?;";
 
         return jdbcTemplate.update(sql,
+                outfit.getDuckId(),
+                outfit.getUserId(),
+                outfit.getDateCreated(),
                 outfit.getShirtId(),
                 outfit.getPantsId(),
                 outfit.getHatId(),
-                outfit.getDateCreated(),
-                outfit.getDuckId(),
+                outfit.getPosted(),
+                outfit.getHidden(),
                 outfit.getOutfitId()) > 0;
     }
 
     @Override
     @Transactional
     public boolean deleteById(int outfitId) {
-        jdbcTemplate.update("update comment set hidden = 1 where outfit_id = ?;", outfitId);
+        jdbcTemplate.update("update comments set hidden = 1 where outfit_id = ?;", outfitId);
         return jdbcTemplate.update("update outfit set hidden = 1 where outfit_id = ?;", outfitId) > 0;
     }
 

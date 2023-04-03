@@ -1,6 +1,7 @@
 package learn.capstone.data;
 
 import learn.capstone.models.Outfit;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,28 +15,26 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 class OutfitJdbcTemplateRepositoryTest {
 
-    final static int NEXT_ID = 9;
+    final static int NEXT_ID = 6;
 
     @Autowired
     OutfitJdbcTemplateRepository repository;
 
-//    @Autowired
-//    KnownGoodState knownGoodState;
+    @Autowired
+    KnownGoodState knownGoodState;
 
-//    @BeforeEach
-//    void setup() {
-//        knownGoodState.set();
-//    }
+    @BeforeEach
+    void setup() {
+        knownGoodState.set();
+    }
 
     @Test
     void shouldFindAll() {
         List<Outfit> outfits = repository.findAll();
         assertNotNull(outfits);
 
-        // can't predict order
-        // if delete is first, we're down to 4
-        // if add is first, we may go as high as 7
-        assertTrue(outfits.size() >= 4 && outfits.size() <= 7);
+
+        assertTrue(outfits.size() >= 3 && outfits.size() <= 8);
     }
 
 //    insert into outfit (outfit_id, app_user_id, shirt_id, pants_id, hat_id, date_created, duck_id, posted, hidden) values
@@ -73,7 +72,7 @@ class OutfitJdbcTemplateRepositoryTest {
     @Test
     void shouldUpdate() {
         Outfit outfit = makeOutfit();
-        outfit.setOutfitId(3);
+        outfit.setOutfitId(2);
         assertTrue(repository.update(outfit));
         outfit.setOutfitId(13);
         assertFalse(repository.update(outfit));
@@ -81,14 +80,13 @@ class OutfitJdbcTemplateRepositoryTest {
 
     @Test
     void shouldDelete() {
-        assertTrue(repository.deleteById(2));
+        assertTrue(repository.deleteById(3));
 //        assertFalse(repository.deleteById(2));
     }
 
     private Outfit makeOutfit() {
         Outfit outfit =  new Outfit();
 
-        outfit.setOutfitId(1);
         outfit.setDuckId(1);
         outfit.setUserId(1);
         outfit.setShirtId(1);
