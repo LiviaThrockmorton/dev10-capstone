@@ -1,0 +1,159 @@
+.comment-container {
+    background-color: #999;
+    padding: 10px;
+    border-radius: 10px;
+  }
+  
+  .comment {
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .username-date {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    color: #fff;
+  }
+  
+  .username {
+    margin-right: 10px;
+    color: #fff;
+  }
+  
+  .date {
+    color: #fff;
+  }
+  
+  .comment-text {
+    margin-left: 30px;
+  }
+  
+  .see-more {
+    text-align: center;
+    margin-top: 10px;
+  }
+  
+  .add-comment {
+    margin-top: 10px;
+  }
+  
+  .add-comment input[type="text"] {
+    width: 80%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+  }
+  
+  .add-comment button[type="submit"] {
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+
+  .add-comment form {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .add-comment input {
+    flex: 1;
+    margin-right: 10px;
+  }
+  
+  .add-comment button {
+    margin-top: 10px;
+  }
+  
+  .back-button {
+    background-color: #ccc;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .back-button:hover {
+    background-color: #999;
+  }
+
+  .container-main {
+    display: flex;
+    flex-wrap: wrap; 
+    /* width: 90%;
+  margin: 0 auto;
+    margin: 30px 0px;
+    margin: 0 auto;
+    padding: 10px; */
+  }
+
+
+  .container-main > div {
+    flex: 1;
+    margin: 5px;
+    margin-bottom: 50px;
+    background-color: #3c3b3b;
+    text-align: center;
+    position: relative;
+  }
+
+  .container-main > div:hover {
+    background-color: #999;
+  }
+
+  .img:hover {
+    background-color: #999;
+  }
+  
+  .container-main > div > img {
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+
+
+  @media screen and (max-width: 768px) {
+    .container-main > div {
+      flex-basis: 100%;
+    }
+  }
+
+  .image-text {
+    padding: 0px;
+    color:white;
+  }
+
+  .container-main > div > a {
+    display: block;
+    height: 200px; /* set the height to the same value as the images */
+    width: 100%;
+  }
+  
+  .container-main > div > a > img {
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+
+
+  .container-main > div > .image-link {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .container-main > div > .image-link > img {
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+    cursor: pointer;
+  }
+
+
+
+
+  
