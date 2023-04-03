@@ -21,40 +21,32 @@ function DressUpDuck({ handleDelete }) {
     const navigate = useNavigate();
     const auth = useContext(AuthContext);
     const canDelete = auth.user && auth.user.hasRole("ADMIN");
+    const [error, setError] = useState(false);
 
-    //DISPLAY DUCK AND CLOTHING ITEMS
+    //GET DUCK AND CLOTHING ITEMS
     useEffect(() => {
         findAll()
             .then(setDucks)
-            .then(document.getElementById("duckError").classList.add("d-none"))
-            .catch(error => document.getElementById("duckError").classList.remove("d-none"));
+            .catch(() => setError(true));
     }, [navigate]);
 
     useEffect(() => {
         findByType("hat")
             .then(setHats)
-            .then(document.getElementById("hatError").classList.add("d-none"))
-            .catch(error => document.getElementById("hatError").classList.remove("d-none"));
+            .catch(() => setError(true));
     }, [navigate]);
 
     useEffect(() => {
         findByType("shirt")
             .then(setShirts)
-            .then(document.getElementById("shirtError").classList.add("d-none"))
-            .catch(error => document.getElementById("shirtError").classList.remove("d-none"));
+            .catch(() => setError(true));
     }, [navigate]);
 
     useEffect(() => {
         findByType("pants")
             .then(setPants)
-            .then(document.getElementById("pantsError").classList.add("d-none"))
-            .catch(error => document.getElementById("pantsError").classList.remove("d-none"));
+            .catch(() => setError(true));
     }, [navigate]);
-
-    //DISPLAY SELECTIONS
-    function selectDuck() {
-
-    }
 
     //OUTFIT FORM STUFF
     useEffect(() => {
@@ -62,14 +54,17 @@ function DressUpDuck({ handleDelete }) {
             findById(outfitId)
                 .then(setOutfit)
                 .catch(() => navigate("/profile"));
+        } else {
+            setOutfit(baseOutfit);
         }
     }, [outfitId, navigate]);
 
     function handleChange(evt) {
+        const btn = evt.target.parentNode;
         const nextOutfit = { ...outfit };
-        nextOutfit[evt.target.name] = evt.target.value;
+        nextOutfit[btn.name] = btn.value;
         setOutfit(nextOutfit);
-        console.log(outfit);
+        console.log(nextOutfit);
     }
 
     function handleSave(evt) {
@@ -84,35 +79,35 @@ function DressUpDuck({ handleDelete }) {
             <div className="row">
                 <div className="col-6">
                     <div className="row mb-2">
-                        <div htmlFor="duck" className="col-1 mt-4">Ducks</div>
+                        <div className="col-1 mt-4">Ducks</div>
                         <div className="col d-flex flex-row">
                             {ducks.map(d => <Duck key={d.duckId} duck={d} handleChange={handleChange} handleDelete={handleDelete} canDelete={canDelete} />)}
                         </div>
-                        <p id="duckError" className="col mt-4 text-danger d-none">The ducks got loose!</p>
+                        {error && <p className="col mt-4 text-danger d-none">The ducks got loose!</p>}
                     </div>
 
                     <div className="row mb-2">
-                        <div htmlFor="hat" className="col-1 mt-4">Hats</div>
+                        <div className="col-1 mt-4">Hats</div>
                         <div className="col d-flex flex-row" id="hat" name="hat">
-                            {hats.map(h => <ClothingItem key={h.itemId} item={h} handleDelete={handleDelete} canDelete={canDelete} />)}
+                            {hats.map(h => <ClothingItem key={h.itemId} item={h} handleChange={handleChange} handleDelete={handleDelete} canDelete={canDelete} />)}
                         </div>
-                        <p id="hatError" className="col mt-4 text-danger d-none">The ducks ate the hats!</p>
+                        {error && <p className="col mt-4 text-danger">The ducks ate the hats!</p>}
                     </div>
 
                     <div className="row mb-2">
-                        <div htmlFor="shirt" className="col-1 mt-4">Shirts</div>
+                        <div className="col-1 mt-4">Shirts</div>
                         <div className="col d-flex flex-row">
-                            {shirts.map(s => <ClothingItem key={s.itemId} item={s} handleDelete={handleDelete} canDelete={canDelete} />)}
+                            {shirts.map(s => <ClothingItem key={s.itemId} item={s} handleChange={handleChange} handleDelete={handleDelete} canDelete={canDelete} />)}
                         </div>
-                        <p id="shirtError" className="col mt-4 text-danger d-none">The shirts fell in the duck pond!</p>
+                        {error && <p className="col mt-4 text-danger d-none">The shirts fell in the duck pond!</p>}
                     </div>
 
                     <div className="row mb-2">
-                        <div htmlFor="pants" className="col-1 mt-4">Pants</div>
+                        <div className="col-1 mt-4">Pants</div>
                         <div className="col d-flex flex-row">
-                            {pants.map(p => <ClothingItem key={p.itemId} item={p} handleDelete={handleDelete} canDelete={canDelete} />)}
+                            {pants.map(p => <ClothingItem key={p.itemId} item={p} handleChange={handleChange} handleDelete={handleDelete} canDelete={canDelete} />)}
                         </div>
-                        <p id="pantsError" className="col mt-4 text-danger d-none">How would a duck even wear pants?</p>
+                        {error && <p className="col mt-4 text-danger d-none">How would a duck even wear pants?</p>}
                     </div>
 
                     <div className="row mb-2">
@@ -122,7 +117,7 @@ function DressUpDuck({ handleDelete }) {
 
                 <div className="col-6">
                     <div style={{ width: "800px", height: "1000px" }}>
-
+                        {<Outfit key={outfit.outfitId} outfit={outfit} canDelete={canDelete} />}
                     </div>
                 </div>
             </div>

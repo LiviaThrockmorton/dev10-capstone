@@ -6,7 +6,7 @@ function Duck({ duck, canDelete, handleChange }) {
         <div className="mb-2 d-flex justify-content-between">
             <div className="d-none">{duck.duckId}</div>
             <div>
-                <button onClick={handleChange} value={duck.duckId} name="duck">
+                <button onClick={handleChange} value={duck.duckId} name="duckId" style={{ border: "none", backgroundColor: "white" }}>
                     <img src={duck.duckImage} alt="duck" style={{ height: "100px", marginLeft: "10px" }} />
                 </button>
             </div>
