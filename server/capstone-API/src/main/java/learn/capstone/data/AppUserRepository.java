@@ -1,8 +1,5 @@
 package learn.capstone.data;
 
-
-
-import learn.capstone.data.mappers.AppUserMapper;
 import learn.capstone.models.AppUser;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -28,11 +25,11 @@ public class AppUserRepository {
     public AppUser findByUsername(String username) {
         List<String> roles = getRolesByUsername(username);
 
-        final String sql = "select app_user_id, username, password_hash, enabled "
+        final String sql = "select app_user_id, username, password_hash, email, hidden, enabled "
                 + "from app_user "
-                + "where username = ?;";
+                + "where username = ? and hidden = 0;";
 
-        return jdbcTemplate.query(sql, new AppUserMapper(roles), username)
+        return jdbcTemplate.query(sql, new learn.capstone.data.AppUserMapper(roles), username)
                 .stream()
                 .findFirst().orElse(null);
     }
@@ -40,7 +37,7 @@ public class AppUserRepository {
     @Transactional
     public AppUser create(AppUser user) {
 
-        final String sql = "insert into app_user (username, password_hash) values (?, ?);";
+        final String sql = "insert into app_user (username, email, password_hash) values (?, ?);";
 
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
         int rowsAffected = jdbcTemplate.update(connection -> {
@@ -55,30 +52,27 @@ public class AppUserRepository {
         }
 
         user.setAppUserId(keyHolder.getKey().intValue());
-
-        updateRoles(user);
-
+        updateAuthorities(user);
         return user;
     }
 
     @Transactional
-    public void update(AppUser user) {
+    public void update(AppUser appUser) {
 
         final String sql = "update app_user set "
                 + "username = ?, "
-                + "enabled = ? "
+                + "email = ?, "
+                + "hidden = ?, "
                 + "where app_user_id = ?";
 
         jdbcTemplate.update(sql,
-                user.getUsername(), user.isEnabled(), user.getAppUserId());
+                appUser.getUsername(), appUser.getEmail(), appUser.getHidden(), appUser.isEnabled(), appUser.getAppUserId());
 
-        updateRoles(user);
+        updateAuthorities(appUser);
     }
 
-    private void updateRoles(AppUser user) {
-        // delete all roles, then re-add
+    private void updateAuthorities(AppUser user) {
         jdbcTemplate.update("delete from app_user_role where app_user_id = ?;", user.getAppUserId());
-
         Collection<GrantedAuthority> authorities = user.getAuthorities();
 
         if (authorities == null) {
@@ -100,4 +94,39 @@ public class AppUserRepository {
                 + "where au.username = ?";
         return jdbcTemplate.query(sql, (rs, rowId) -> rs.getString("name"), username);
     }
+
+
+    //
+//    @Override
+//    public List<AppUser> findAll() {
+//        final String sql = "select app_user_id, username, password_hash, email, hidden from app_user where hidden = 0;";
+//        return jdbcTemplate.query(sql, new AppUserMapper());
+//    }
+//
+//    @Override
+//    public AppUser findById(int appUserId) {
+//        String sql = "select app_user_id, username, password_hash, email, hidden from app_user where app_user_id = ? and hidden = 0;";
+//        AppUser user = jdbcTemplate.query(sql, new AppUserMapper(), appUserId).stream()
+//                .findFirst().orElse(null);
+//
+//        if (user != null) {
+//            addAuthorities(user);
+//        }
+//        return user;
+//    }
+//    private void addAuthorities(AppUser user) {
+//
+//        String sql = "select a.name "
+//                + "from app_user_authority aua "
+//                + "inner join app_authority a on aua.app_authority_id = a.app_authority_id "
+//                + "where aua.app_user_id = ?";
+//
+//        List<String> authorities = jdbcTemplate.query(
+//                sql,
+//                (rs, i) -> rs.getString("name"),
+//                user.getAppUserId()
+//        );
+//        user.addAuthorities(authorities);
+//    }
+
 }

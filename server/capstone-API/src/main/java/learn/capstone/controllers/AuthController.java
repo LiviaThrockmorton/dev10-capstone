@@ -26,9 +26,9 @@ public class AuthController {
 
     private final AuthenticationManager authenticationManager;
     private final JwtConverter converter;
-    private final learn.solarfarm.security.AppUserService appUserService;
+    private final AppUserService appUserService;
 
-    public AuthController(AuthenticationManager authenticationManager, JwtConverter converter, learn.solarfarm.security.AppUserService appUserService) {
+    public AuthController(AuthenticationManager authenticationManager, JwtConverter converter, AppUserService appUserService) {
         this.authenticationManager = authenticationManager;
         this.converter = converter;
         this.appUserService = appUserService;

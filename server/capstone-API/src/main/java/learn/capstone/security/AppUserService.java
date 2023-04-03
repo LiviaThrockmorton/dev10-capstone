@@ -1,8 +1,7 @@
-package learn.solarfarm.security;
+package learn.capstone.security;
 
-import learn.capstone.data.AppUserRepositoryInterface;
+import learn.capstone.data.AppUserRepository;
 import learn.capstone.domain.ResultType;
-import learn.capstone.security.AppUserResult;
 import learn.capstone.models.AppUser;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,10 +15,10 @@ import java.util.List;
 @Service
 public class AppUserService implements UserDetailsService {
 
-    private final AppUserRepositoryInterface repository;
+    private final AppUserRepository repository;
     private final PasswordEncoder encoder;
 
-    public AppUserService(AppUserRepositoryInterface repository, PasswordEncoder encoder) {
+    public AppUserService(AppUserRepository repository, PasswordEncoder encoder) {
         this.repository = repository;
         this.encoder = encoder;
     }
