@@ -42,7 +42,7 @@ app_user_id int not null,
 date_created date not null,
 item_id int not null,
 posted bit not null,
-hidden bit not null,
+hidden bit not null, 
 	constraint fk_duck_id
 		foreign key (duck_id)
         references duck(duck_id),
