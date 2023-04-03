@@ -24,7 +24,7 @@ public class DuckJdbcTemplateRepository implements DuckRepository {
     public List<Duck> findAll() {
 
         final String sql = "select duck_id, duck_image, hidden" +
-                " from duck;";
+                " from duck where hidden = 0;";
 
 
         return jdbcTemplate.query(sql, new DuckMapper());
@@ -34,7 +34,7 @@ public class DuckJdbcTemplateRepository implements DuckRepository {
     public Duck findById(int duckId) {
 
         final String sql = "select duck_id, duck_image, hidden from duck"
-                + " where duck_id = ?;";
+                + " where duck_id = ? and hidden = 0;";
 
         return jdbcTemplate.query(sql, new DuckMapper(), duckId)
                 .stream()
@@ -83,8 +83,9 @@ public class DuckJdbcTemplateRepository implements DuckRepository {
 
     @Override
     public boolean deleteById(int duckId) {
-        return jdbcTemplate.update("delete from duck where duck_id = ?;", duckId) > 0;
+        return jdbcTemplate.update("update duck set hidden = 1 where duck_id = ?;", duckId) > 0;
     }
+
 
     @Override
     public int getUsageCount(int duckId) {

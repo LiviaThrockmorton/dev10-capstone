@@ -7,15 +7,22 @@ import java.util.List;
 public class Outfit {
 
     private int outfitId;
+
+    private int duckId;
+    private int userId;
+
     private int shirtId;
     private int pantsId;
     private int hatId;
     private LocalDate dateCreated;
-    private int duckId;
-    private List<ClothingItem> items = new ArrayList<>();
+
+//    private List<ClothingItem> items = new ArrayList<>();
     private boolean posted;
 
     private boolean hidden;
+
+
+
 
     public boolean getPosted() {
         return posted;
@@ -40,6 +47,15 @@ public class Outfit {
 
     public void setOutfitId(int outfitId) {
         this.outfitId = outfitId;
+    }
+
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public int getShirtId() {
@@ -82,11 +98,11 @@ public class Outfit {
         this.duckId = duckId;
     }
 
-    public List<ClothingItem> getItems() {
-        return items;
-    }
-
-    public void setItems(List<ClothingItem> items) {
-        this.items = items;
-    }
+//    public List<ClothingItem> getItems() {
+//        return items;
+//    }
+//
+//    public void setItems(List<ClothingItem> items) {
+//        this.items = items;
+//    }
 }

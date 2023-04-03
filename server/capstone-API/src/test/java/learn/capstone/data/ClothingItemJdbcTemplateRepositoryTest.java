@@ -5,12 +5,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
+//@SpringBootTest
 class ClothingItemJdbcTemplateRepositoryTest {
 
     final static int NEXT_ID = 7;
@@ -19,13 +21,26 @@ class ClothingItemJdbcTemplateRepositoryTest {
     ClothingItemJdbcTemplateRepository repository;
 
     @Autowired
-    KnownGoodState knownGoodState;
+    private JdbcTemplate jdbcTemplate;
+
+//    @Autowired
+//    KnownGoodState knownGoodState;
+//
+//    @BeforeEach
+//    void setup() {
+//        knownGoodState.set();
+//    }
+
+
+    static boolean hasSetup = false;
 
     @BeforeEach
     void setup() {
-        knownGoodState.set();
+        if (!hasSetup) {
+            hasSetup = true;
+            jdbcTemplate.update("call set_known_good_state();");
+        }
     }
-
 
         @Test
     void shouldFindByType() {
@@ -35,15 +50,17 @@ class ClothingItemJdbcTemplateRepositoryTest {
         // can't predict order
         // if delete is first, we're down to 2
         // if add is first, we may go as high as 3
-        assertTrue(items.size() >= 2 && items.size() <= 4);
+        assertTrue(items.size() >= 1 && items.size() <= 3);
     }
 
     @Test
     void shouldFindHat() {
-        ClothingItem hat = repository.findById(1);
-        assertEquals(1, hat.getItemId());
+        ClothingItem hat = repository.findById(5);
+        assertEquals(5, hat.getItemId());
         assertEquals(false, hat.getHidden());
     }
+
+    //TODO test for should not find hidden items
 
     @Test
     void shouldAdd() {

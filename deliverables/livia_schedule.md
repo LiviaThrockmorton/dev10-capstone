@@ -12,15 +12,15 @@
 ## Thursday March 30th, 2023
 - X Implement bootswatch 1hr
 - Create service and fetch posts 3hrs
-- Homepage 2hrs
-- Create account 3hrs
+- X Homepage 2hrs
+- X Create account 3hrs
 
 ## Friday March 31st, 2023
-- Sign-in 1hr
+- X Sign-in 1hr
 - Profile page 1hr
 - View your outfits 3hrs
 - Create an outfit 2hrs
-- Different options after signing in 1hr
+- X Different options after signing in 1hr
 
 
 ## Monday April 3rd, 2023

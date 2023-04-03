@@ -24,7 +24,7 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository{
 
     public AppUser findByUsername(String username) {
 
-        String sql = "select app_user_id, username, password_hash, email, hidden from app_user where username = ?;";
+        String sql = "select app_user_id, username, password_hash, email, hidden from app_user where username = ? and hidden = 0;";
         AppUser user = jdbcTemplate.query(sql, new AppUserMapper(), username).stream()
                 .findFirst().orElse(null);
 
@@ -53,13 +53,13 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository{
 
     @Override
     public List<AppUser> findAll() {
-        final String sql = "select app_user_id, username, password_hash, email, hidden from app_user;";
+        final String sql = "select app_user_id, username, password_hash, email, hidden from app_user where hidden = 0;";
         return jdbcTemplate.query(sql, new AppUserMapper());
     }
 
     @Override
     public AppUser findById(int appUserId) {
-        String sql = "select app_user_id, username, password_hash, email, hidden from app_user where app_user_id = ?;";
+        String sql = "select app_user_id, username, password_hash, email, hidden from app_user where app_user_id = ? and hidden = 0;";
         AppUser user = jdbcTemplate.query(sql, new AppUserMapper(), appUserId).stream()
                 .findFirst().orElse(null);
 
@@ -73,7 +73,7 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository{
     @Override
     public AppUser add(AppUser appUser) {
 
-        final String sql = "insert into appUser (username, email, hidden) values (?,?, ?);";
+        final String sql = "insert into app_user (username, email, hidden) values (?,?,?);";
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
         int rowsAffected = jdbcTemplate.update(connection -> {
@@ -81,6 +81,7 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository{
             ps.setString(1, appUser.getUsername());
             ps.setString(2, appUser.getEmail());
             ps.setBoolean(3,appUser.getHidden());
+
             return ps;
         }, keyHolder);
 
@@ -95,11 +96,11 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository{
     @Override
     public boolean update(AppUser appUser) {
 
-        final String sql = "update appUser set "
+        final String sql = "update app_user set "
                 + "username = ?, "
                 + "email = ?, "
-                + "hidden = ?"
-                + "where appUser_id = ?";
+                + "hidden = ? "
+                + "where app_user_id = ?";
 
         return jdbcTemplate.update(sql, appUser.getUsername(), appUser.getEmail(), appUser.getHidden(), appUser.getAppUserId()) > 0;
     }
@@ -107,9 +108,11 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository{
     @Override
     @Transactional
     public boolean deleteById(int appUserId) {
-        jdbcTemplate.update("delete from comment where app_user_id = ?", appUserId);
-        jdbcTemplate.update("delete from user_outfit where app_user_id = ?", appUserId);
+        jdbcTemplate.update("delete from comments where app_user_id = ?", appUserId);
+        jdbcTemplate.update("delete from outfit where app_user_id = ?", appUserId);
         return jdbcTemplate.update("delete from app_user where app_user_id = ?", appUserId) > 0;
     }
+
+
 
 }

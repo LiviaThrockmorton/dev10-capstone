@@ -22,12 +22,12 @@ public class ClothingItemController {
         this.service = service;
     }
 
-    @GetMapping("/{itemType}")
+    @GetMapping("/type/{itemType}")
     public List<ClothingItem> findByType(@PathVariable String itemType) {
         return service.findByType(itemType);
     }
 
-    @GetMapping("/{outfitId}")
+    @GetMapping("/{itemId}")
     public ClothingItem findById(@PathVariable int itemId) {
         return service.findById(itemId);
     }
@@ -55,11 +55,15 @@ public class ClothingItemController {
     }
 
     @DeleteMapping("/{itemId}")
-    public ResponseEntity<Object> deleteById(@PathVariable int itemId) {
-        Result<Void> result = service.deleteById(itemId);
+    public ResponseEntity<Object> deleteById(@PathVariable int itemId, @RequestBody ClothingItem item) {
+        if (itemId != item.getItemId()) {
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
+        Result<ClothingItem> result = service.update(item);
         if (result.isSuccess()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return ErrorResponse.build(result);
+
     }
 }

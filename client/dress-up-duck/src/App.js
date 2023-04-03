@@ -75,7 +75,7 @@ function App() {
             <Route path="/dress-up-duck/edit/:id" element={user ? <DressUpDuck /> : <Navigate to="/login" />} />
             <Route path="/dress-up-duck/delete/:id" element={user && user.roles.includes("ADMIN") ? <Confirm /> : <Navigate to="/login" />} />
             <Route path="/forum" element={<Forum />} />
-            <Route path="/forum/:outfitId" element={<Outfit />} />
+            <Route path="/forum/:outfitId" element={<ForumPost />} />
             <Route path="/profile" element={user ? <Profile /> : <Navigate to="/login" />} />
             <Route path="/forum-post" element={<ForumPost />} />
             <Route path="/forum-main" element={<ForumMain />} />

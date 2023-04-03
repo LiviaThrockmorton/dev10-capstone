@@ -24,6 +24,7 @@ import java.util.List;
 
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
+//@SpringBootTest
 class DuckServiceTest {
 
     @MockBean

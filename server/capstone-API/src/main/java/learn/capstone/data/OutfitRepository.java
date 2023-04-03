@@ -12,6 +12,8 @@ public interface OutfitRepository {
 
 //    Outfit findByUser(int outfitId);
 
+    List<Outfit> findByUser(int AppUserId);
+
     Outfit add(Outfit outfit);
 
     boolean update(Outfit outfit);
