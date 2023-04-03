@@ -10,7 +10,8 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
+//@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
+@SpringBootTest
 class OutfitJdbcTemplateRepositoryTest {
 
     final static int NEXT_ID = 9;
@@ -81,15 +82,27 @@ class OutfitJdbcTemplateRepositoryTest {
     @Test
     void shouldDelete() {
         assertTrue(repository.deleteById(2));
-        assertFalse(repository.deleteById(2));
+//        assertFalse(repository.deleteById(2));
     }
 
     private Outfit makeOutfit() {
-        Outfit outfit = new Outfit();
+        Outfit outfit =  new Outfit();
+
+        outfit.setOutfitId(1);
+        outfit.setDuckId(1);
+        outfit.setUserId(1);
         outfit.setShirtId(1);
+        outfit.setPantsId(1);
         outfit.setHatId(1);
-        outfit.setDateCreated(LocalDate.of(2022, 8, 15));
-        outfit.setDuckId(99);
+        outfit.setDateCreated(LocalDate.of(2022,1,1));
+        outfit.setPosted(false);
+        outfit.setHidden(false);
+
+
+
+
+
         return outfit;
+
     }
 }

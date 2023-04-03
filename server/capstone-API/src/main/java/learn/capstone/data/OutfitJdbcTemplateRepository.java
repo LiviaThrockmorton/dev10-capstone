@@ -37,6 +37,7 @@ public class OutfitJdbcTemplateRepository implements OutfitRepository {
                 "posted,  " +
                 "hidden  " +
                 "from outfit " +
+                "where hidden = 0 " +
                 "order by date_created desc;";
         return jdbcTemplate.query(sql, new OutfitMapper());
     }
@@ -56,6 +57,7 @@ public class OutfitJdbcTemplateRepository implements OutfitRepository {
                 "hidden  " +
                 "from outfit " +
                 "where outfit_id = ? " +
+                "and hidden = 0 " +
                 "order by date_created desc;";
 
         Outfit outfit = jdbcTemplate.query(sql, new OutfitMapper(), outfitId).stream()
@@ -82,6 +84,7 @@ public class OutfitJdbcTemplateRepository implements OutfitRepository {
                     "hidden  " +
                     "from outfit " +
                     "where app_user_id = ? " +
+                    "and hidden = 0 " +
                     "order by date_created desc;";
             return jdbcTemplate.query(sql, new OutfitMapper());
         }
@@ -141,9 +144,16 @@ public class OutfitJdbcTemplateRepository implements OutfitRepository {
     @Override
     @Transactional
     public boolean deleteById(int outfitId) {
-        jdbcTemplate.update("delete from comment where outfit_id = ?;", outfitId);
-        return jdbcTemplate.update("delete from outfit where outfit_id = ?;", outfitId) > 0;
+        jdbcTemplate.update("update comment set hidden = 1 where outfit_id = ?;", outfitId);
+        return jdbcTemplate.update("update outfit set hidden = 1 where outfit_id = ?;", outfitId) > 0;
     }
+
+
+
+
+
+
+
 
 
     private void addClothingItems(Outfit outfit) {

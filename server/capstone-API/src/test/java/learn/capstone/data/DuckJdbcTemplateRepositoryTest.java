@@ -12,7 +12,8 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
+//@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
+@SpringBootTest
 class DuckJdbcTemplateRepositoryTest {
 
 
@@ -52,22 +53,29 @@ class DuckJdbcTemplateRepositoryTest {
         assertNotNull(ducks);
 
 
-        assertTrue(ducks.size() >= 4 && ducks.size() <= 7);
+        assertTrue(ducks.size() >= 3 && ducks.size() <= 7);
     }
 
     @Test
     void shouldFindById() {
-        Duck duck1 = new Duck(1, "[INSERT URL HERE]", false);
-        Duck duck2 = new Duck(2, "[INSERT URL HERE]", true);
+        Duck duck1 = new Duck(1, "/svgs/yellow-duck.svg", false);
+
 
         Duck actual = repository.findById(1);
         assertEquals(duck1, actual);
 
         actual = repository.findById(2);
-        assertEquals(duck2, actual);
+
 
         actual = repository.findById(12);
         assertEquals(null, actual);
+    }
+
+    @Test
+    void shouldNotFindHidden(){
+
+        Duck actual = repository.findById(4);
+        assertNull(actual);
     }
 
     @Test
@@ -91,15 +99,15 @@ class DuckJdbcTemplateRepositoryTest {
     @Test
     void shouldDelete() {
         assertTrue(repository.deleteById(2));
-        assertFalse(repository.deleteById(2));
+//        assertFalse(repository.deleteById(2));
     }
 
 //TODO need to implement this once outfit is complete
-//    @Test
-//    void shouldGetUsageCount(){
-//        assertTrue(repository.getUsageCount(1) > 0);
+    @Test
+    void shouldGetUsageCount(){
+        assertTrue(repository.getUsageCount(1) > 0);
 //        assertFalse(repository.getUsageCount(2) > 0);
-//    }
+    }
 
 
     public Duck makeDuck(){

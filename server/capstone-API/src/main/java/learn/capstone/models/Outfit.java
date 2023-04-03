@@ -21,6 +21,9 @@ public class Outfit {
 
     private boolean hidden;
 
+
+
+
     public boolean getPosted() {
         return posted;
     }

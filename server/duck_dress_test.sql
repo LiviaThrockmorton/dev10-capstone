@@ -187,7 +187,7 @@ insert into app_user_authority
 
 insert into duck (duck_id, duck_image, hidden) values
 (1, '/svgs/yellow-duck.svg', 0),
-(2, '/svgs/brown-duck.svg', 1),
+(2, '/svgs/brown-duck.svg', 0),
 (3, '[INSERT URL HERE]', 0),
 (4, '[INSERT URL HERE]', 1),
 (5, '[INSERT URL HERE]', 0);

@@ -27,7 +27,7 @@ public class CommentJdbcTemplateRepository implements CommentRepository {
 
         final String sql = "select comment_id, userId, content, outfitId, dateTime"
                 + "from comment "
-                + "where comment_id = ?;";
+                + "where comment_id = ? and hidden = 0;";
 
         return jdbcTemplate.query(sql, new CommentMapper(), commentId).stream()
                 .findFirst()
@@ -103,3 +103,5 @@ public class CommentJdbcTemplateRepository implements CommentRepository {
                 "delete from comment where comment_id = ?", commentId) > 0;
     }
 }
+
+

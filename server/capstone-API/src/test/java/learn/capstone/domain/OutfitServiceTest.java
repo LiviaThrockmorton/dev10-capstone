@@ -12,6 +12,10 @@
 //import static org.mockito.Mockito.when;
 //
 //@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
+
+//import org.springframework.boot.test.context.SpringBootTest;
+//
+//@SpringBootTest
 //class OutfitServiceTest {
 //
 //    @Autowired
