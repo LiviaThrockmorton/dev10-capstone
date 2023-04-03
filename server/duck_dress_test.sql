@@ -193,12 +193,12 @@ insert into duck (duck_id, duck_image, hidden) values
 (5, '[INSERT URL HERE]', 1);
 
 insert into clothing_item (item_id, item_type, clothing_item_image, hidden) values
-(1, 'shirt', '[INSERT URL HERE]', 0),
-(2, 'shirt', '[INSERT URL HERE]', 0),
-(3, 'pants', '[INSERT URL HERE]', 1),
-(4, 'pants', '[INSERT URL HERE]', 0),
-(5, 'hat', '[INSERT URL HERE]', 0),
-(6, 'hat', '[INSERT URL HERE]', 0);
+(1, 'shirt', '/svgs/grey-shirt.svg', 0),
+(2, 'shirt', '/svgs/white-tank.svg', 0),
+(3, 'pants', '/svgs/navy-pants.svg', 0),
+(4, 'pants', '/svgs/pink-skirt.svg', 0),
+(5, 'hat', '/svgs/green-hat.svg', 0),
+(6, 'hat', '/svgs/top-hat.svg', 0);
 
 -- insert into clothing_item (shirt_id, pants_id, hat_id) values 
 -- (1, null, null),

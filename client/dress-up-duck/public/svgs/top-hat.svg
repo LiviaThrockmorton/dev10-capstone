@@ -1,0 +1,15 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000">
+	<title>yellow-duck-svg</title>
+	<defs>
+		<linearGradient id="g1" x1="578" y1="132.6" x2="223" y2="126.4" gradientUnits="userSpaceOnUse">
+			<stop offset="0" stop-color="#191919"/>
+			<stop offset="1" stop-color="#434343"/>
+		</linearGradient>
+	</defs>
+	<style>
+		.s0 { fill: url(#g1) } 
+		.s1 { fill: #232323 } 
+	</style>
+	<path id="Shape 12" class="s0" d="m223 21h355v217h-355z"/>
+	<path id="Shape 11" class="s1" d="m171 234h458v24h-458z"/>
+</svg>
