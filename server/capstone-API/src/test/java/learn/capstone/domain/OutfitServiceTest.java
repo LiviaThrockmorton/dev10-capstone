@@ -10,8 +10,10 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import static learn.capstone.TestHelper.makeOutfit;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
+import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
+//@SpringBootTest
 class OutfitServiceTest {
 
     @Autowired
@@ -21,7 +23,7 @@ class OutfitServiceTest {
     OutfitRepository repository;
 
     @Test
-    void shouldFindHazel() {
+    void shouldFindbyId() {
         // pass-through test, probably not useful
         Outfit expected = makeOutfit();
         when(repository.findById(1)).thenReturn(expected);
@@ -37,12 +39,14 @@ class OutfitServiceTest {
 
         outfit.setOutfitId(0);
         outfit.setShirtId(0);
+        outfit.setHatId(0);
+        outfit.setPantsId(0);
         result = service.add(outfit);
         assertEquals(ResultType.INVALID, result.getType());
     }
 
     @Test
-    void shouldNotAddWhenValid() {
+    void shouldAddWhenValid() {
         Outfit expected = makeOutfit();
         Outfit arg = makeOutfit();
         arg.setOutfitId(0);

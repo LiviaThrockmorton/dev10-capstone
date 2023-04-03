@@ -1,20 +1,33 @@
 package learn.capstone.domain;
 
 import learn.capstone.data.CommentRepository;
+import learn.capstone.data.OutfitRepository;
 import learn.capstone.models.Comment;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class CommentService {
 
     private final CommentRepository repository;
+    private final OutfitRepository outfitRepository;
 
-    public CommentService(CommentRepository repository) {
+    public CommentService(CommentRepository repository, OutfitRepository outfitRepository) {
         this.repository = repository;
+        this.outfitRepository = outfitRepository;
     }
 
     public Comment findById(int commentId) {
         return repository.findById(commentId);
+    }
+
+    public List<Comment> findByOutfit(int outfitId) {
+        return repository.findByOutfit(outfitId);
+    }
+
+    public List <Comment> findByHidden() {
+        return repository.findByHidden();
     }
 
     public Result<Comment> add(Comment comment) {
@@ -56,24 +69,26 @@ public class CommentService {
         return repository.deleteById(commentId);
     }
 
+    //TODO look into more validations for comments
+
     private Result<Comment> validate(Comment comment) {
         Result<Comment> result = new Result<>();
 
         if (comment == null) {
-            result.addMessage("comment cannot be null", ResultType.INVALID);
+            result.addMessage("Comment cannot be null", ResultType.INVALID);
             return result;
         }
 
-        if (Validations.isNullOrBlank(comment.getUserId())) {
-            result.addMessage("UserId is required", ResultType.INVALID);
+        if ((comment.getUserId()) ==0) {
+            result.addMessage("User Id is required", ResultType.INVALID);
         }
 
         if (Validations.isNullOrBlank(comment.getContent())) {
-            result.addMessage("content is required", ResultType.INVALID);
+            result.addMessage("Content is required", ResultType.INVALID);
         }
 
-        if (Validations.isNullOrBlank(comment.getOutfitId())) {
-            result.addMessage("outfitId is required", ResultType.INVALID);
+        if ((comment.getOutfitId()) ==0) {
+            result.addMessage("Outfit Id is required", ResultType.INVALID);
         }
 
 

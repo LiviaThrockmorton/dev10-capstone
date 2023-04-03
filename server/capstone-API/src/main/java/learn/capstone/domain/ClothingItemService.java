@@ -2,23 +2,32 @@ package learn.capstone.domain;
 
 
 import learn.capstone.data.ClothingItemRepository;
-import learn.capstone.data.OutfitRepository;
 import learn.capstone.models.ClothingItem;
+import learn.capstone.models.Duck;
 import learn.capstone.models.Outfit;
 import org.springframework.stereotype.Service;
 
-import java.util.Objects;
+import java.util.List;
 
 @Service
 public class ClothingItemService {
 
     private final ClothingItemRepository itemRepository;
-    private final OutfitRepository outfitRepository;
 
-    public ClothingItemService(ClothingItemRepository itemRepository, OutfitRepository outfitRepository) {
+    public ClothingItemService(ClothingItemRepository itemRepository) {
         this.itemRepository = itemRepository;
-        this.outfitRepository = outfitRepository;
     }
+
+    public List<ClothingItem> findByType(String itemType) {
+        return itemRepository.findByType(itemType);
+    }
+
+    public ClothingItem findById(int itemId) {
+
+        return itemRepository.findById(itemId);
+    }
+
+
 
     public Result<ClothingItem> add(ClothingItem item) {
         Result<ClothingItem> result = validate(item);
@@ -43,16 +52,30 @@ public class ClothingItemService {
         }
         boolean success = itemRepository.update(item);
         if (!success) {
-            result.addMessage("item id " + item.getItemId() + " not found", ResultType.NOT_FOUND);
+            result.addMessage("Item id " + item.getItemId() + " not found", ResultType.NOT_FOUND);
         }
         return result;
     }
 
-    public Result<Void> deleteById(int itemId) {
-        boolean success = itemRepository.deleteById(itemId);
-        Result<Void> result = new Result<>();
-        if (!success) {
-            result.addMessage("item id " + itemId + " not found", ResultType.NOT_FOUND);
+    public Result<ClothingItem> deleteById(int itemId) {
+        Result<ClothingItem> result = numberOfUsages(itemId);
+        if (!result.isSuccess()) {
+            return result;
+        }
+
+        if (!itemRepository.deleteById(itemId)) {
+            String msg = String.format("Duck Id: %s, not found", itemId);
+            result.addMessage(msg, ResultType.NOT_FOUND);
+        }
+
+        return result;
+    }
+
+    private Result<ClothingItem> numberOfUsages(int itemId) {
+        Result<ClothingItem> result = new Result<>();
+        int count = itemRepository.getUsageCount(itemId);
+        if(count >0){
+            result.addMessage("This item is in use in " + count + " outfits. It cannot be deleted at this time.", ResultType.INVALID);
         }
         return result;
     }
@@ -65,20 +88,25 @@ public class ClothingItemService {
         }
 
         if (Validations.isNullOrBlank(item.getItemType())) {
-            result.addMessage("itemType is required", ResultType.INVALID);
+            result.addMessage("Item type is required", ResultType.INVALID);
             return result;
         }
 
-        Outfit outfit = outfitRepository.findById(item.getItemId());
-        for (ClothingItem a : outfit.getItems()) {
-            boolean itemTypesMatch = a.getItemType().equalsIgnoreCase(item.getItemType())
-                    && a.getItemId() != item.getItemId();
-            boolean clothingItemImagesMatch = Objects.equals(a.getClothingItemImage(), item.getClothingItemImage());
-            if (itemTypesMatch && clothingItemImagesMatch) {
-                result.addMessage("duplicate itemType and outfit", ResultType.INVALID);
-            }
+        if (Validations.isNullOrBlank(item.getClothingItemImage())) {
+            result.addMessage("Image is required", ResultType.INVALID);
+            return result;
         }
+        if (!(item.getItemType().equalsIgnoreCase("hat") || item.getItemType().equalsIgnoreCase("pants") ||item.getItemType().equalsIgnoreCase("shirt"))){
+            result.addMessage("Invalid item, only hat, pants, and shirt are allowed.", ResultType.INVALID);
+            return result;
+        }
+
+
 
         return result;
     }
+
+
+
+
 }

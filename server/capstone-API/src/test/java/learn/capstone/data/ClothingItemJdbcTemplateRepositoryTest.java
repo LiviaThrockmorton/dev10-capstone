@@ -5,16 +5,23 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.jdbc.core.JdbcTemplate;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
+//@SpringBootTest
 class ClothingItemJdbcTemplateRepositoryTest {
 
-    final static int NEXT_ID = 4;
+    final static int NEXT_ID = 7;
 
     @Autowired
     ClothingItemJdbcTemplateRepository repository;
+
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
 //    @Autowired
 //    KnownGoodState knownGoodState;
@@ -24,10 +31,41 @@ class ClothingItemJdbcTemplateRepositoryTest {
 //        knownGoodState.set();
 //    }
 
+
+    static boolean hasSetup = false;
+
+    @BeforeEach
+    void setup() {
+        if (!hasSetup) {
+            hasSetup = true;
+            jdbcTemplate.update("call set_known_good_state();");
+        }
+    }
+
+        @Test
+    void shouldFindByType() {
+        List<ClothingItem> items = repository.findByType("Hat");
+        assertNotNull(items);
+
+        // can't predict order
+        // if delete is first, we're down to 2
+        // if add is first, we may go as high as 3
+        assertTrue(items.size() >= 1 && items.size() <= 3);
+    }
+
+    @Test
+    void shouldFindHat() {
+        ClothingItem hat = repository.findById(5);
+        assertEquals(5, hat.getItemId());
+        assertEquals(false, hat.getHidden());
+    }
+
+    //TODO test for should not find hidden items
+
     @Test
     void shouldAdd() {
-        ClothingItem arg = new ClothingItem(0, "Test ClothingItem", "Test ClothingItemImage", false);
-        ClothingItem expected = new ClothingItem(NEXT_ID, "Test ClothingItem", "Test ClothingItemImage", false);
+        ClothingItem arg = new ClothingItem(7, "Shirt", "Test ClothingItemImage", false);
+        ClothingItem expected = new ClothingItem(NEXT_ID, "Shirt", "Test ClothingItemImage", false);
         ClothingItem actual = repository.add(arg);
         assertEquals(expected, actual);
     }

@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @CrossOrigin(origins = {"http://localhost:3000"})
 @RequestMapping("/api/comment")
@@ -27,6 +29,23 @@ public class CommentController {
         return ResponseEntity.ok(comment);
     }
 
+
+    @GetMapping("/admin")
+    public List<Comment> findByHidden() {
+        List <Comment> hiddenComments = service.findByHidden();
+        if (hiddenComments == null) {
+        }
+        return service.findByHidden();
+    }
+
+    @GetMapping("/outfitComments/{outfitId}")
+    public List<Comment> findByOutfit(@PathVariable int outfitId) {
+        List <Comment> hiddenComments = service.findByOutfit(outfitId);
+        if (hiddenComments == null) {
+        }
+        return service.findByHidden();
+    }
+
     @PostMapping
     public ResponseEntity<Object> add(@RequestBody Comment comment) {
         Result<Comment> result = service.add(comment);
@@ -35,6 +54,9 @@ public class CommentController {
         }
         return ErrorResponse.build(result);
     }
+
+    //TODO find by outfit
+    //TODO find hidden
 
     @PutMapping("/{commentId}")
     public ResponseEntity<Object> update(@PathVariable int commentId, @RequestBody Comment comment) {

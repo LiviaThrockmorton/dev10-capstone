@@ -1,7 +1,7 @@
 package learn.capstone.controllers;
 
 
-import learn.capstone.domain.OutfitService;
+
 import learn.capstone.domain.Result;
 import learn.capstone.domain.DuckService;
 import learn.capstone.models.AppUser;
@@ -15,7 +15,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(origins = {"http://localhost:3000"})
-@RequestMapping("/api/security/clearance")
+@RequestMapping("/api/duck")
 public class DuckController {
 
     private final DuckService service;
@@ -30,9 +30,6 @@ public class DuckController {
     }
 
     @GetMapping("/{duckId}")
-//    public Duck findById(@PathVariable int duckId) {
-//        return service.findById(duckId);
-//    }
     public ResponseEntity<Duck> findById(@PathVariable int duckId) {
         Duck duck = service.findById(duckId);
         if (duck == null) {

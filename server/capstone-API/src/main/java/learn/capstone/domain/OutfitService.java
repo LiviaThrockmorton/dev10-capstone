@@ -1,6 +1,7 @@
 package learn.capstone.domain;
 
 import learn.capstone.data.OutfitRepository;
+import learn.capstone.models.Duck;
 import learn.capstone.models.Outfit;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +24,10 @@ public class OutfitService {
     public Outfit findById(int outfitId) {
 
         return repository.findById(outfitId);
+    }
+
+    public List<Outfit> findByUser(int userId) {
+        return repository.findByUser(userId);
     }
 
     public Result<Outfit> add(Outfit outfit) {
@@ -79,12 +84,16 @@ public class OutfitService {
 //            result.addMessage("hatId is required", ResultType.INVALID);
 //        }
 
-        if (outfit.getDateCreated() != null && outfit.getDateCreated().isAfter(LocalDate.now().minusYears(12))) {
-            result.addMessage("outfits younger than 12 are not allowed", ResultType.INVALID);
+        if(outfit.getShirtId() == 0 && outfit.getPantsId()==0&&outfit.getHatId() ==0){
+            result.addMessage("No clothing items found.", ResultType.INVALID);
         }
 
-        if (outfit.getDuckId() < 36 || outfit.getDuckId() > 96) {
-            result.addMessage("duckId must be between 36 and 96 inches", ResultType.INVALID);
+        if (outfit.getDateCreated() != null && outfit.getDateCreated().isAfter(LocalDate.now())) {
+            result.addMessage("Date cannot be set to in the future.", ResultType.INVALID);
+        }
+
+        if (outfit.getOutfitId() < 0 || outfit.getOutfitId() > 100) {
+            result.addMessage("Outfit Id must be between 0 and 100", ResultType.INVALID);
         }
 
         return result;

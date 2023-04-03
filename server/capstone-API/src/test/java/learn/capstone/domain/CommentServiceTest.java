@@ -11,6 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
+//@SpringBootTest
 class CommentServiceTest {
 
     @Autowired
@@ -19,10 +20,12 @@ class CommentServiceTest {
     @MockBean
     CommentRepository repository;
 
+    //TODO should find by hidden, should find by outfit, should not update date, should not update blank content
+
     @Test
     void shouldNotAddWhenInvalid() {
         Comment comment = makeComment();
-        comment.setUserId("   ");
+        comment.setUserId(0);
 
         Result<Comment> actual = service.add(comment);
         assertEquals(ResultType.INVALID, actual.getType());
@@ -32,10 +35,6 @@ class CommentServiceTest {
         actual = service.add(comment);
         assertEquals(ResultType.INVALID, actual.getType());
 
-        comment = makeComment();
-        comment.setOutfitId("\t");
-        actual = service.add(comment);
-        assertEquals(ResultType.INVALID, actual.getType());
     }
 
     @Test
@@ -57,17 +56,6 @@ class CommentServiceTest {
         Result<Comment> actual = service.update(comment);
         assertEquals(ResultType.INVALID, actual.getType());
 
-        comment = makeComment();
-        comment.setCommentId(1);
-        comment.setCountryCode("");
-        actual = service.update(comment);
-        assertEquals(ResultType.INVALID, actual.getType());
-
-        comment = makeComment();
-        comment.setCommentId(1);
-        comment.setPostalCode(null);
-        actual = service.update(comment);
-        assertEquals(ResultType.INVALID, actual.getType());
     }
 
     @Test
@@ -83,13 +71,10 @@ class CommentServiceTest {
 
     Comment makeComment() {
         Comment comment = new Comment();
-        comment.setUserId("HQ");
-        comment.setContent("123 Oak St.");
-        comment.setOutfitId("Test OutfitId");
-        comment.setRegion("Test Region");
-        comment.setCountryCode("TEST");
-        comment.setPostalCode("55555-PST");
-        comment.setAppUserId(1);
+        comment.setUserId(1);
+        comment.setContent("Test Comment Content");
+        comment.setOutfitId(1);
+        comment.setUserId(1);
         return comment;
     }
 }

@@ -30,6 +30,11 @@ public class OutfitController {
         return service.findById(outfitId);
     }
 
+    @GetMapping("/byUser/{userId}")
+    public List <Outfit> findByUser(@PathVariable int userId) {
+        return service.findByUser(userId);
+    }
+
     @PostMapping
     public ResponseEntity<Object> add(@RequestBody Outfit outfit) {
         Result<Outfit> result = service.add(outfit);

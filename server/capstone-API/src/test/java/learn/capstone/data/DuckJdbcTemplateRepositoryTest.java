@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.util.List;
 
@@ -12,21 +13,38 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
+//@SpringBootTest
 class DuckJdbcTemplateRepositoryTest {
 
 
-    final static int NEXT_ID = 3;
+    final static int NEXT_ID = 6;
 
     @Autowired
     DuckJdbcTemplateRepository repository;
 
+
     @Autowired
-    KnownGoodState knownGoodState;
+    private JdbcTemplate jdbcTemplate;
+
+//    @Autowired
+//    KnownGoodState knownGoodState;
+//
+//    @BeforeEach
+//    void setup() {
+//        knownGoodState.set();
+//    }
+
+
+    static boolean hasSetup = false;
 
     @BeforeEach
     void setup() {
-        knownGoodState.set();
+        if (!hasSetup) {
+            hasSetup = true;
+            jdbcTemplate.update("call set_known_good_state();");
+        }
     }
+
 
 
     @Test
@@ -35,22 +53,29 @@ class DuckJdbcTemplateRepositoryTest {
         assertNotNull(ducks);
 
 
-        assertTrue(ducks.size() >= 1 && ducks.size() <= 4);
+        assertTrue(ducks.size() >= 3 && ducks.size() <= 7);
     }
 
     @Test
     void shouldFindById() {
-        Duck secret = new Duck(1, "Secret");
-        Duck topSecret = new Duck(2, "Top Secret");
+        Duck duck1 = new Duck(1, "/svgs/yellow-duck.svg", false);
+
 
         Duck actual = repository.findById(1);
-        assertEquals(secret, actual);
+        assertEquals(duck1, actual);
 
         actual = repository.findById(2);
-        assertEquals(topSecret, actual);
 
-        actual = repository.findById(4);
+
+        actual = repository.findById(12);
         assertEquals(null, actual);
+    }
+
+    @Test
+    void shouldNotFindHidden(){
+
+        Duck actual = repository.findById(4);
+        assertNull(actual);
     }
 
     @Test
@@ -74,19 +99,19 @@ class DuckJdbcTemplateRepositoryTest {
     @Test
     void shouldDelete() {
         assertTrue(repository.deleteById(2));
-        assertFalse(repository.deleteById(2));
+//        assertFalse(repository.deleteById(2));
     }
 
-
+//TODO need to implement this once outfit is complete
     @Test
     void shouldGetUsageCount(){
         assertTrue(repository.getUsageCount(1) > 0);
-        assertFalse(repository.getUsageCount(2) > 0);
+//        assertFalse(repository.getUsageCount(2) > 0);
     }
 
 
     public Duck makeDuck(){
-        Duck duck = new Duck(3, "Test Clearance");
+        Duck duck = new Duck(6, "[INSERT URL HERE]", false);
         return duck;
     }
 

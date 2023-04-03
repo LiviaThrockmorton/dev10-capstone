@@ -23,8 +23,8 @@ public class DuckJdbcTemplateRepository implements DuckRepository {
     @Override
     public List<Duck> findAll() {
 
-        final String sql = "select duck_id, `duckImage` duck_duckImage" +
-                "                from duck ;";
+        final String sql = "select duck_id, duck_image, hidden" +
+                " from duck where hidden = 0;";
 
 
         return jdbcTemplate.query(sql, new DuckMapper());
@@ -33,9 +33,8 @@ public class DuckJdbcTemplateRepository implements DuckRepository {
     @Override
     public Duck findById(int duckId) {
 
-        final String sql = "select duck_id, `duckImage` duck_duckImage "
-                + "from duck "
-                + "where duck_id = ?;";
+        final String sql = "select duck_id, duck_image, hidden from duck"
+                + " where duck_id = ? and hidden = 0;";
 
         return jdbcTemplate.query(sql, new DuckMapper(), duckId)
                 .stream()
@@ -44,13 +43,15 @@ public class DuckJdbcTemplateRepository implements DuckRepository {
 
     @Override
     public Duck add(Duck duck) {
-        final String sql = "insert into duck (`duckImage`) " +
-                "values (?);";
+        final String sql = "insert into duck (duck_image, hidden) " +
+                "values (?, ?);";
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
         int rowsAffected = jdbcTemplate.update(connection -> {
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, duck.getDuckImage());
+            ps.setBoolean(2, duck.getHidden());
+
 
             return ps;
         }, keyHolder);
@@ -70,23 +71,26 @@ public class DuckJdbcTemplateRepository implements DuckRepository {
 
 
         final String sql = "update duck " +
-                "set `duckImage` = ? " +
+                "set duck_image = ?, " +
+                "hidden = ? " +
                 "where duck_id = ?;";
 
         return jdbcTemplate.update(sql,
                 duck.getDuckImage(),
+                duck.getHidden(),
                 duck.getDuckId()) > 0;
     }
 
     @Override
     public boolean deleteById(int duckId) {
-        return jdbcTemplate.update("delete from duck where duck_id = ?;", duckId) > 0;
+        return jdbcTemplate.update("update duck set hidden = 1 where duck_id = ?;", duckId) > 0;
     }
+
 
     @Override
     public int getUsageCount(int duckId) {
         int count = jdbcTemplate.queryForObject(
-                "select count(*) from appUser_outfit where duck_id = ?;", Integer.class, duckId);
+                "select count(*) from outfit where duck_id = ?;", Integer.class, duckId);
         return count;
     }
 
