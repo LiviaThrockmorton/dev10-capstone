@@ -71,6 +71,7 @@ function DressUpDuck({ handleDelete }) {
         evt.preventDefault();
         const nextOutfit = { ...outfit };
 
+        
         //save
         fetch('http://localhost:8080/api/outfit', {
             method: 'POST',
