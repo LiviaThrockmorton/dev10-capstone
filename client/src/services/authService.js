@@ -45,7 +45,7 @@ export async function refresh() {
         }
     };
 
-    const response = await fetch(`${url}/refresh`, config);
+    const response = await fetch(`${url}/refresh_token`, config);
     if (response.ok) {
         const json = await response.json();
         return convertJwtToUser(json.jwt_token);
