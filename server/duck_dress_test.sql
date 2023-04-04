@@ -173,11 +173,13 @@ insert into app_authority (`name`) values
     ('USER'),
     ('ADMIN');
 
--- passwords are set to "P@ssw0rd!"
+
 insert into app_user (username, password_hash, email, hidden, enabled)
     values
-    ('jsmith', '$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa', 'john@smith.com', 0, 1),
-    ('sjones', '$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa', 'sally@jones.com', 0, 1);
+    ('jsmith', '$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa', 'john@smith.com', 0, 1), -- "P@ssw0rd!"
+    ('sjones', '$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa', 'sally@jones.com', 0, 1), -- "P@ssw0rd!"
+	('user', '$2a$10$.zydOtTivoIcJP1CVcbEbOEaSfgDefR8yIRp3W.oZRFrvOSEOAOm6', 'user@user.com', 0, 1), -- password "user"
+    ('admin', '$2a$10$8e6e6BDT1RUt0WuHIXqYb.szJZH9RYNRGScE.WlC52EB/92L6CasW', 'admin@admin.com', 0, 1); -- password "admin"
 
 insert into app_user_authority
     values
@@ -188,7 +190,7 @@ insert into app_user_authority
 insert into duck (duck_id, duck_image, hidden) values
 (1, '/svgs/yellow-duck.svg', 0),
 (2, '/svgs/brown-duck.svg', 0),
-(3, '[INSERT URL HERE]', 1),
+(3, '/svgs/baby-duck.svg', 0),
 (4, '[INSERT URL HERE]', 1),
 (5, '[INSERT URL HERE]', 1);
 

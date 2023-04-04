@@ -72,24 +72,24 @@ public class AppUserRepository {
     }
 
     private void updateAuthorities(AppUser user) {
-        jdbcTemplate.update("delete from app_user_role where app_user_id = ?;", user.getAppUserId());
+        jdbcTemplate.update("delete from app_user_authority where app_user_id = ?;", user.getAppUserId());
         Collection<GrantedAuthority> authorities = user.getAuthorities();
 
         if (authorities == null) {
             return;
         }
 
-        for (GrantedAuthority role : authorities) {
-            String sql = "insert into app_user_role (app_user_id, app_role_id) "
-                    + "select ?, app_role_id from app_role where `name` = ?;";
-            jdbcTemplate.update(sql, user.getAppUserId(), role.getAuthority());
+        for (GrantedAuthority authority : authorities) {
+            String sql = "insert into app_user_authority (app_user_id, app_authority_id) "
+                    + "select ?, app_authority_id from app_authority where `name` = ?;";
+            jdbcTemplate.update(sql, user.getAppUserId(), authority.getAuthority());
         }
     }
 
     private List<String> getRolesByUsername(String username) {
         final String sql = "select r.name "
-                + "from app_user_role ur "
-                + "inner join app_role r on ur.app_role_id = r.app_role_id "
+                + "from app_user_authority ur "
+                + "inner join app_authority r on ur.app_authority_id = r.app_authority_id "
                 + "inner join app_user au on ur.app_user_id = au.app_user_id "
                 + "where au.username = ?";
         return jdbcTemplate.query(sql, (rs, rowId) -> rs.getString("name"), username);
