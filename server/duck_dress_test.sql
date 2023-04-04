@@ -173,11 +173,13 @@ insert into app_authority (`name`) values
     ('USER'),
     ('ADMIN');
 
--- passwords are set to "P@ssw0rd!"
+
 insert into app_user (username, password_hash, email, hidden, enabled)
     values
     ('jsmith', '$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa', 'john@smith.com', 0, 1),
-    ('sjones', '$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa', 'sally@jones.com', 0, 1);
+    ('sjones', '$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa', 'sally@jones.com', 0, 1),
+	('user', '$2a$10$.zydOtTivoIcJP1CVcbEbOEaSfgDefR8yIRp3W.oZRFrvOSEOAOm6', 'user@user.com', 0, 1), 
+    ('admin', '$2a$10$8e6e6BDT1RUt0WuHIXqYb.szJZH9RYNRGScE.WlC52EB/92L6CasW', 'admin@admin.com', 0, 1);
 
 insert into app_user_authority
     values
@@ -188,7 +190,7 @@ insert into app_user_authority
 insert into duck (duck_id, duck_image, hidden) values
 (1, '/svgs/yellow-duck.svg', 0),
 (2, '/svgs/brown-duck.svg', 0),
-(3, '[INSERT URL HERE]', 1),
+(3, '/svgs/baby-duck.svg', 0),
 (4, '[INSERT URL HERE]', 1),
 (5, '[INSERT URL HERE]', 1);
 
@@ -210,10 +212,10 @@ insert into clothing_item (item_id, item_type, clothing_item_image, hidden) valu
 
 insert into outfit (outfit_id, app_user_id, shirt_id, pants_id, hat_id, date_created, duck_id, posted, hidden) values
 (1, 1, 1, 3, 5, '2023-03-28', 1, true, false),
-(2, 2, 2, 3, 5,  '2023-03-21', 2, true, true),
-(3, 2, 1, 3, 5, '2023-02-28', 3, false, false),
-(4, 2, 2, 3, 5, '2023-01-02', 4, true, true),
-(5, 1, 1, 3, 5, '2023-11-28', 5, false, false);
+(2, 2, 2, 4, 5,  '2023-03-21', 2, true, false),
+(3, 2, 1, 4, 5, '2023-02-28', 1, true, false),
+(4, 2, 2, 3, 6, '2023-01-02', 2, true, false),
+(5, 1, 1, 3, 5, '2023-11-28', 1, true, false);
 
 
 insert into comments (comment_id, app_user_id, content, outfit_id, date_time, hidden) values
