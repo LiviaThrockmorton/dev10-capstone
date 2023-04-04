@@ -41,14 +41,14 @@ export async function refresh() {
     const config = {
         method: "POST",
         headers: {
-            "Authorization": `Bearer ${localStorage.getItem("BG_JWT")}`
+            "Authorization": `Bearer ${localStorage.getItem("duckToken")}`
         }
     };
 
-    const response = await fetch(`${url}/refresh`, config);
+    const response = await fetch(`${url}/refresh_token`, config);
     if (response.ok) {
         const json = await response.json();
-        return convertJwtToUser(json.jwt);
+        return convertJwtToUser(json.jwt_token);
     }
 
     return Promise.reject();

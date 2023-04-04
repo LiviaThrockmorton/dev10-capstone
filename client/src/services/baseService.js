@@ -25,7 +25,7 @@ async function sendBody(instance, method, theUrl) {
         method: method,
         headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${localStorage.getItem("BG_JWT")}`
+            "Authorization": `Bearer ${localStorage.getItem("duckToken")}`
         },
         body: JSON.stringify(instance)
     }
@@ -55,7 +55,7 @@ export async function deleteById(model, id) {
     const config = {
         method: "DELETE",
         headers: {
-            "Authorization": `Bearer ${localStorage.getItem("BG_JWT")}`
+            "Authorization": `Bearer ${localStorage.getItem("duckToken")}`
         },
     }
 
