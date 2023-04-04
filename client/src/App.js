@@ -10,12 +10,9 @@ import Success from './components/Success';
 import Confirm from './components/Confirm';
 import DressUpDuck from './components/DressUpDuck';
 import Forum from './components/Forum';
-import ForumMain from './components/ForumMain';
-import Outfit from './components/Outfit';
+import ForumPost from './components/ForumPost';
 import Profile from './components/Profile';
 import NotFound from './components/NotFound';
-import ForumPost from './components/ForumPost';
-import ToggleSwitch from './components/toggleSwitch';
 import { useState, useEffect } from 'react';
 
 const LOCAL_STORAGE_TOKEN_KEY = "dressUpDuckToken";
@@ -77,8 +74,6 @@ function App() {
             <Route path="/forum" element={<Forum />} />
             <Route path="/forum/:outfitId" element={<ForumPost />} />
             <Route path="/profile" element={user ? <Profile /> : <Navigate to="/login" />} />
-            <Route path="/forum-post" element={<ForumPost />} />
-            <Route path="/forum-main" element={<ForumMain />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>

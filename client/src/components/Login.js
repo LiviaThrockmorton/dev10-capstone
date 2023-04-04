@@ -56,7 +56,6 @@ import AuthContext from "../contexts/AuthContext";
 
 function Login() {
 
-
     const [credentials, setCredentials] = useState({ username: "", password: "" });
     const [hasError, setHasError] = useState(false);
     const { login } = useContext(AuthContext);
@@ -100,6 +99,7 @@ function Login() {
 
                     <button type="submit" className="btn btn-primary">Submit</button>
                 </form>
+
 
                 {hasError && <div className="alert alert-danger">
                     Bad Credentials.
