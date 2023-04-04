@@ -12,12 +12,12 @@ function AuthContextProvider({ children }) {
 
     function login(userArg) {
         setUser(userArg);
-        localStorage.setItem("BG_JWT", userArg.jwt);
+        localStorage.setItem("duckToken", userArg.jwt);
     }
 
     function logout() {
         setUser();
-        localStorage.removeItem("BG_JWT");
+        localStorage.removeItem("duckToken");
     }
 
     const auth = {

@@ -56,3 +56,7 @@
 - Delete comment 1hr
 - Delete any comment (admin) 1hr
 - View deleted posts (admin) 2 hrs
+
+ - "P@ssw0rd!"
+ -- password "user"
+  -- password "admin"

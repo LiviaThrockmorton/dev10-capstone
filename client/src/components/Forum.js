@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import Outfit from "./Outfit";
-import AuthContext from "../context/AuthContext";
+import AuthContext from "../contexts/AuthContext";
 import { findAll } from "../services/OutfitService";
 import { useNavigate } from "react-router-dom";
 
