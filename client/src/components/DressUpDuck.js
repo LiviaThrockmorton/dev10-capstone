@@ -72,7 +72,22 @@ function DressUpDuck({ handleDelete }) {
         const nextOutfit = { ...outfit };
 
         //save
-    }
+        fetch('http://localhost:8080/api/outfit', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(nextOutfit)
+          })
+          .then(response => response.json())
+          .then(data => {
+            setOutfit({...nextOutfit, outfitId: data.outfitId});
+          })
+          .catch(error => {
+            console.error('Error:', error);
+          });
+        }
+
 
     return (
         <div className="container">
