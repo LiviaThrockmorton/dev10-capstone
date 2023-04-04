@@ -1,7 +1,7 @@
 import './App.css';
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import jwtDecode from "jwt-decode";
-import AuthContext from "./context/AuthContext";
+import AuthContext from "./contexts/AuthContext";
 import NavBar from './components/NavBar';
 import Home from './components/Home';
 import Login from './components/Login';
@@ -33,14 +33,14 @@ function App() {
   const login = (token) => {
     localStorage.setItem(LOCAL_STORAGE_TOKEN_KEY, token);
     const { sub: username, authorities: authoritiesString } = jwtDecode(token);
-    const roles = authoritiesString.split(',');
+    const authorities = authoritiesString.split(',');
 
     const user = {
       username,
-      roles,
+      authorities,
       token,
-      hasRole(role) {
-        return this.roles.includes(role);
+      hasAuthority(authority) {
+        return this.authorities.includes(authority);
       }
     };
 
@@ -58,7 +58,7 @@ function App() {
   if (!restoreLoginAttemptCompleted) { return null; };
 
   return (
-    <AuthContext.Provider value={auth}>
+
       <Router>
         <div className='container'>
           <NavBar />
@@ -70,7 +70,7 @@ function App() {
             <Route path="/confirm" element={<Confirm />} />
             <Route path="/dress-up-duck" element={<DressUpDuck />} />
             <Route path="/dress-up-duck/edit/:id" element={user ? <DressUpDuck /> : <Navigate to="/login" />} />
-            <Route path="/dress-up-duck/delete/:id" element={user && user.roles.includes("ADMIN") ? <Confirm /> : <Navigate to="/login" />} />
+            <Route path="/dress-up-duck/delete/:id" element={user && user.Authorities.includes("ADMIN") ? <Confirm /> : <Navigate to="/login" />} />
             <Route path="/forum" element={<Forum />} />
             <Route path="/forum/:outfitId" element={<ForumPost />} />
             <Route path="/profile" element={user ? <Profile /> : <Navigate to="/login" />} />
@@ -78,7 +78,7 @@ function App() {
           </Routes>
         </div>
       </Router>
-    </AuthContext.Provider>
+
   );
 }
 

@@ -1,6 +1,7 @@
 import { findDuck } from "../services/DuckService";
 import { findItem } from "../services/ClothingItemService";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import AuthContext from "../contexts/AuthContext";
 import OutfitPlay from "./OutfitPlay";
 import OutfitView from "./OutfitView";
 
@@ -11,6 +12,7 @@ function Outfit({ outfit, canDelete, viewOutfit, handleView }) {
     const [shirt, setShirt] = useState();
     const [pants, setPants] = useState();
     const [error, setError] = useState(false);
+    const { user } = useContext(AuthContext);
 
     useEffect(() => {
         findDuck(outfit.duckId)
