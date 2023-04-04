@@ -8,11 +8,11 @@ function Forum() {
 
   const [outfits, setOutfits] = useState([]);
   const auth = useContext(AuthContext);
-  const canDelete = auth.user && auth.user.hasRole("ADMIN");
+  const canDelete = auth.user && auth.user.hasAnyAuthority("ADMIN");
   const navigate = useNavigate();
   const [error, setError] = useState(false);
 
-  
+
 
   useEffect(() => {
     findAll()

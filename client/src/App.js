@@ -39,7 +39,7 @@ function App() {
       username,
       authorities,
       token,
-      hasAuthority(authority) {
+      hasAnyAuthority(authority) {
         return this.authorities.includes(authority);
       }
     };
