@@ -20,7 +20,7 @@ function DressUpDuck({ handleDelete }) {
     const { outfitId } = useParams();
     const navigate = useNavigate();
     const auth = useContext(AuthContext);
-    const canDelete = auth.user && auth.user.hasAuthority("ADMIN");
+    const canDelete = auth.user && auth.user.hasAnyAuthority("ADMIN");
     const [error, setError] = useState(false);
 
     //GET DUCK AND CLOTHING ITEMS

@@ -4,6 +4,11 @@ function convertJwtToUser(jwt) {
     const tokens = jwt.split(".");
     const userJson = atob(tokens[1]);
     const user = JSON.parse(userJson);
+
+
+    user.authorities = user.authorities.split(",");
+    console.log(user);
+
     user.jwt = jwt;
     user.hasAnyAuthority = function (...authNames) {
         for (const name of authNames) {
