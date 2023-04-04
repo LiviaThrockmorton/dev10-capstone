@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import AuthContext from "../context/AuthContext";
+import AuthContext from "../contexts/AuthContext";
 import { findAll } from "../services/DuckService";
 import Duck from "./Duck";
 import ClothingItem from "./ClothingItem";
@@ -20,7 +20,7 @@ function DressUpDuck({ handleDelete }) {
     const { outfitId } = useParams();
     const navigate = useNavigate();
     const auth = useContext(AuthContext);
-    const canDelete = auth.user && auth.user.hasRole("ADMIN");
+    const canDelete = auth.user && auth.user.hasAuthority("ADMIN");
     const [error, setError] = useState(false);
 
     //GET DUCK AND CLOTHING ITEMS
