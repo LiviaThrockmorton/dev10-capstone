@@ -30,7 +30,7 @@
 ## Tuesday April 4th, 2023
 - X Fetch posts for forum 3hrs
 - X Profile page 1hr
-- View your outfits 2hrs
+- X View your outfits 2hrs
 - X Create an outfit 1hrs
 
 ## Wednesday April 5th, 2023
@@ -39,13 +39,13 @@
 - Comment 2hrs
 - X Login 2hrs
 - X Sign out 2hrs
-- Miscellaneous security front-end
+- X Miscellaneous security front-end
 
 
 ## Thursday April 6th, 2023
 - Work on presentation 3hrs
-- Refine clothing items, maybe add a few more 5hrs
-- Make site icon
+- X Refine clothing items, maybe add a few more 5hrs
+- X Make site icon
 
 ## Friday April 7th, 2023
 - Present!

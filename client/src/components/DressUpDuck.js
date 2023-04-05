@@ -22,7 +22,7 @@ function DressUpDuck({ handleDelete }) {
     const auth = useContext(AuthContext);
     const canDelete = auth.user && auth.user.hasAnyAuthority("ADMIN");
     const [error, setError] = useState(false);
-    const [saveResult, setSaveResult] = useState("");
+    const [saveResult, setSaveResult] = useState();
 
     //GET DUCK AND CLOTHING ITEMS
     useEffect(() => {
@@ -74,8 +74,8 @@ function DressUpDuck({ handleDelete }) {
         nextOutfit.userId = auth.user.app_user_id;
         
         save(nextOutfit)
-        .then(setSaveResult("Succes! Outfit saved."))
-        .catch(setSaveResult("Failure to save outfit."))
+        .then(() => setSaveResult("Succes! Outfit saved."))
+        .catch(() => setSaveResult("Failure to save outfit."))
         }
 
     return (
