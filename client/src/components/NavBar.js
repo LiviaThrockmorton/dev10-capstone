@@ -32,10 +32,10 @@ function NavBar() {
                     <div>
                         <div className="navbar-brand">Welcome</div>
                         <p className="nav-item">{auth.user.username}</p>
-                        <button onClick={() => auth.logout()}>Logout</button>
+                        <button className="btn btn-danger" onClick={() => auth.logout()}>Logout</button>
                     </div>
                 )}
-                
+
             </div>
         </nav>  
     )
