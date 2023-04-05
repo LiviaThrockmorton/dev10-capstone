@@ -70,13 +70,19 @@ function DressUpDuck({ handleDelete }) {
 
     function handleSave(evt) {
         evt.preventDefault();
-        const nextOutfit = { ...outfit };
-        nextOutfit.userId = auth.user.app_user_id;
-        
-        save(nextOutfit)
-        .then(() => setSaveResult("Succes! Outfit saved."))
-        .catch(() => setSaveResult("Failure to save outfit."))
+
+        if (auth.user) {
+            const nextOutfit = { ...outfit };
+            nextOutfit.userId = auth.user.app_user_id;
+
+            save(nextOutfit)
+                .then(() => setSaveResult("Succes! Outfit saved."))
+                .catch(() => setSaveResult("Failure to save outfit."))
+        } else {
+            navigate("/login")
         }
+
+    }
 
     return (
         <div className="container">
