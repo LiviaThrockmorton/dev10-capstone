@@ -77,7 +77,7 @@ function DressUpDuck({ handleDelete }) {
             nextOutfit.userId = auth.user.app_user_id;
 
             save(nextOutfit)
-                .then(() => setSaveResult("Succes! Outfit saved."))
+                .then(() => setSaveResult("Success! Outfit saved."))
                 .catch(() => setSaveResult("Failure to save outfit."))
         } else {
             navigate("/login")
