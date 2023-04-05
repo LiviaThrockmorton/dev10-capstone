@@ -184,7 +184,9 @@ insert into app_user (username, password_hash, email, hidden, enabled)
 insert into app_user_authority
     values
     (1, 2),
-    (2, 1);
+    (2, 1),
+    (3, 1),
+    (4, 2);
 
 
 insert into duck (duck_id, duck_image, hidden) values
