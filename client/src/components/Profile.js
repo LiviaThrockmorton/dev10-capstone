@@ -28,7 +28,7 @@ function Profile() {
                 <div className="col-6">
                     <h4 className="text-center">Your Outfits</h4>
                     <div className="d-flex flex-wrap">
-                        {outfits.map(o => <Outfit key={o.outfitId} outfit={o} viewOutfit={true} canHide={canHide} canPost={canPost} />)}
+                        {outfits.map(o => <Outfit key={o.outfitId} outfit={o} viewOutfit={true} profileView={true} canHide={canHide} canPost={canPost} />)}
                     </div>
                     {error && <p className="text-danger">Your outfits aren't here at the moment...</p>}
                 </div>

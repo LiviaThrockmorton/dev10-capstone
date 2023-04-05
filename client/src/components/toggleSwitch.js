@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const ToggleSwitch = () => {
+const ToggleSwitch = ({outfitId}) => {
   const [isChecked, setIsChecked] = useState(false);
 
   const handleChange = () => {
