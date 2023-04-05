@@ -71,6 +71,7 @@ function DressUpDuck({ handleDelete }) {
     function handleSave(evt) {
         evt.preventDefault();
 
+
         if (auth.user) {
             const nextOutfit = { ...outfit };
             nextOutfit.userId = auth.user.app_user_id;
