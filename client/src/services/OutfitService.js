@@ -15,3 +15,11 @@ export async function findById(outfitId) {
     }
     return Promise.reject(`Could not find outfit with id: ${outfitId}`);
 }
+
+export async function findByUser(userId) {
+    const response = await fetch(`${url}/byUser/${userId}`);
+    if (response.ok) {
+        return response.json();
+    }
+    return Promise.reject(`Could not find outfits for user`);
+}
