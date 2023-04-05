@@ -73,7 +73,7 @@ function App() {
             <Route path="/dress-up-duck/delete/:id" element={user && user.Authorities.includes("ADMIN") ? <Confirm /> : <Navigate to="/login" />} />
             <Route path="/forum" element={<Forum />} />
             <Route path="/forum/:outfitId" element={<ForumPost />} />
-            <Route path="/profile" element={user ? <Profile /> : <Navigate to="/login" />} />
+            <Route path="/profile" element={auth.user ? <Profile /> : <Navigate to="/login" />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
