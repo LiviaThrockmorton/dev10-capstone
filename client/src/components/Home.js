@@ -16,6 +16,7 @@ function Home() {
                         <Link to="/login" className="btn btn-primary mb-4">Log In</Link>
                         <Link to="/forum" className="btn btn-primary mb-4">Forum</Link>
                         <Link to="/dress-up-duck" className="btn btn-primary mb-4">Dress Up!</Link>
+                        <div style={{height: "800px"}}></div>
                     </div>
                 </div>
             </div>
