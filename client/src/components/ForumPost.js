@@ -20,11 +20,11 @@ function ForumPost() {
   function handleSubmit(evt) {
     evt.preventDefault();
     const nextComment = { ...comments };
-    console.log("saved not implemented yet.")
+    console.log("saved not fully implemented yet.")
 
-    // save(nextComment, auth)
-    //   .then(console.log("saved!"))
-    //   .catch(() => setError(true));
+    save(nextComment, auth)
+      .then(console.log("saved!"))
+      .catch(() => setError(true));
   }
 
 
@@ -94,7 +94,7 @@ function ForumPost() {
 
         <div className="col-6">
           <div style={{ width: "800px", height: "1000px" }}>
-            {<Outfit key={outfit.outfitId} outfit={outfit} viewOutfit={false} />}
+            {<Outfit key={outfit.outfitId} outfit={outfit} userId={outfit.userId} viewOutfit={false} />}
           </div>
         </div>
       </div >

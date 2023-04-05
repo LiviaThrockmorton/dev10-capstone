@@ -34,8 +34,12 @@ function Comment({ comment }) {
             .catch(() => setError(true));
 
     }, [comment, navigate]);
-
     
+
+    const username = comment.userId
+
+    var date = new Date(comment.dateTime);
+    date = date.getMonth() + '/' + date.getDay() + '/' + date.getFullYear();
 
 
 
@@ -43,18 +47,23 @@ function Comment({ comment }) {
 
     return (
 
-        <div className="card border-primary m-1" >
+        <div className="card-container border-light" >
+            <div className="card-header .bg-transparent text-white">
 
-
-            <div className="comment">
-                <div className="username-date"> 
-                    <p className="username">{comment.commentUsername}</p>
-                    <p className="date">{comment.date}</p>
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">{username}</h5>
+                    <small>{date}</small>
                 </div>
-                <div className="comment-text">
+
+            </div>
+
+
+            {/* <div className="card border-light mb-3"> */}
+
+                <div className="card card-body">
                     <p>{comment.content}</p>
                 </div>
-            </div>
+            {/* </div> */}
         </div >
 
 
