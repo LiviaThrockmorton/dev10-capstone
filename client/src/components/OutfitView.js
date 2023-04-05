@@ -8,6 +8,7 @@ function OutfitView({ duck, hat, shirt, pants, outfit, canDelete, error }) {
         navigate(`/forum/${outfit.outfitId}`);
     }
 
+    
     return (
         <div className="d-flex flex-wrap">
             <div className="d-flex flex-wrap">
