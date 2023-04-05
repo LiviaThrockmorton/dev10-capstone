@@ -5,7 +5,7 @@ import AuthContext from "../contexts/AuthContext";
 import OutfitPlay from "./OutfitPlay";
 import OutfitView from "./OutfitView";
 
-function Outfit({ outfit, canDelete, viewOutfit, handleView, viewHome }) {
+function Outfit({ outfit, canDelete, viewOutfit, handleView, viewHome, profileView }) {
 
     const [duck, setDuck] = useState([]);
     const [hat, setHat] = useState();
@@ -48,10 +48,17 @@ function Outfit({ outfit, canDelete, viewOutfit, handleView, viewHome }) {
         }
     }, [outfit.pantsId]);
 
-    return (<>{viewOutfit ? <OutfitView duck={duck} hat={hat} shirt={shirt} pants={pants}
-                                outfit={outfit} canDelete={canDelete} error={error} handleView={handleView}/>
-                            : <OutfitPlay duck={duck} hat={hat} shirt={shirt} pants={pants}
-                                outfit={outfit} error={error} viewHome={viewHome} /> }</>);
+    return (
+        <>
+            {viewOutfit ? <OutfitView duck={duck} hat={hat} shirt={shirt} pants={pants}
+                outfit={outfit} canDelete={canDelete} error={error}
+                handleView={handleView} profileView={profileView} />
+
+                : <OutfitPlay duck={duck} hat={hat} shirt={shirt} pants={pants}
+                    outfit={outfit} error={error} viewHome={viewHome} />
+            }
+        </>
+    );
 }
 
 export default Outfit;

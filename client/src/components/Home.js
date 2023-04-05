@@ -35,6 +35,7 @@ useEffect(() => {
                   outfit={o}
                   viewOutfit={false}
                   viewHome={true}
+                  profileView={false}
                 />
               ))}
             </div>
