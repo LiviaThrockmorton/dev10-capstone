@@ -70,27 +70,20 @@ function DressUpDuck({ handleDelete }) {
 
     function handleSave(evt) {
         evt.preventDefault();
-        const nextOutfit = { ...outfit };
-        nextOutfit.userId = auth.user.app_user_id;
 
-        //save
-        fetch('http://localhost:8080/api/outfit', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${localStorage.getItem('duckToken')}`
-            },
-            body: JSON.stringify(nextOutfit)
-          })
-          .then(response => response.json())
-          .then(data => {
-            setOutfit({...nextOutfit, outfitId: data.outfitId});
-          })
-          .catch(error => {
-            console.error('Error:', error);
-          });
+
+        if (auth.user) {
+            const nextOutfit = { ...outfit };
+            nextOutfit.userId = auth.user.app_user_id;
+
+            save(nextOutfit)
+                .then(() => setSaveResult("Succes! Outfit saved."))
+                .catch(() => setSaveResult("Failure to save outfit."))
+        } else {
+            navigate("/login")
         }
 
+    }
 
     return (
         <div className="container">
