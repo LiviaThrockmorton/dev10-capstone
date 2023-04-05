@@ -1,8 +1,11 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import Outfit from "./Outfit";
 import { findByOutfit } from "../services/commentService";
-import { findById } from "../services/OutfitService";
+import { findById, save } from "../services/OutfitService";
+import AuthContext from "../contexts/AuthContext";
+import Comment from "./Comment";
+
 
 
 function ForumPost() {
@@ -11,13 +14,23 @@ function ForumPost() {
   const navigate = useNavigate();
   const [error, setError] = useState(false);
   const [outfit, setOutfit] = useState([]);
-  const {outfitId} = useParams();
+  const { outfitId } = useParams();
+  const auth = useContext(AuthContext);
 
   function handleSubmit(evt) {
     evt.preventDefault();
-    console.log("Add comment placeholder")
-}
+    const nextComment = { ...comments };
+    console.log("saved not implemented yet.")
 
+    // save(nextComment, auth)
+    //   .then(console.log("saved!"))
+    //   .catch(() => setError(true));
+  }
+
+
+
+
+//sets the outfit
   useEffect(() => {
 
     findById(outfitId)
@@ -26,17 +39,13 @@ function ForumPost() {
 
   }, [outfitId, navigate]);
 
-  // useEffect(() => {
-  //   findByOutfit(outfitId)
-  //     .then(setComments)
-  //     .catch(() => setError(true));
-  // }, [navigate]); // this will happen only once when the component is loaded
 
-
-
-
-
-
+//should only be finding the comments
+  useEffect(() => {
+    findByOutfit(outfitId)
+      .then(setComments)
+      .catch(() => setError(true));
+  }, [comments.outfitId, navigate]); // this will happen only once when the component is loaded
 
 
 
@@ -54,18 +63,13 @@ function ForumPost() {
           <div className="comment-container">
 
 
-            {/* < div >
-
+            < div >
 
               {comments.map((comment) => (
                 <Comment key={comment.commentId} comment={comment} />
               ))}
 
-            </div> */}
-
-
-
-
+            </div>
 
 
             <div className="add-comment">
