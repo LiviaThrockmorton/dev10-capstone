@@ -1,5 +1,3 @@
-import { Link } from "react-router-dom";
-
 function OutfitPlay({duck, hat, shirt, pants, outfit, error}) {
 
     return (
