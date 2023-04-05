@@ -9,9 +9,9 @@ function OutfitView({ duck, hat, shirt, pants, outfit, canDelete, error }) {
     }
 
     return (
-        <div className="d-flex justify-content-between">
-            <div>
-                <button onClick={handleView} style={{ border: "none", backgroundColor: "white", margin: "0 175px 0 175px"}}>
+        <div className="d-flex flex-wrap">
+            <div className="d-flex flex-wrap">
+                <button onClick={handleView} style={{ border: "none", backgroundColor: "white", margin: "0 120px 300px", padding: "10px"}}>
                     <img src={duck.duckImage} alt="duck" style={{ height: "300px", position: "absolute" }} />
                     {hat && <img src={hat.clothingItemImage} alt="hat" style={{ height: "300px", position: "absolute" }} />}
                     {pants && <img src={pants.clothingItemImage} alt="pants" style={{ height: "300px", position: "absolute" }} />}
