@@ -1,16 +1,17 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Outfit from "./Outfit";
 import { findByOutfit } from "../services/commentService";
 import { findById } from "../services/OutfitService";
 
 
-function ForumPost({ outfitId }) {
+function ForumPost() {
 
   const [comments, setComments] = useState([]);
   const navigate = useNavigate();
   const [error, setError] = useState(false);
   const [outfit, setOutfit] = useState([]);
+  const {outfitId} = useParams();
 
   function handleSubmit(evt) {
     evt.preventDefault();

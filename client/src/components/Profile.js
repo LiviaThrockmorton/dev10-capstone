@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import background from "./images/mallard_lake.jpg";
 import { useState, useContext, useEffect } from "react";
 import Outfit from "./Outfit";
@@ -15,10 +15,11 @@ function Profile() {
     const canPost = auth.user;
 
     useEffect(() => {
-        findByUser(auth.appUserId)
+        findByUser(auth.user.app_user_id)
             .then(setOutfits)
             .catch(() => setError(true));
-    }, [navigate]);
+            console.log(auth.user);
+    }, [auth.user.app_user_id, navigate]);
 
     return (
         <div className="container">
