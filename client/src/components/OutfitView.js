@@ -13,20 +13,12 @@ function OutfitView({ duck, hat, shirt, pants, outfit, canDelete, error, profile
         navigate(`/dress-up-duck/edit/${outfit.outfitId}`)
     }
 
-    function showEdit(evt) {
-        evt.target.style.border = '3px solid black';
-    }
-
-    function hideEdit(evt) {
-        evt.target.style.border = 'none';
-    }
-
     return (
         <div className="d-flex flex-wrap">
             {profileView ?
                 <div className="d-flex flex-wrap">
                     <div>
-                        <button onClick={handleEdit} onMouseOver={showEdit} onMouseLeave={hideEdit} style={{ border: "none", backgroundColor: "white", margin: "0 120px 300px", padding: "10px" }}>
+                        <button onClick={handleEdit} style={{ border: "none", backgroundColor: "white", margin: "0 120px 300px", padding: "10px" }}>
                             <img src={duck.duckImage} alt="duck" style={{ height: "300px", position: "absolute" }} />
                             {hat && <img src={hat.clothingItemImage} alt="hat" style={{ height: "300px", position: "absolute" }} />}
                             {pants && <img src={pants.clothingItemImage} alt="pants" style={{ height: "300px", position: "absolute" }} />}
