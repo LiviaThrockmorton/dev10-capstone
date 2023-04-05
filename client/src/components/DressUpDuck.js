@@ -70,9 +70,25 @@ function DressUpDuck({ handleDelete }) {
     function handleSave(evt) {
         evt.preventDefault();
         const nextOutfit = { ...outfit };
+        nextOutfit.userId = auth.user.app_user_id;
 
         //save
-    }
+        fetch('http://localhost:8080/api/outfit', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${localStorage.getItem('duckToken')}`
+            },
+            body: JSON.stringify(nextOutfit)
+          })
+          .then(response => response.json())
+          .then(data => {
+            setOutfit({...nextOutfit, outfitId: data.outfitId});
+          })
+          .catch(error => {
+            console.error('Error:', error);
+          });
+        }
 
     return (
         <div className="container">
@@ -117,7 +133,7 @@ function DressUpDuck({ handleDelete }) {
 
                 <div className="col-6">
                     <div style={{ width: "800px", height: "1000px" }}>
-                        {<Outfit key={outfit.outfitId} outfit={outfit} viewOutfit={false} />}
+                        {<Outfit key={outfit.outfitId} outfit={outfit} viewOutfit={false} viewHome={false} />}
                     </div>
                 </div>
             </div>
