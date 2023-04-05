@@ -65,6 +65,7 @@ useEffect(() => {
             <Link to="/dress-up-duck" className="btn btn-primary mb-4">
               Dress Up!
             </Link>
+            <div style={{ height: "800px" }}></div>
           </div>
         </div>
       </div>
