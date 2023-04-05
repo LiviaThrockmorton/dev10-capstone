@@ -9,14 +9,6 @@ function NavBar() {
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark mb-5">
             <div className="container-fluid">
             <div className="navbar-brand">Dress-Up Duck</div>
-
-                {auth.user && (
-                    <div>
-                        <div className="navbar-brand">Welcome</div>
-                        <p className="nav-item">{auth.user.username}</p>
-                        <button onClick={() => auth.logout()}>Logout</button>
-                    </div>
-                )}
                 
                 <div className="navbar-collapse" id="navbarColor02">
                     <ul className="navbar-nav me-auto">
@@ -35,6 +27,15 @@ function NavBar() {
 
                     </ul>
                 </div>
+
+                {auth.user && (
+                    <div>
+                        <div className="navbar-brand">Welcome</div>
+                        <p className="nav-item">{auth.user.username}</p>
+                        <button className="btn btn-danger" onClick={() => auth.logout()}>Logout</button>
+                    </div>
+                )}
+
             </div>
         </nav>  
     )
