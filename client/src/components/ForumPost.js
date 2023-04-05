@@ -66,7 +66,7 @@ function ForumPost() {
             < div >
 
               {comments.map((comment) => (
-                <Comment key={comment.commentId} comment={comment} />
+                <Comment key={comment.commentId} comment={comment} userId={comment.userId} />
               ))}
 
             </div>
@@ -76,13 +76,13 @@ function ForumPost() {
               <div>
                 <form onSubmit={handleSubmit}>
                   <input type="text" placeholder="Add a comment..."></input>
-                  <button type="submit">Add</button>
+                  <button type="submit" className="btn btn-success">Add</button>
                 </form>
               </div>
               <div>
                 <center>
                   <Link to="/forum">
-                    <button type="button" className="back-button">
+                    <button type="button" className="btn btn-secondary">
                       Back to Forum
                     </button>
                   </Link>

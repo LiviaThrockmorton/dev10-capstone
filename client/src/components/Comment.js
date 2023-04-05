@@ -38,8 +38,17 @@ function Comment({ comment }) {
 
     const username = comment.userId
 
+
+
+//format date
+    function getMonthName(monthNumber) {
+        const date = new Date();
+        date.setMonth(monthNumber - 1);
+
+        return date.toLocaleString('en-US', { month: 'long' });
+    }
     var date = new Date(comment.dateTime);
-    date = date.getMonth() + '/' + date.getDay() + '/' + date.getFullYear();
+    date = getMonthName(date.getMonth()) + ' ' + date.getDay() + ', ' + date.getFullYear();
 
 
 
@@ -48,22 +57,13 @@ function Comment({ comment }) {
     return (
 
         <div className="card-container border-light" >
-            <div className="card-header .bg-transparent text-white">
-
-                <div class="d-flex w-100 justify-content-between">
+            <div className="card-header .bg-transparent text-white d-flex w-100 justify-content-between">
                     <h5 class="mb-1">{username}</h5>
                     <small>{date}</small>
-                </div>
-
             </div>
-
-
-            {/* <div className="card border-light mb-3"> */}
-
                 <div className="card card-body">
                     <p>{comment.content}</p>
                 </div>
-            {/* </div> */}
         </div >
 
 
