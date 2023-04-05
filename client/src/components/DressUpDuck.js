@@ -5,10 +5,10 @@ import { findAll } from "../services/DuckService";
 import Duck from "./Duck";
 import ClothingItem from "./ClothingItem";
 import { findByType } from "../services/ClothingItemService";
-import { findById } from "../services/OutfitService";
+import { findById, save } from "../services/OutfitService";
 import Outfit from "./Outfit";
 
-const baseOutfit = { outfitId: "", appUserId: "", duckId: 1, shirtId: "", pantsId: "", hatId: "", dateCreated: "", posted: "false", hidden: "false" }
+const baseOutfit = { outfitId: "", userId: "", duckId: 1, shirtId: "", pantsId: "", hatId: "", dateCreated: "", posted: "false", hidden: "false" }
 
 function DressUpDuck({ handleDelete }) {
 
@@ -22,6 +22,7 @@ function DressUpDuck({ handleDelete }) {
     const auth = useContext(AuthContext);
     const canDelete = auth.user && auth.user.hasAnyAuthority("ADMIN");
     const [error, setError] = useState(false);
+    const [saveResult, setSaveResult] = useState();
 
     //GET DUCK AND CLOTHING ITEMS
     useEffect(() => {
@@ -69,27 +70,20 @@ function DressUpDuck({ handleDelete }) {
 
     function handleSave(evt) {
         evt.preventDefault();
-        const nextOutfit = { ...outfit };
-        nextOutfit.userId = auth.user.app_user_id;
 
-        //save
-        fetch('http://localhost:8080/api/outfit', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${localStorage.getItem('duckToken')}`
-            },
-            body: JSON.stringify(nextOutfit)
-          })
-          .then(response => response.json())
-          .then(data => {
-            setOutfit({...nextOutfit, outfitId: data.outfitId});
-          })
-          .catch(error => {
-            console.error('Error:', error);
-          });
+
+        if (auth.user) {
+            const nextOutfit = { ...outfit };
+            nextOutfit.userId = auth.user.app_user_id;
+
+            save(nextOutfit)
+                .then(() => setSaveResult("Succes! Outfit saved."))
+                .catch(() => setSaveResult("Failure to save outfit."))
+        } else {
+            navigate("/login")
         }
 
+    }
 
     return (
         <div className="container">
@@ -130,6 +124,7 @@ function DressUpDuck({ handleDelete }) {
                     <div className="row mb-2">
                         <button className="btn btn-primary" onClick={handleSave}>Save Outfit</button>
                     </div>
+                    {saveResult && <p className="col mt-4 text-danger d-none">{saveResult}</p>}
                 </div>
 
                 <div className="col-6">

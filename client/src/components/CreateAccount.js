@@ -1,72 +1,97 @@
-import background from "./images/sink_ducklings.jpg";
-import { Link } from "react-router-dom";
+import background from "./images/field_ducklings.jpg";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
+
+const baseUser = { appUserId: "", username: "", passwordHash: "", email: "", hidden: 0, enabled: 1 }
 
 function CreateAccount() {
 
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
+    // const [username, setUsername] = useState("");
+    // const [password, setPassword] = useState("");
+    // const [email, setEmail] = useState("");
+    // const { appUserId } = useParams();
     const [confirm, setConfirm] = useState("");
-    const [email, setEmail] = useState("");
-    let valid = false;
+    const [error, setError] = useState(false);
+    const [newUser, setNewUser] = useState(baseUser);
+    const navigate = useNavigate();
+
+
+    function handleChange(evt) {
+        const nextNewUser = { ...newUser };
+        nextNewUser[evt.target.name] = evt.target.value;
+        setNewUser(nextNewUser);
+        console.log(nextNewUser);
+    }
 
     function validateInput() {
-        console.log(password, confirm);
-        if (password !== confirm) {
-            document.getElementById("validatePassword").classList.remove("d-none");
+        console.log(newUser.passwordHash, confirm);
+        if (newUser.passwordHash !== confirm) {
+            setError(true);
         } else {
-            valid = true;
+            setError(false);
         }
     }
 
     const handleSubmit = async (evt) => {
         evt.preventDefault();
         validateInput();
-        if (!valid) {
-            return;
-        }
+        const nextNewUser = { ...newUser };
 
-        //await fetch post
+        if (!error) {
+            fetch('http://localhost:8080/create_account', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(nextNewUser)
+            })
+                .then(response => response.json())
+                .then(data => { setNewUser({ ...nextNewUser, appUserId: data.appUserId }); })
+                .then(navigate("/profile"))
+                .catch(setError(true))
+        }
     }
 
     return (
         <div className="container">
-            <div className="flex-row w-50">
-                <h1 className="text-center">Create Account</h1>
-                <h5 className="text-center">Already have an account? Log in {' '}
-                    <Link to="/login" className="btn btn-outline-secondary">here</Link>
-                </h5>
+            <div className="row">
+                <div className="col-6">
+                    <h1 className="text-center">Create Account</h1>
+                    <h5 className="text-center">Already have an account? Log in {' '}
+                        <Link to="/login" className="btn btn-outline-secondary">here</Link>
+                    </h5>
 
-                <form onSubmit={handleSubmit}>
-                    <div className="form-group">
-                        <label htmlFor="username">Username:</label>
-                        <input type="text" onChange={(event) => setUsername(event.target.value)} className="form-control mb-4" id="username" placeholder="Enter a unique username" />
-                    </div>
+                    <form onSubmit={handleSubmit}>
+                        <div className="form-group">
+                            <label htmlFor="username">Username:</label>
+                            <input type="text" onChange={handleChange} className="form-control mb-4" id="username" name="username" placeholder="Enter a unique username" />
+                        </div>
 
-                    <div className="form-group">
-                        <label htmlFor="password">Password:</label>
-                        <input type="password" onChange={(event) => setPassword(event.target.value)} className="form-control mb-4" id="password" />
-                    </div>
+                        <div className="form-group">
+                            <label htmlFor="passwordHash">Password:</label>
+                            <input type="password" onChange={handleChange} className="form-control mb-4" id="passwordHash" name="passwordHash" />
+                        </div>
 
-                    <div className="form-group">
-                        <label htmlFor="confirm">Confirm Password:</label>
-                        <input type="password" onChange={(event) => setConfirm(event.target.value)} className="form-control mb-4" id="confirm" />
-                    </div>
+                        <div className="form-group">
+                            <label htmlFor="confirm">Confirm Password:</label>
+                            <input type="password" onChange={(event) => setConfirm(event.target.value)} className="form-control mb-4" id="confirm" name="confirm" />
+                        </div>
 
-                    <div className="form-group">
-                        <label htmlFor="email">Email:</label>
-                        <input type="enail" onChange={(event) => setEmail(event.target.value)} className="form-control mb-4" id="email" />
-                    </div>
+                        <div className="form-group">
+                            <label htmlFor="email">Email:</label>
+                            <input type="enail" onChange={handleChange} className="form-control mb-4" id="email" name="email" />
+                        </div>
 
-                    <button type="submit" className="btn btn-primary">Submit</button>
-                </form>
+                        <button type="submit" className="btn btn-primary">Submit</button>
+                    </form>
 
-                <p id="validatePassword" className="text-danger d-none">Passwords don't match, try again</p>
-            </div>
+                    {error && <p className="text-danger mt-3">Passwords don't match, or couldn't create an account</p>}
+                </div>
 
 
-            <div className="flex-row-reverse w-50 bg-image" style={{ backgroundImage: `url(${background})` }}>
-
+                <div className="h-100 col-6 bg-image" style={{ backgroundImage: `url(${background})`, backgroundPosition: "center", backgroundSize: "cover" }}>
+                    <div style={{ height: "800px" }}></div>
+                </div>
             </div>
         </div>
     )

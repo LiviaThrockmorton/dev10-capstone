@@ -29,24 +29,23 @@
 
 ## Tuesday April 4th, 2023
 - X Fetch posts for forum 3hrs
-- Profile page 1hr
-- View your outfits 2hrs
-- Create an outfit 1hrs
-- Edit outfit 2hrs
+- X Profile page 1hr
+- X View your outfits 2hrs
+- X Create an outfit 1hrs
 
 ## Wednesday April 5th, 2023
 - Delete outfit (hide and undo) 1hr
 - Post or make private 2hrs
 - Comment 2hrs
-- Login 2hrs
-- Sign out 2hrs
-- Miscellaneous security front-end
+- X Login 2hrs
+- X Sign out 2hrs
+- X Miscellaneous security front-end
 
 
 ## Thursday April 6th, 2023
 - Work on presentation 3hrs
-- Refine clothing items, maybe add a few more 5hrs
-- Make site icon
+- X Refine clothing items, maybe add a few more 5hrs
+- X Make site icon
 
 ## Friday April 7th, 2023
 - Present!
@@ -56,7 +55,9 @@
 - Delete comment 1hr
 - Delete any comment (admin) 1hr
 - View deleted posts (admin) 2 hrs
+- Edit outfit 2hrs
 
- - "P@ssw0rd!"
- -- password "user"
-  -- password "admin"
+## Passwords
+- "P@ssw0rd!"
+- password "user"
+- password "admin"
