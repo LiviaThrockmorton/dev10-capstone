@@ -12,8 +12,6 @@ function Forum() {
   const navigate = useNavigate();
   const [error, setError] = useState(false);
 
-
-
   useEffect(() => {
     findAll()
       .then(setOutfits)
