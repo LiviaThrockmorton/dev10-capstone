@@ -18,7 +18,7 @@ function Profile() {
         findByUser(auth.user.app_user_id)
             .then(setOutfits)
             .catch(() => setError(true));
-            console.log(auth.user);
+        console.log(auth.user);
     }, [auth.user.app_user_id, navigate]);
 
     return (
@@ -27,7 +27,9 @@ function Profile() {
             <div className="row">
                 <div className="col-6">
                     <h4 className="text-center">Your Outfits</h4>
-                    {outfits.map(o => <Outfit key={o.outfitId} outfit={o} viewOutfit={true} canHide={canHide} canPost={canPost} />)}
+                    <div className="d-flex flex-wrap">
+                        {outfits.map(o => <Outfit key={o.outfitId} outfit={o} viewOutfit={true} canHide={canHide} canPost={canPost} />)}
+                    </div>
                     {error && <p className="text-danger">Your outfits aren't here at the moment...</p>}
                 </div>
 
@@ -37,7 +39,7 @@ function Profile() {
                         <Link to="/dress-up-duck" className="btn btn-primary mb-4">Dress Up!</Link>
                         <button className="btn btn-danger mb-5" onClick={() => auth.logout()}>Logout</button>
                     </div>
-                    <div style={{height: "800px"}}></div>
+                    <div style={{ height: "800px" }}></div>
                 </div>
 
             </div>
