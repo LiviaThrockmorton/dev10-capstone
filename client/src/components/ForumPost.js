@@ -1,8 +1,8 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState, useContext } from "react";
 import Outfit from "./Outfit";
-import { findByOutfit } from "../services/commentService";
-import { findById, save } from "../services/OutfitService";
+import { findByOutfit, save } from "../services/commentService";
+import { findById} from "../services/OutfitService";
 import AuthContext from "../contexts/AuthContext";
 import Comment from "./Comment";
 
@@ -15,6 +15,7 @@ function ForumPost() {
   const [error, setError] = useState(false);
   const [outfit, setOutfit] = useState([]);
   const { outfitId } = useParams();
+  const { commentId } = useParams();
   const auth = useContext(AuthContext);
   const canDelete = auth.user && auth.user.hasAnyAuthority("ADMIN");
   const [saveResult, setSaveResult] = useState();
@@ -23,9 +24,16 @@ function ForumPost() {
     evt.preventDefault();
 
 
+
+
     if (auth.user) {
       const nextComment = { ...comments };
       nextComment.userId = auth.user.app_user_id;
+
+      console.log(auth.user)
+
+      console.log(nextComment);
+      console.log(...comments);
 
       save(nextComment)
         .then(() => setSaveResult("Success! Comment saved."))
@@ -84,9 +92,9 @@ function ForumPost() {
 
             <div className="add-comment">
               <div>
-                <form onSubmit={handleSubmit}>
+                <form >
                   <input class="form-control form-outline-light form"  placeholder="Add a comment..."></input>
-                  <button  className="btn btn-success">Add</button>
+                  <button className="btn btn-success" onClick={handleSubmit}>Add</button>
                 </form>
               </div>
               <div>
