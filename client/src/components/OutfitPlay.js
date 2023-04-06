@@ -10,7 +10,7 @@ function OutfitPlay({duck, hat, shirt, pants, outfit, error, viewHome}) {
             </div> 
             :                   
             <div>
-                <img src={duck.duckImage} className="duck" alt="duck" style={{ height: "800px", position: "absolute" }} />
+                {duck && <img src={duck.duckImage} className="duck" alt="duck" style={{ height: "800px", position: "absolute" }} />}
                 {hat && <img src={hat.clothingItemImage} alt="hat" style={{ height: "800px", position: "absolute" }} />}
                 {pants && <img src={pants.clothingItemImage} alt="pants" style={{ height: "800px", position: "absolute" }} />}
                 {shirt && <img src={shirt.clothingItemImage} alt="shirt" style={{ height: "800px", position: "absolute" }} />}
