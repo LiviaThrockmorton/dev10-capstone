@@ -23,9 +23,9 @@ function OutfitView({ duck, hat, shirt, pants, outfit, canDelete, error, profile
 
     }
 
-    function handleChange(hidden) {
+    function handleChange(posted) {
         const nextOutfit = {...outfit}
-        nextOutfit.hidden = hidden;
+        nextOutfit.posted = posted;
         save (nextOutfit)
         .then(() => setResult("Success! Outfit hidden."))
         .catch(() => setResult("Failure to hide outfit."));
@@ -45,8 +45,8 @@ function OutfitView({ duck, hat, shirt, pants, outfit, canDelete, error, profile
                                     {shirt && <img src={shirt.clothingItemImage} alt="shirt" style={{ height: "300px", position: "absolute" }} />}
                                 </button>
                             </div>
-                            <div className="card-body">{<ToggleSwitch outfitId={outfit.outfitId} hidden={outfit.hidden} handleChange={handleChange} />}</div>
-                            <div className="card-body"><button onClick={handleDelete} className="btn btn-danger mt-2">Delete</button></div>
+                            <div className="card-body">{<ToggleSwitch outfitId={outfit.outfitId} posted={outfit.posted} handleChange={handleChange} />}</div>
+                            <div className="card-body"><button onClick={handleDelet className="btn btn-danger mt-2">Delete</button></div>
                             {result && <p className="text-success">{result}</p>}
                     
                     

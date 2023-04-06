@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
-const ToggleSwitch = ({ outfitId, hidden, handleChange }) => {
-  const [isChecked, setIsChecked] = useState(hidden);
+const ToggleSwitch = ({ outfitId, posted, handleChange }) => {
+  const [isChecked, setIsChecked] = useState(posted);
 
   const onChange = () => {
     handleChange(!isChecked);
@@ -19,9 +19,6 @@ const ToggleSwitch = ({ outfitId, hidden, handleChange }) => {
           )}
         </span>
       </label>
-      {/* {!isChecked && (
-        <img src= {duck.duckImage} alt="Duck" />
-      )} */}
     </div>
   );
 };
