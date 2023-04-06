@@ -53,7 +53,8 @@ async function add(comment) {
     const config = {
         method: "POST",
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem('duckToken')}`
         },
         body: JSON.stringify(comment)
     };
@@ -73,7 +74,7 @@ async function add(comment) {
 }
 
 export async function save(comment) {
-    if (comment.commentId) {
+    if (comment.Id) {
         return update(comment);
     } else {
         return add(comment);

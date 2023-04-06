@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
@@ -63,7 +64,7 @@ public class CommentJdbcTemplateRepository implements CommentRepository {
             ps.setInt(1, comment.getUserId());
             ps.setString(2, comment.getContent());
             ps.setInt(3, comment.getOutfitId());
-            ps.setTimestamp(4, Timestamp.valueOf(comment.getDateTime()));
+            ps.setTimestamp(4, Timestamp.valueOf(LocalDateTime.now()));
             ps.setBoolean(5, comment.getHidden());
             return ps;
         }, keyHolder);

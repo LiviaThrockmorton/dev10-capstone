@@ -1,11 +1,12 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState, useContext } from "react";
 import Outfit from "./Outfit";
-import { findByOutfit } from "../services/commentService";
-import { findById, save } from "../services/OutfitService";
+import { findByOutfit, save } from "../services/commentService";
+import { findById} from "../services/OutfitService";
 import AuthContext from "../contexts/AuthContext";
 import Comment from "./Comment";
 
+const baseComment = { commentId: "", userId: "", content: "", dateTime: null, hidden: "false" }
 
 
 function ForumPost() {
@@ -13,19 +14,48 @@ function ForumPost() {
   const [comments, setComments] = useState([]);
   const navigate = useNavigate();
   const [error, setError] = useState(false);
-  const [outfit, setOutfit] = useState([]);
+  const [outfit, setOutfit] = useState(baseComment);
   const { outfitId } = useParams();
   const auth = useContext(AuthContext);
+  const canDelete = auth.user && auth.user.hasAnyAuthority("ADMIN");
+  const [saveResult, setSaveResult] = useState();
 
   function handleSubmit(evt) {
     evt.preventDefault();
-    const nextComment = { ...comments };
-    console.log("saved not implemented yet.")
 
-    // save(nextComment, auth)
-    //   .then(console.log("saved!"))
-    //   .catch(() => setError(true));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    if (auth.user) {
+      const nextComment = { ...comments };
+      nextComment.userId = auth.user.app_user_id;
+
+      console.log(auth.user)
+
+      console.log(nextComment);
+      console.log(...comments);
+
+      save(nextComment)
+        .then(() => setSaveResult("Success! Comment saved."))
+        .catch(() => setSaveResult("Failure to save comment."))
+    } else {
+      navigate("/login")
+    }
+
   }
+  
 
 
 
@@ -66,7 +96,7 @@ function ForumPost() {
             < div >
 
               {comments.map((comment) => (
-                <Comment key={comment.commentId} comment={comment} />
+                <Comment key={comment.commentId} comment={comment} commentUserId={comment.userId} />
               ))}
 
             </div>
@@ -74,15 +104,16 @@ function ForumPost() {
 
             <div className="add-comment">
               <div>
-                <form onSubmit={handleSubmit}>
-                  <input type="text" placeholder="Add a comment..."></input>
-                  <button type="submit">Add</button>
+                <form >
+                  <input class="form-control form-outline-light form"  placeholder="Add a comment..."></input>
+                  <button className="btn btn-success" onClick={handleSubmit}>Add</button>
                 </form>
+                {saveResult && <p className="col mt-4">{saveResult}</p>}
               </div>
               <div>
                 <center>
                   <Link to="/forum">
-                    <button type="button" className="back-button">
+                    <button type="button" className="btn btn-secondary">
                       Back to Forum
                     </button>
                   </Link>
@@ -103,8 +134,4 @@ function ForumPost() {
 }
 
 export default ForumPost;
-
-
-//TODO
-///Showing the outfit-- id is undefined but is part of the url
 

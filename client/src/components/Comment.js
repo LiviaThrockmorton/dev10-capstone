@@ -7,10 +7,9 @@ import AuthContext from "../contexts/AuthContext";
 import { findById } from "../services/OutfitService";
 
 
-function Comment({ comment }) {
+function Comment({ comment, commentUserId }) {
 
     const [outfit, setOutfit] = useState([]);
-
     const [outfitUser, setOutfitUser] = useState();
     const [error, setError] = useState(false);
     const { user } = useContext(AuthContext);
@@ -34,8 +33,21 @@ function Comment({ comment }) {
             .catch(() => setError(true));
 
     }, [comment, navigate]);
-
     
+
+    const username = commentUserId
+
+
+
+//format date
+    function getMonthName(monthNumber) {
+        const date = new Date();
+        date.setMonth(monthNumber - 1);
+
+        return date.toLocaleString('en-US', { month: 'long' });
+    }
+    var date = new Date(comment.dateTime);
+    date = getMonthName(date.getMonth()) + ' ' + date.getDay() + ', ' + date.getFullYear();
 
 
 
@@ -43,18 +55,14 @@ function Comment({ comment }) {
 
     return (
 
-        <div className="card border-primary m-1" >
-
-
-            <div className="comment">
-                <div className="username-date"> 
-                    <p className="username">{comment.commentUsername}</p>
-                    <p className="date">{comment.date}</p>
-                </div>
-                <div className="comment-text">
+        <div className="card-container border-light" >
+            <div className="card-header .bg-transparent text-white d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">{username}</h5>
+                    <small>{date}</small>
+            </div>
+                <div className="card card-body">
                     <p>{comment.content}</p>
                 </div>
-            </div>
         </div >
 
 
