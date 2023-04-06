@@ -38,7 +38,7 @@ public class OutfitJdbcTemplateRepository implements OutfitRepository {
                 "hidden  " +
                 "from outfit " +
                 "where hidden = 0 " +
-                "and posted = 1" +
+                "and posted = 1 " +
                 "order by date_created desc;";
         return jdbcTemplate.query(sql, new OutfitMapper());
     }
