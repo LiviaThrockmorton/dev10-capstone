@@ -16,18 +16,12 @@ function Comment({ comment }) {
     var date = new Date(comment.dateTime);
     date = getMonthName(date.getMonth()) + ' ' + date.getDay() + ', ' + date.getFullYear();
 
-
 //Bea's changes
     useEffect(() => {
-
         findAppUser(comment.appUserId)
-
             .then(setUser)
-
             .catch(() => setError(true));
-
         console.log(comment.appUserId);
-
     }, [comment.appUserId]);
 
 
