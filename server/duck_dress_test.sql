@@ -179,22 +179,24 @@ insert into app_user (username, password_hash, email, hidden, enabled)
     ('jsmith', '$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa', 'john@smith.com', 0, 1),
     ('sjones', '$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa', 'sally@jones.com', 0, 1),
 	('user', '$2a$10$.zydOtTivoIcJP1CVcbEbOEaSfgDefR8yIRp3W.oZRFrvOSEOAOm6', 'user@user.com', 0, 1), 
-    ('admin', '$2a$10$8e6e6BDT1RUt0WuHIXqYb.szJZH9RYNRGScE.WlC52EB/92L6CasW', 'admin@admin.com', 0, 1);
+    ('admin', '$2a$10$8e6e6BDT1RUt0WuHIXqYb.szJZH9RYNRGScE.WlC52EB/92L6CasW', 'admin@admin.com', 0, 1),
+    	('gabrielle', '$2a$10$.zydOtTivoIcJP1CVcbEbOEaSfgDefR8yIRp3W.oZRFrvOSEOAOm6', 'user@user.com', 0, 1);
 
 insert into app_user_authority
     values
     (1, 2),
     (2, 1),
     (3, 1),
-    (4, 2);
+    (4, 2),
+    (5, 1);
 
 
 insert into duck (duck_id, duck_image, hidden) values
 (1, '/svgs/yellow-duck.svg', 0),
 (2, '/svgs/brown-duck.svg', 0),
 (3, '/svgs/baby-duck.svg', 0),
-(4, '[INSERT URL HERE]', 1),
-(5, '[INSERT URL HERE]', 1);
+(4, '/svgs/duck-mallard.svg', 0),
+(5, '/svgs/duck-orange.svg', 0);
 
 insert into clothing_item (item_id, item_type, clothing_item_image, hidden) values
 (1, 'shirt', '/svgs/grey-shirt.svg', 0),
@@ -202,7 +204,20 @@ insert into clothing_item (item_id, item_type, clothing_item_image, hidden) valu
 (3, 'pants', '/svgs/navy-pants.svg', 0),
 (4, 'pants', '/svgs/pink-skirt.svg', 0),
 (5, 'hat', '/svgs/green-hat.svg', 0),
-(6, 'hat', '/svgs/top-hat.svg', 0);
+(6, 'hat', '/svgs/top-hat.svg', 0),
+(7, 'hat', '/svgs/hat-black-hair.svg', 0),
+(8, 'hat', '/svgs/hat-bow-pink.svg', 0),
+(9, 'shirt', '/svgs/shirt-purple.svg', 0),
+(10, 'shirt', '/svgs/shirt-stars.svg', 0),
+(11, 'pants', '/svgs/pants-stars.svg', 0),
+(12, 'pants', '/svgs/pants-black.svg', 0),
+(13, 'hat', '/svgs/hat-pnk-hair.svg', 0),
+(14, 'shirt', '/svgs/shirt-paw.svg', 0),
+(15, 'pants', '/svgs/pants-orange.svg', 0);
+
+
+
+
 
 -- insert into clothing_item (shirt_id, pants_id, hat_id) values 
 -- (1, null, null),
@@ -221,13 +236,13 @@ insert into outfit (outfit_id, app_user_id, shirt_id, pants_id, hat_id, date_cre
 
 
 insert into comments (comment_id, app_user_id, content, outfit_id, date_time, hidden) values
-(1, 1, 'I really liked my duck! So cute.', 1, '2023-03-28 12:00:00', 0),
+(1, 1, 'I really liked my duck! So cute.', 1, '2023-3-28 12:00:00', 0),
 (2, 2, 'Are we actually going to pretend this is cute?', 2, '2023-03-21 12:00:00', 1),
 (3, 1, 'Here is mine.', 3, '2023-02-28 12:00:00', 0),
 (4, 2, 'I think I should show MY ducks now...', 4, '2023-01-02 12:00:00', 0),
 (5, 1, 'Very proud of this one yall!!', 5, '2022-11-28 12:00:00', 0),
 (6, 1, 'Rude comment that should be hidden!', 5, '2022-11-29 12:00:00', 1),
-(7, 1, 'Wow!', 5, '2022-11-29 12:00:04', 1);
+(7, 1, 'Wow!', 1, '2022-11-29 12:00:04', 1);
 
 
 

@@ -1,4 +1,4 @@
-package learn.capstone.data;
+package learn.capstone.data.mappers;
 
 import learn.capstone.models.AppUser;
 import org.springframework.jdbc.core.RowMapper;

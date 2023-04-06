@@ -84,7 +84,7 @@ async function add(outfit) {
 }
 
 export async function save(outfit) {
-    if (outfit.id) {
+    if (outfit.outfitId) {
         return update(outfit);
     } else {
         return add(outfit);
