@@ -32,7 +32,7 @@ public class AuthController {
         this.converter = converter;
         this.appUserService = appUserService;
     }
-    @GetMapping("/{appUserId}")
+    @GetMapping("/user/{appUserId}")
     public ResponseEntity<AppUser> loadUserById(@PathVariable int appUserId) {
         AppUser appUser = appUserService.loadUserById(appUserId);
         if (appUser == null) {
