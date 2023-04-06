@@ -13,6 +13,8 @@ public class AppUserMapper implements RowMapper<AppUser> {
         this.roles = roles;
     }
 
+
+
     @Override
     public AppUser mapRow(ResultSet rs, int i) throws SQLException {
         return new AppUser(
