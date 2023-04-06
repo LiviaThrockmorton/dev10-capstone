@@ -6,6 +6,7 @@ import { findById} from "../services/OutfitService";
 import AuthContext from "../contexts/AuthContext";
 import Comment from "./Comment";
 
+const baseComment = { commentId: "", userId: "", content: "", dateTime: null, hidden: "false" }
 
 
 function ForumPost() {
@@ -13,15 +14,26 @@ function ForumPost() {
   const [comments, setComments] = useState([]);
   const navigate = useNavigate();
   const [error, setError] = useState(false);
-  const [outfit, setOutfit] = useState([]);
+  const [outfit, setOutfit] = useState(baseComment);
   const { outfitId } = useParams();
-  const { commentId } = useParams();
   const auth = useContext(AuthContext);
   const canDelete = auth.user && auth.user.hasAnyAuthority("ADMIN");
   const [saveResult, setSaveResult] = useState();
 
   function handleSubmit(evt) {
     evt.preventDefault();
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -96,6 +108,7 @@ function ForumPost() {
                   <input class="form-control form-outline-light form"  placeholder="Add a comment..."></input>
                   <button className="btn btn-success" onClick={handleSubmit}>Add</button>
                 </form>
+                {saveResult && <p className="col mt-4">{saveResult}</p>}
               </div>
               <div>
                 <center>

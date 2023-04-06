@@ -10,7 +10,6 @@ import { findById } from "../services/OutfitService";
 function Comment({ comment, commentUserId }) {
 
     const [outfit, setOutfit] = useState([]);
-
     const [outfitUser, setOutfitUser] = useState();
     const [error, setError] = useState(false);
     const { user } = useContext(AuthContext);
