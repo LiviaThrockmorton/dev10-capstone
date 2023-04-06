@@ -1,10 +1,13 @@
+import noDuck from "./images/not-found-duck.png";
+
 function NotFound() {
-    return (
-      <>
-        <h1>404</h1>
-        <p>Page not found 📃</p>
-      </>
-    );
-  }
-  
-  export default NotFound;
+  return (
+    <>
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+      <img src={noDuck} alt="Not Found Duck" width="550" height="700"  />
+      </div>
+    </>
+  );
+}
+
+export default NotFound;
