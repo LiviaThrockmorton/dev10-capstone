@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import ToggleSwitch from "./toggleSwitch";
-import { hide } from "../services/OutfitService";
+import { hide, save } from "../services/OutfitService";
 import { useState } from "react";
 
 function OutfitView({ duck, hat, shirt, pants, outfit, canDelete, error, profileView }) {
@@ -18,17 +18,25 @@ function OutfitView({ duck, hat, shirt, pants, outfit, canDelete, error, profile
 
     function handleDelete() {
         hide(outfit.outfitId)
-            .then(() => setResult("Succes! Outfit deleted."))
+            .then(() => setResult("Success! Outfit deleted."))
             .catch(() => setResult("Failure to delete outfit."));
 
+    }
+
+    function handleChange(posted) {
+        const nextOutfit = {...outfit}
+        nextOutfit.posted = posted;
+        save (nextOutfit)
+        .then(() => setResult("Success! Outfit hidden."))
+        .catch(() => setResult("Failure to hide outfit."));
     }
 
     return (
         <div>
             {profileView ?
                 <div className="card m-1" style={{ width: "16.5rem" }}>
-                    {!outfit.hidden &&
-                        <>
+                    
+                    
                             <div className="card-img-top">
                                 <button onClick={handleEdit} style={{ border: "none", backgroundColor: "white", margin: "0 0 300px", padding: "10px" }}>
                                     <img src={duck.duckImage} alt="duck" style={{ height: "300px", position: "absolute" }} />
@@ -37,11 +45,11 @@ function OutfitView({ duck, hat, shirt, pants, outfit, canDelete, error, profile
                                     {shirt && <img src={shirt.clothingItemImage} alt="shirt" style={{ height: "300px", position: "absolute" }} />}
                                 </button>
                             </div>
-                            <div className="card-body">{<ToggleSwitch outfitId={outfit.outfitId} />}</div>
+                            <div className="card-body">{<ToggleSwitch outfitId={outfit.outfitId} posted={outfit.posted} handleChange={handleChange} />}</div>
                             <div className="card-body"><button onClick={handleDelete} className="btn btn-danger mt-2">Delete</button></div>
                             {result && <p className="text-success">{result}</p>}
-                        </>
-                    }
+                    
+                    
                 </div>
                 :
                 <div className="d-flex flex-wrap">
