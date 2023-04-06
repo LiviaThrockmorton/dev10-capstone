@@ -179,14 +179,16 @@ insert into app_user (username, password_hash, email, hidden, enabled)
     ('jsmith', '$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa', 'john@smith.com', 0, 1),
     ('sjones', '$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa', 'sally@jones.com', 0, 1),
 	('user', '$2a$10$.zydOtTivoIcJP1CVcbEbOEaSfgDefR8yIRp3W.oZRFrvOSEOAOm6', 'user@user.com', 0, 1), 
-    ('admin', '$2a$10$8e6e6BDT1RUt0WuHIXqYb.szJZH9RYNRGScE.WlC52EB/92L6CasW', 'admin@admin.com', 0, 1);
+    ('admin', '$2a$10$8e6e6BDT1RUt0WuHIXqYb.szJZH9RYNRGScE.WlC52EB/92L6CasW', 'admin@admin.com', 0, 1),
+    	('gabrielle', '$2a$10$.zydOtTivoIcJP1CVcbEbOEaSfgDefR8yIRp3W.oZRFrvOSEOAOm6', 'user@user.com', 0, 1);
 
 insert into app_user_authority
     values
     (1, 2),
     (2, 1),
     (3, 1),
-    (4, 2);
+    (4, 2),
+    (5, 1);
 
 
 insert into duck (duck_id, duck_image, hidden) values

@@ -9,20 +9,21 @@ function Comment({ comment }) {
 
     function getMonthName(monthNumber) {
         const date = new Date();
-        date.setMonth(monthNumber + 1);
+        date.setMonth(monthNumber - 1);
         return date.toLocaleString('en-US', { month: 'long' });
     }
 
     var date = new Date(comment.dateTime);
-    date = getMonthName(date.getMonth()) + ' ' + date.getDay() + ', ' + date.getFullYear();
+    date = getMonthName(date.getDay()) + ' ' + (date.getMonth()+ 3) + ', ' + date.getFullYear();
 
 //Bea's changes
     useEffect(() => {
-        findAppUser(comment.appUserId)
+        findAppUser(comment.userId)
             .then(setUser)
             .catch(() => setError(true));
-        console.log(comment.appUserId);
-    }, [comment.appUserId]);
+        console.log(comment.userId);
+    }, [comment.userId]);
+
 
 
 //Bea's changes-- I also changed the user.username below in 2 places
