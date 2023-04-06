@@ -33,6 +33,9 @@ public class AppUserService implements UserDetailsService {
         return appUser;
     }
 
+
+//findById
+
     public AppUserResult create(String username, String password) {
         AppUserResult result = validate(username, password);
         if (!result.isSuccess()) {

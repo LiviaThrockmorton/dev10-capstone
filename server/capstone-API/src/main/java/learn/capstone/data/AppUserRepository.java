@@ -1,6 +1,9 @@
 package learn.capstone.data;
 
+import learn.capstone.data.mappers.CommentMapper;
+import learn.capstone.data.mappers.AppUserMapper;
 import learn.capstone.models.AppUser;
+import learn.capstone.models.Comment;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.security.core.GrantedAuthority;
@@ -33,6 +36,38 @@ public class AppUserRepository {
                 .stream()
                 .findFirst().orElse(null);
     }
+
+
+//    @Override
+//    public Comment findById(int commentId) {
+//
+//        final String sql = "select comment_id, app_user_id, content, outfit_id, date_time, hidden "
+//                + "from comments "
+//                + "where comment_id = ? and hidden = 0;";
+//
+//        return jdbcTemplate.query(sql, new CommentMapper(), commentId).stream()
+//                .findFirst()
+//                .orElse(null);
+//    }
+
+    @Transactional
+    public AppUser findById(int appUserId) {
+
+
+        final String sql = "select app_user_id, username, password_hash, email, hidden, enabled "
+                + "from app_user "
+                + "where app_user_id = ? and hidden = 0;";
+
+        return jdbcTemplate.query(sql, new learn.capstone.data.AppUserMapper(), appUserId)
+                .stream()
+                .findFirst().orElse(null);
+    }
+
+
+
+
+
+
 
     @Transactional
     public AppUser create(AppUser user) {

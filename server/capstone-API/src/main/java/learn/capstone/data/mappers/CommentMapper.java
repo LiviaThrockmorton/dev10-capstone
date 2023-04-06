@@ -16,11 +16,12 @@ public class CommentMapper implements RowMapper<Comment> {
         Comment comment = new Comment();
         comment.setCommentId(resultSet.getInt("comment_id"));
         comment.setUserId(resultSet.getInt("app_user_id"));
-        comment.setUserId(resultSet.getInt("outfit_id"));
+
         comment.setContent(resultSet.getString("content"));
         comment.setOutfitId(resultSet.getInt("outfit_id"));
         Timestamp sqlDate = resultSet.getTimestamp("date_time");
         comment.setDateTime(sqlDate.toLocalDateTime());
+        comment.setHidden(resultSet.getBoolean("hidden"));
         return comment;
     }
 }

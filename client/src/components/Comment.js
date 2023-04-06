@@ -12,13 +12,13 @@ function Comment({ comment }) {
     return (
         <div className="card-container border-light .bg-transparent " >
             <div className="card-header .bg-transparent text-white d-flex w-100 justify-content-between">
-                <h5 class="mb-1">{comment.userId}</h5>
+                <h5 className="mb-1">{comment.userId}</h5>
                 <small>{date}</small>
             </div>
             <div className="card-body .bg-transparent">
                 <p>{comment.content}</p>
             </div>
-            <hr class="hr" />
+            <hr className="hr" />
             <div className="d-none">{comment.commentId}</div>
             <div className="d-none">{comment.userId}</div>
             <div className="d-none">{comment.outfitId}</div>
