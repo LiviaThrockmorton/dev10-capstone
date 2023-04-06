@@ -13,16 +13,16 @@ function Outfit({ outfit, canDelete, viewOutfit, handleView, viewHome, profileVi
     const [error, setError] = useState(false);
 
     useEffect(() => {
+        if (outfit.duckId) {
         findDuck(outfit.duckId)
             .then(setDuck)
             .catch(() => setError(true));
         console.log(outfit.duckId);
+        }
     }, [outfit.duckId]);
 
     useEffect(() => {
         if (outfit.hatId) {
-
-
             findItem(outfit.hatId)
                 .then(setHat)
                 .catch(() => setError(true));
