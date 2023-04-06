@@ -40,10 +40,9 @@ public class CommentController {
 
     @GetMapping("/outfitComments/{outfitId}")
     public List<Comment> findByOutfit(@PathVariable int outfitId) {
-        List <Comment> hiddenComments = service.findByOutfit(outfitId);
-        if (hiddenComments == null) {
-        }
-        return service.findByHidden();
+        List <Comment> outfits = service.findByOutfit(outfitId);
+
+        return service.findByOutfit(outfitId);
     }
 
     @PostMapping
@@ -55,7 +54,7 @@ public class CommentController {
         return ErrorResponse.build(result);
     }
 
-    //TODO find by outfit
+
     //TODO find hidden
 
     @PutMapping("/{commentId}")

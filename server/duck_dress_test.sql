@@ -227,6 +227,7 @@ insert into comments (comment_id, app_user_id, content, outfit_id, date_time, hi
 (4, 2, 'I think I should show MY ducks now...', 4, '2023-01-02 12:00:00', 0),
 (5, 1, 'Very proud of this one yall!!', 5, '2022-11-28 12:00:00', 0),
 (6, 1, 'Rude comment that should be hidden!', 5, '2022-11-29 12:00:00', 1);
+(7, 1, 'Wow!', 5, '2022-11-29 12:00:04', 1);
 
 
 

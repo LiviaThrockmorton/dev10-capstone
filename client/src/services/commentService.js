@@ -13,7 +13,7 @@ export async function findByHidden() {
     if (response.ok) {
         return response.json();
     }
-    return Promise.reject(`Could not find comment id: ${commentId}`)
+    return Promise.reject(`No comments here.`)
 }
 
 export async function deleteById(commentId) {

@@ -7,12 +7,12 @@ import { useNavigate } from "react-router-dom";
 
 function Home() {
 
-const [outfits, setOutfits] = useState([]);
-const navigate = useNavigate();
-const [error, setError] = useState(false);
+  const [outfits, setOutfits] = useState([]);
+  const navigate = useNavigate();
+  const [error, setError] = useState(false);
 
 
-useEffect(() => {
+  useEffect(() => {
     findAll()
       .then(setOutfits)
       .catch(() => setError(true));
@@ -34,12 +34,13 @@ useEffect(() => {
                   outfit={o}
                   viewOutfit={false}
                   viewHome={true}
+                  profileView={false}
                 />
               ))}
             </div>
           </div>
         </div>
-  
+
         <div
           className="h-100 col-6 bg-image"
           style={{
@@ -64,12 +65,14 @@ useEffect(() => {
             <Link to="/dress-up-duck" className="btn btn-primary mb-4">
               Dress Up!
             </Link>
+
           </div>
+          <div style={{ height: "800px" }}></div>
         </div>
       </div>
     </div>
   );
-  
+
 }
 
 export default Home;
