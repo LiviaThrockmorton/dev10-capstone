@@ -2,7 +2,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState, useContext } from "react";
 import Outfit from "./Outfit";
 import { findByOutfit, save } from "../services/commentService";
-import { findById} from "../services/OutfitService";
+import { findById } from "../services/OutfitService";
 import AuthContext from "../contexts/AuthContext";
 import Comment from "./Comment";
 
@@ -14,8 +14,9 @@ function ForumPost() {
   const [comments, setComments] = useState([]);
   const navigate = useNavigate();
   const [error, setError] = useState(false);
-  const [outfit, setOutfit] = useState(baseComment);
+  const [outfit, setOutfit] = useState([]);
   const { outfitId } = useParams();
+  const [content, setContent] = useState(baseComment.content)
   const auth = useContext(AuthContext);
   const canDelete = auth.user && auth.user.hasAnyAuthority("ADMIN");
   const [saveResult, setSaveResult] = useState();
@@ -24,27 +25,14 @@ function ForumPost() {
     evt.preventDefault();
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     if (auth.user) {
       const nextComment = { ...comments };
       nextComment.userId = auth.user.app_user_id;
+      // setContent = nextComment.content;
 
       console.log(auth.user)
 
-      console.log(nextComment);
+      console.log('next comment', nextComment);
       console.log(...comments);
 
       save(nextComment)
@@ -55,12 +43,12 @@ function ForumPost() {
     }
 
   }
-  
 
 
 
 
-//sets the outfit
+
+  //sets the outfit
   useEffect(() => {
 
     findById(outfitId)
@@ -70,7 +58,7 @@ function ForumPost() {
   }, [outfitId, navigate]);
 
 
-//should only be finding the comments
+  //should only be finding the comments
   useEffect(() => {
     findByOutfit(outfitId)
       .then(setComments)
@@ -101,15 +89,28 @@ function ForumPost() {
 
             </div>
 
+            
+            {auth.user &&
+
+              <div>
+
+                <form >
+
+                  <input class="form-control form-outline-light form" placeholder="Add a comment..."></input>
+
+                  <button className="btn btn-success " onClick={handleSubmit}>Add</button>
+
+                </form>
+
+                {saveResult && <p className="col mt-4">{saveResult}</p>}
+
+              </div>
+
+            }
+
 
             <div className="add-comment">
-              <div>
-                <form >
-                  <input class="form-control form-outline-light form"  placeholder="Add a comment..."></input>
-                  <button className="btn btn-success" onClick={handleSubmit}>Add</button>
-                </form>
-                {saveResult && <p className="col mt-4">{saveResult}</p>}
-              </div>
+
               <div>
                 <center>
                   <Link to="/forum">

@@ -55,14 +55,16 @@ function Comment({ comment, commentUserId }) {
 
     return (
 
-        <div className="card-container border-light" >
+        <div className="card-container border-light .bg-transparent " >
             <div className="card-header .bg-transparent text-white d-flex w-100 justify-content-between">
                     <h5 class="mb-1">{username}</h5>
                     <small>{date}</small>
             </div>
-                <div className="card card-body">
+            <div className="card-body .bg-transparent">
                     <p>{comment.content}</p>
-                </div>
+            </div>
+            <hr class="hr" />
+            
         </div >
 
 
