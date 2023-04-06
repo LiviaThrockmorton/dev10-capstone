@@ -29,7 +29,7 @@ function ForumPost() {
     if (auth.user) {
       const nextComment = { ...comments };
       nextComment.userId = auth.user.app_user_id;
-      nextComment.content = comments.content;
+      nextComment.content = comment.content;
 
 
 
@@ -99,7 +99,7 @@ function ForumPost() {
 
                 <form >
 
-                  <input type="text" value={comments.content} class="form-control" id="content" name="content" placeholder="Add a comment..."></input>
+                  <input type="text" value={comment.content} class="form-control" id="content" name="content" placeholder="Add a comment..."></input>
 
                   <button className="btn btn-success " onClick={handleSubmit}>Add</button>
 
