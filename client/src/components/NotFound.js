@@ -10,7 +10,7 @@ function NotFound() {
   //ANIMATION
   useLayoutEffect(() => {
     let ctx = gsap.context(() => {
-      gsap.fromTo(".tear", { y: -50, opacity: 0}, { duration: 2, y: 0, opacity: 1, ease: "power4" });
+      gsap.fromTo(".tear", { y: -50, opacity: 0 }, { duration: 2, y: 0, opacity: 1, ease: "power4" });
       return () => ctx.revert();
     });
   }, [navigate]);

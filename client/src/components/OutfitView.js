@@ -1,12 +1,24 @@
 import { Link, useNavigate } from "react-router-dom";
 import ToggleSwitch from "./toggleSwitch";
 import { hide, save } from "../services/OutfitService";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { findAppUser } from "../services/authService";
 
 function OutfitView({ duck, hat, shirt, pants, outfit, canDelete, error, profileView, loadOutfits }) {
 
     const navigate = useNavigate();
     const [result, setResult] = useState();
+    //Bea's changes -- I also added the imports at the top
+    const [user, setUser] = useState({});
+
+
+
+    //Bea's changes
+    useEffect(() => {
+        findAppUser(outfit.userId)
+            .then(setUser)
+        console.log(outfit.userId);
+    }, [outfit.userId]);
 
     function handleView() {
         navigate(`/forum/${outfit.outfitId}`);
@@ -47,15 +59,20 @@ function OutfitView({ duck, hat, shirt, pants, outfit, canDelete, error, profile
                     <div className="card-body">{<ToggleSwitch outfitId={outfit.outfitId} posted={outfit.posted} handleChange={handleChange} />}</div>
                     <div className="card-body"><button onClick={handleDelete} className="btn btn-danger mt-2">Delete</button></div>
                     {result && <p className="text-success">{result}</p>}
+                    {user.username}
                 </div>
                 :
+                
                 <div className="d-flex flex-wrap">
-                    <button onClick={handleView} style={{ border: "none", backgroundColor: "white", margin: "0 120px 300px", padding: "10px" }}>
+                    <button onClick={handleView} style={{ border: "none", backgroundColor: "white", margin: "0 120px 300px", padding: "20px" }}>
                         {outfit.duckId && <img src={duck.duckImage} alt="duck" style={{ height: "300px", position: "absolute" }} />}
                         {hat && <img src={hat.clothingItemImage} alt="hat" style={{ height: "300px", position: "absolute" }} />}
                         {pants && <img src={pants.clothingItemImage} alt="pants" style={{ height: "300px", position: "absolute" }} />}
                         {shirt && <img src={shirt.clothingItemImage} alt="shirt" style={{ height: "300px", position: "absolute" }} />}
                     </button>
+                    <div>
+                    {user.username}
+                    </div>
                 </div>
             }
 
