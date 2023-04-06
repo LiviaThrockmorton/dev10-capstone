@@ -32,36 +32,24 @@ public class AppUserRepository {
                 + "from app_user "
                 + "where username = ? and hidden = 0;";
 
-        return jdbcTemplate.query(sql, new learn.capstone.data.AppUserMapper(roles), username)
+        return jdbcTemplate.query(sql, new AppUserMapper(roles), username)
                 .stream()
                 .findFirst().orElse(null);
     }
 
-
-//    @Override
-//    public Comment findById(int commentId) {
 //
-//        final String sql = "select comment_id, app_user_id, content, outfit_id, date_time, hidden "
-//                + "from comments "
-//                + "where comment_id = ? and hidden = 0;";
+//    @Transactional
+//    public AppUser findById(int appUserId) {
 //
-//        return jdbcTemplate.query(sql, new CommentMapper(), commentId).stream()
-//                .findFirst()
-//                .orElse(null);
+//
+//        final String sql = "select app_user_id, username, password_hash, email, hidden, enabled "
+//                + "from app_user "
+//                + "where app_user_id = ? and hidden = 0;";
+//
+//        return jdbcTemplate.query(sql, new AppUserMapper(), appUserId)
+//                .stream()
+//                .findFirst().orElse(null);
 //    }
-
-    @Transactional
-    public AppUser findById(int appUserId) {
-
-
-        final String sql = "select app_user_id, username, password_hash, email, hidden, enabled "
-                + "from app_user "
-                + "where app_user_id = ? and hidden = 0;";
-
-        return jdbcTemplate.query(sql, new learn.capstone.data.AppUserMapper(), appUserId)
-                .stream()
-                .findFirst().orElse(null);
-    }
 
 
 
@@ -128,7 +116,19 @@ public class AppUserRepository {
                 + "inner join app_user au on ur.app_user_id = au.app_user_id "
                 + "where au.username = ?";
         return jdbcTemplate.query(sql, (rs, rowId) -> rs.getString("name"), username);
+
+
+
     }
+    private List<String> getRolesById(int appUserId) {
+        final String sql = "select r.name "
+                + "from app_user_role ur "
+                + "inner join app_role r on ur.app_role_id = r.app_role_id "
+                + "inner join app_user au on ur.app_user_id = au.app_user_id "
+                + "where au.app_user_id = ?";
+        return jdbcTemplate.query(sql, (rs, rowId) -> rs.getString("name"), appUserId);
+    }
+
 
 
     //
