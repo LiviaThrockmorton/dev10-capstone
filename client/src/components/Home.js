@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useLayoutEffect } from "react";
 import background from "./images/sink_ducklings.jpg";
 import Outfit from "./Outfit";
 import { findAll } from "../services/OutfitService";
 import { useNavigate } from "react-router-dom";
+import { gsap } from "gsap";
 
 function Home() {
 
@@ -11,11 +12,17 @@ function Home() {
   const navigate = useNavigate();
   const [error, setError] = useState(false);
 
-
   useEffect(() => {
     findAll()
       .then(setOutfits)
       .catch(() => setError(true));
+  }, [navigate]);
+
+  //ANIMATION
+  useLayoutEffect(() => {
+    let ctx = gsap.context(() => {
+      gsap.fromTo(".displayOutfits", { y: 300 }, { duration: 2, y: 0, ease: "bounce" });
+      return () => ctx.revert();});
   }, [navigate]);
 
   return (
@@ -27,46 +34,24 @@ function Home() {
             Create new outfits, get inspiration from others, and more
           </h5>
           <div className="d-flex flex-wrap">
-            <div className="d-flex flex-wrap">
-              {outfits.map((o) => (
-                <Outfit
-                  key={o.outfitId}
-                  outfit={o}
-                  viewOutfit={false}
-                  viewHome={true}
-                  profileView={false}
-                />
-              ))}
+            <div className="d-flex flex-wrap displayOutfits">
+              {outfits.map((o) => (<Outfit key={o.outfitId} outfit={o} viewOutfit={false} viewHome={true} profileView={false} />))}
+              {error && <p>Failed to load outfits</p>}
             </div>
           </div>
         </div>
 
-        <div
-          className="h-100 col-6 bg-image"
-          style={{
-            backgroundImage: `url(${background})`,
-            backgroundPosition: "center",
-            backgroundSize: "cover",
-          }}
-        >
-          <div
-            className="d-flex align-items-center flex-column mt-5"
-            style={{ backgroundColor: "rgba(255,255,255, .75)" }}
-          >
-            <Link to="/create-account" className="btn btn-primary mb-4 mt-5">
-              Sign Up
-            </Link>
-            <Link to="/login" className="btn btn-primary mb-4">
-              Log In
-            </Link>
-            <Link to="/forum" className="btn btn-primary mb-4">
-              Forum
-            </Link>
-            <Link to="/dress-up-duck" className="btn btn-primary mb-4">
-              Dress Up!
-            </Link>
+        <div className="h-100 col-6 bg-image" style={{ backgroundImage: `url(${background})`, backgroundPosition: "center", backgroundSize: "cover", }}>
+
+          <div className="d-flex align-items-center flex-column mt-5" style={{ backgroundColor: "rgba(255,255,255, .75)" }}>
+
+            <Link to="/create-account" className="btn btn-primary mb-4 mt-5">Sign Up</Link>
+            <Link to="/login" className="btn btn-primary mb-4">Log In</Link>
+            <Link to="/forum" className="btn btn-primary mb-4">Forum</Link>
+            <Link to="/dress-up-duck" className="btn btn-primary mb-4">Dress Up!</Link>
 
           </div>
+
           <div style={{ height: "800px" }}></div>
         </div>
       </div>

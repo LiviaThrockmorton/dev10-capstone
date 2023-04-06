@@ -7,8 +7,10 @@ import ClothingItem from "./ClothingItem";
 import { findByType } from "../services/ClothingItemService";
 import { findById, save } from "../services/OutfitService";
 import Outfit from "./Outfit";
+import yellowDuck from "./images/yellow-duck-no-arm.svg"
+import duckArm from "./images/yellow-duck-arm.svg"
 
-const baseOutfit = { outfitId: "", userId: "", duckId: 1, shirtId: "", pantsId: "", hatId: "", dateCreated: "", posted: "false", hidden: "false" }
+const baseOutfit = { outfitId: "", userId: "", duckId: "", shirtId: "", pantsId: "", hatId: "", dateCreated: "", posted: "false", hidden: "false" }
 
 function DressUpDuck({ handleDelete }) {
 
@@ -130,6 +132,8 @@ function DressUpDuck({ handleDelete }) {
                 <div className="col-6">
                     <div style={{ width: "800px", height: "1000px" }}>
                         {<Outfit key={outfit.outfitId} outfit={outfit} viewOutfit={false} viewHome={false} profileView={false} />}
+                        <img src={yellowDuck} />
+                        <img src={duckArm} />
                     </div>
                 </div>
             </div>

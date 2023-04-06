@@ -14,8 +14,8 @@ function App() {
         ease: "bounce"
       }, comp);
 
-      gsap.set(".logo, .rectangle", {transformOrigin: "50% 50%"});
-      gsap.to(".logo, .rectangle", {duration: 2, rotation: 360});
+      // gsap.set(".logo, .rectangle", {transformOrigin: "50% 50%"});
+      // gsap.to(".logo, .rectangle", {duration: 2, rotation: 360});
       return () => ctx.revert();
     });
   });

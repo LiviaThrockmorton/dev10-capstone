@@ -1,8 +1,9 @@
 import background from "./images/brown_duckling.jpg";
-import { useContext, useState } from "react";
+import { useContext, useState, useLayoutEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { authenticate } from "../services/authService";
 import AuthContext from "../contexts/AuthContext";
+import { gsap } from "gsap";
 
 function Login() {
 
@@ -10,6 +11,13 @@ function Login() {
     const [hasError, setHasError] = useState(false);
     const { login } = useContext(AuthContext);
     const navigate = useNavigate();
+
+    //ANIMATION
+    useLayoutEffect(() => {
+        let ctx = gsap.context(() => {
+            gsap.fromTo(".brownDuckling", { y: 300 }, { duration: 2, y: 0, ease: "bounce" });
+            return () => ctx.revert();});
+    }, [navigate]);
 
     function handleChange(evt) {
         const next = { ...credentials };
@@ -54,7 +62,7 @@ function Login() {
                     {hasError && <p className="text-danger d-none">Login attempt failed, try again</p>}
                 </div>
 
-                <div className="h-100 col-6 bg-image" style={{ backgroundImage: `url(${background})`, backgroundPosition: "center", backgroundSize: "cover" }}>
+                <div className="h-100 col-6 bg-image brownDuckling" style={{ backgroundImage: `url(${background})`, backgroundPosition: "center", backgroundSize: "cover" }}>
                     <div style={{ height: "800px" }}></div>
                 </div>
             </div>
