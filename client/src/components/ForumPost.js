@@ -30,10 +30,15 @@ function ForumPost() {
   }, [outfitId, navigate]);
 
   useEffect(() => {
+    loadComments();
+  }, [outfitId, navigate]);
+
+  function loadComments() {
     findByOutfit(outfitId)
       .then(setComments)
       .catch(() => setDisplayResult("Failed to load comments"));
-  }, [outfitId, navigate]);
+
+  }
 
 
 
@@ -50,7 +55,14 @@ function ForumPost() {
     nextComment.outfitId = outfitId;
 
     add(nextComment)
-      .then(() => setCommentResult("Success! Comment saved."))
+      .then(() => {
+        setCommentResult("Success! Comment saved.")
+        loadComments();
+
+        setComment(baseComment)
+
+      })
+  
       .catch(() => setCommentResult("Failure to save comment."))
   }
 
@@ -97,7 +109,7 @@ function ForumPost() {
         </div>
 
         {displayResult && <p className="col mt-4">{displayResult}</p>}
-        
+
       </div>
     </div >
   );
