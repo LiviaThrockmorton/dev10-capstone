@@ -37,24 +37,21 @@ public class AppUserRepository {
                 .findFirst().orElse(null);
     }
 
-//
-//    @Transactional
-//    public AppUser findById(int appUserId) {
-//
-//
-//        final String sql = "select app_user_id, username, password_hash, email, hidden, enabled "
-//                + "from app_user "
-//                + "where app_user_id = ? and hidden = 0;";
-//
-//        return jdbcTemplate.query(sql, new AppUserMapper(), appUserId)
-//                .stream()
-//                .findFirst().orElse(null);
-//    }
+
+    @Transactional
+    public AppUser findById(int appUserId) {
+        List<String> roles = getRolesById(appUserId);
 
 
 
+        final String sql = "select app_user_id, username, password_hash, email, hidden, enabled "
+                + "from app_user "
+                + "where app_user_id = ? and hidden = 0;";
 
-
+        return jdbcTemplate.query(sql, new AppUserMapper(roles), appUserId)
+                .stream()
+                .findFirst().orElse(null);
+    }
 
 
     @Transactional
@@ -121,11 +118,11 @@ public class AppUserRepository {
 
     }
     private List<String> getRolesById(int appUserId) {
-        final String sql = "select r.name "
-                + "from app_user_role ur "
-                + "inner join app_role r on ur.app_role_id = r.app_role_id "
-                + "inner join app_user au on ur.app_user_id = au.app_user_id "
-                + "where au.app_user_id = ?";
+        final String sql = "select r.name " +
+                "from app_user_authority ur " +
+                "inner join app_authority r on ur.app_authority_id = r.app_authority_id  " +
+                "inner join app_user au on ur.app_user_id = au.app_user_id where au.app_user_id = ?;";
+
         return jdbcTemplate.query(sql, (rs, rowId) -> rs.getString("name"), appUserId);
     }
 
