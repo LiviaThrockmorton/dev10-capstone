@@ -1,4 +1,4 @@
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import background from "./images/mallard_lake.jpg";
 import { useState, useContext, useEffect } from "react";
 import Outfit from "./Outfit";

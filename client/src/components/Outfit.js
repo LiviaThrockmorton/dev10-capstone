@@ -1,7 +1,6 @@
 import { findDuck } from "../services/DuckService";
 import { findItem } from "../services/ClothingItemService";
-import { useContext, useEffect, useState } from "react";
-import AuthContext from "../contexts/AuthContext";
+import { useEffect, useState } from "react";
 import OutfitPlay from "./OutfitPlay";
 import OutfitView from "./OutfitView";
 
@@ -12,7 +11,6 @@ function Outfit({ outfit, canDelete, viewOutfit, handleView, viewHome, profileVi
     const [shirt, setShirt] = useState();
     const [pants, setPants] = useState();
     const [error, setError] = useState(false);
-    const { user } = useContext(AuthContext);
 
     useEffect(() => {
         findDuck(outfit.duckId)
@@ -29,7 +27,6 @@ function Outfit({ outfit, canDelete, viewOutfit, handleView, viewHome, profileVi
                 .then(setHat)
                 .catch(() => setError(true));
         }
-        console.log("hatId", outfit.hatId);
     }, [outfit.hatId]);
 
     useEffect(() => {
