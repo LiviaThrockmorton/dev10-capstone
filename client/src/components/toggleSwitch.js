@@ -13,9 +13,9 @@ const ToggleSwitch = ({ outfitId, posted, handleChange }) => {
       <label className="switch">
         <input type="checkbox" checked={isChecked} onChange={onChange} />
         <span className="slider round">
-          <span className="switch-label-right">Posted</span>
+          <span className="switch-label">Private</span>
           {isChecked && (
-            <span className="switch-label">Private</span>
+            <span className="switch-label-right">Posted</span>
           )}
         </span>
       </label>

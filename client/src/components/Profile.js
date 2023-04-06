@@ -14,12 +14,16 @@ function Profile() {
     const canHide = auth.user;
     const canPost = auth.user;
 
-    useEffect(() => {
+    function loadOutfits() {
         findByUser(auth.user.app_user_id)
-            .then(setOutfits)
-            .catch(() => setError(true));
-        console.log(auth.user);
-    }, [auth.user.app_user_id, navigate]);
+        .then(setOutfits)
+        .catch(() => setError(true));
+    console.log(auth.user);
+    }
+
+    useEffect(() => {
+        loadOutfits();
+    }, [auth.user, auth.user.app_user_id, navigate]);
 
     return (
         <div className="container">
@@ -28,7 +32,7 @@ function Profile() {
                 <div className="col-6">
                     <h4 className="text-center">Your Outfits</h4>
                     <div className="d-flex flex-wrap">
-                        {outfits.map(o => <Outfit key={o.outfitId} outfit={o} viewOutfit={true} profileView={true} canHide={canHide} canPost={canPost} />)}
+                        {outfits.map(o => <Outfit key={o.outfitId} outfit={o} viewOutfit={true} profileView={true} canHide={canHide} canPost={canPost} loadOutfits={loadOutfits} />)}
                     </div>
                     {error && <p className="text-danger">Your outfits aren't here at the moment...</p>}
                 </div>

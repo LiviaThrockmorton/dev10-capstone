@@ -30,7 +30,8 @@ function Comment({ comment }) {
     return (
         <div className="card-container border-light .bg-transparent " >
             <div className="card-header .bg-transparent text-white d-flex w-100 justify-content-between">
-                <h5 className="mb-1">{user.username}</h5>
+                {error ? <h5 className="mb-1">User Post</h5> : <h5 className="mb-1">{user.username}</h5>}
+                
                 <small>{date}</small>
             </div>
             <div className="card-body .bg-transparent">

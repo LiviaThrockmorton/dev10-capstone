@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, useLayoutEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import AuthContext from "../contexts/AuthContext";
 import { findAll } from "../services/DuckService";
@@ -9,6 +9,7 @@ import { findById, save } from "../services/OutfitService";
 import Outfit from "./Outfit";
 import yellowDuck from "./images/yellow-duck-no-arm.svg"
 import duckArm from "./images/yellow-duck-arm.svg"
+import { gsap } from "gsap";
 
 const baseOutfit = { outfitId: "", userId: "", duckId: "", shirtId: "", pantsId: "", hatId: "", dateCreated: "", posted: "false", hidden: "false" }
 
@@ -25,6 +26,16 @@ function DressUpDuck({ handleDelete }) {
     const canDelete = auth.user && auth.user.hasAnyAuthority("ADMIN");
     const [error, setError] = useState(false);
     const [saveResult, setSaveResult] = useState();
+
+    //ANIMATION
+    useLayoutEffect(() => {
+        let ctx = gsap.context(() => {
+            gsap.to(".arm", {duration: .25, rotation: 40});
+            gsap.to(".arm", {duration: .25, rotation: 20, delay: .25});
+            gsap.to(".arm", {duration: .25, rotation: 40, delay: .5});
+            gsap.to(".arm", {duration: .5, rotation: 0, delay: .75});
+            return () => ctx.revert();});
+    }, [navigate]);
 
     //GET DUCK AND CLOTHING ITEMS
     useEffect(() => {
@@ -131,9 +142,9 @@ function DressUpDuck({ handleDelete }) {
 
                 <div className="col-6">
                     <div style={{ width: "800px", height: "1000px" }}>
+                        <img src={yellowDuck} className="duck-no-arm" alt="duck" style={{ height: "800px", position: "absolute" }} />
+                        <img src={duckArm} className="arm" alt="duck" style={{ height: "800px", position: "absolute" }} />
                         {<Outfit key={outfit.outfitId} outfit={outfit} viewOutfit={false} viewHome={false} profileView={false} />}
-                        <img src={yellowDuck} />
-                        <img src={duckArm} />
                     </div>
                 </div>
             </div>
