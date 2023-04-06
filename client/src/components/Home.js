@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import background from "./images/sink_ducklings.jpg";
-
 import Outfit from "./Outfit";
 import { findAll } from "../services/OutfitService";
 import { useNavigate } from "react-router-dom";
