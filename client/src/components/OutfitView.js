@@ -3,7 +3,7 @@ import ToggleSwitch from "./toggleSwitch";
 import { hide, save } from "../services/OutfitService";
 import { useState } from "react";
 
-function OutfitView({ duck, hat, shirt, pants, outfit, canDelete, error, profileView }) {
+function OutfitView({ duck, hat, shirt, pants, outfit, canDelete, error, profileView, loadOutfits }) {
 
     const navigate = useNavigate();
     const [result, setResult] = useState();
@@ -18,43 +18,40 @@ function OutfitView({ duck, hat, shirt, pants, outfit, canDelete, error, profile
 
     function handleDelete() {
         hide(outfit.outfitId)
-            .then(() => setResult("Success! Outfit deleted."))
+            .then(() => {loadOutfits();
+                setResult("Success! Outfit deleted.")})
             .catch(() => setResult("Failure to delete outfit."));
 
     }
 
     function handleChange(posted) {
-        const nextOutfit = {...outfit}
+        const nextOutfit = { ...outfit }
         nextOutfit.posted = posted;
-        save (nextOutfit)
-        .then(() => setResult("Success! Outfit hidden."))
-        .catch(() => setResult("Failure to hide outfit."));
+        save(nextOutfit)
+            .then(() => setResult("Success! Status changed."))
+            .catch(() => setResult("Failure to change status."));
     }
 
     return (
         <div>
             {profileView ?
                 <div className="card m-1" style={{ width: "16.5rem" }}>
-                    
-                    
-                            <div className="card-img-top">
-                                <button onClick={handleEdit} style={{ border: "none", backgroundColor: "white", margin: "0 0 300px", padding: "10px" }}>
-                                    <img src={duck.duckImage} alt="duck" style={{ height: "300px", position: "absolute" }} />
-                                    {hat && <img src={hat.clothingItemImage} alt="hat" style={{ height: "300px", position: "absolute" }} />}
-                                    {pants && <img src={pants.clothingItemImage} alt="pants" style={{ height: "300px", position: "absolute" }} />}
-                                    {shirt && <img src={shirt.clothingItemImage} alt="shirt" style={{ height: "300px", position: "absolute" }} />}
-                                </button>
-                            </div>
-                            <div className="card-body">{<ToggleSwitch outfitId={outfit.outfitId} posted={outfit.posted} handleChange={handleChange} />}</div>
-                            <div className="card-body"><button onClick={handleDelete} className="btn btn-danger mt-2">Delete</button></div>
-                            {result && <p className="text-success">{result}</p>}
-                    
-                    
+                    <div className="card-img-top">
+                        <button onClick={handleEdit} style={{ border: "none", backgroundColor: "white", margin: "0 0 300px", padding: "10px" }}>
+                            {duck && <img src={duck.duckImage} alt="duck" style={{ height: "300px", position: "absolute" }} />}
+                            {hat && <img src={hat.clothingItemImage} alt="hat" style={{ height: "300px", position: "absolute" }} />}
+                            {pants && <img src={pants.clothingItemImage} alt="pants" style={{ height: "300px", position: "absolute" }} />}
+                            {shirt && <img src={shirt.clothingItemImage} alt="shirt" style={{ height: "300px", position: "absolute" }} />}
+                        </button>
+                    </div>
+                    <div className="card-body">{<ToggleSwitch outfitId={outfit.outfitId} posted={outfit.posted} handleChange={handleChange} />}</div>
+                    <div className="card-body"><button onClick={handleDelete} className="btn btn-danger mt-2">Delete</button></div>
+                    {result && <p className="text-success">{result}</p>}
                 </div>
                 :
                 <div className="d-flex flex-wrap">
                     <button onClick={handleView} style={{ border: "none", backgroundColor: "white", margin: "0 120px 300px", padding: "10px" }}>
-                        <img src={duck.duckImage} alt="duck" style={{ height: "300px", position: "absolute" }} />
+                        {outfit.duckId && <img src={duck.duckImage} alt="duck" style={{ height: "300px", position: "absolute" }} />}
                         {hat && <img src={hat.clothingItemImage} alt="hat" style={{ height: "300px", position: "absolute" }} />}
                         {pants && <img src={pants.clothingItemImage} alt="pants" style={{ height: "300px", position: "absolute" }} />}
                         {shirt && <img src={shirt.clothingItemImage} alt="shirt" style={{ height: "300px", position: "absolute" }} />}

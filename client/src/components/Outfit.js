@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import OutfitPlay from "./OutfitPlay";
 import OutfitView from "./OutfitView";
 
-function Outfit({ outfit, canDelete, viewOutfit, handleView, viewHome, profileView }) {
+function Outfit({ outfit, canDelete, viewOutfit, handleView, viewHome, profileView, loadOutfits }) {
 
     const [duck, setDuck] = useState([]);
     const [hat, setHat] = useState();
@@ -14,10 +14,10 @@ function Outfit({ outfit, canDelete, viewOutfit, handleView, viewHome, profileVi
 
     useEffect(() => {
         if (outfit.duckId) {
-        findDuck(outfit.duckId)
-            .then(setDuck)
-            .catch(() => setError(true));
-        console.log(outfit.duckId);
+            findDuck(outfit.duckId)
+                .then(setDuck)
+                .catch(() => setError(true));
+            console.log(outfit.duckId);
         }
     }, [outfit.duckId]);
 
@@ -49,7 +49,7 @@ function Outfit({ outfit, canDelete, viewOutfit, handleView, viewHome, profileVi
         <>
             {viewOutfit ? <OutfitView duck={duck} hat={hat} shirt={shirt} pants={pants}
                 outfit={outfit} canDelete={canDelete} error={error}
-                handleView={handleView} profileView={profileView} />
+                handleView={handleView} profileView={profileView} loadOutfits={loadOutfits} />
 
                 : <OutfitPlay duck={duck} hat={hat} shirt={shirt} pants={pants}
                     outfit={outfit} error={error} viewHome={viewHome} />

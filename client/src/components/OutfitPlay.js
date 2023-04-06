@@ -3,14 +3,14 @@ function OutfitPlay({duck, hat, shirt, pants, outfit, error, viewHome}) {
     return (
         <div className="mb-2 d-flex flex-wrap justify-content-between flex-row">
             {viewHome ? <div className="d-flex flex-wrap" >
-                <img src={duck.duckImage} alt="duck" style={{ height: "150px", position: "relative", padding: "2px"}} />
+                {duck &&<img src={duck.duckImage} alt="duck" style={{ height: "150px", position: "relative", padding: "2px"}} />}
                 {hat && <img src={hat.clothingItemImage} alt="hat" style={{ height: "150px", position: "absolute" }} />}
                 {pants && <img src={pants.clothingItemImage} alt="pants" style={{ height: "150px", position: "absolute" }} />}
                 {shirt && <img src={shirt.clothingItemImage} alt="shirt" style={{ height: "150px", position: "absolute" }} />}
             </div> 
             :                   
             <div>
-                {duck && <img src={duck.duckImage} className="duck" alt="duck" style={{ height: "800px", position: "absolute" }} />}
+                {outfit.duckId && <img src={duck.duckImage} className="duck" alt="duck" style={{ height: "800px", position: "absolute" }} />}
                 {hat && <img src={hat.clothingItemImage} alt="hat" style={{ height: "800px", position: "absolute" }} />}
                 {pants && <img src={pants.clothingItemImage} alt="pants" style={{ height: "800px", position: "absolute" }} />}
                 {shirt && <img src={shirt.clothingItemImage} alt="shirt" style={{ height: "800px", position: "absolute" }} />}
