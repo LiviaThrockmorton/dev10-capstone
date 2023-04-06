@@ -12,6 +12,22 @@ function Comment({ comment }) {
     const commentUsername = comment.commentId
 
 
+    // useEffect(() => {
+
+    //     findUser(comment.appUserId)
+
+    //         .then(setUser)
+
+    //         .catch(() => setError(true));
+
+    //     console.log(comment.appUserId);
+
+    // }, [comment.appUserId]);
+
+
+//    <img src={duck.duckImage} alt="duck" style={{ height: "150px", position: "relative", padding: "2px"}} />
+
+
 
 
     return (
