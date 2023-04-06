@@ -24,6 +24,19 @@ export async function findByUser(userId) {
     return Promise.reject(`Could not find outfits for user`);
 }
 
+export async function hide(outfitId) {
+    const response = await fetch(`${url}/${outfitId}`, { 
+        method: "DELETE",
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem('duckToken')}`
+        }
+    })
+    if (response.ok) {
+        return;
+    }
+    return Promise.reject(`Could not find outfit id: ${outfitId}`)
+}
+
 async function update(outfit) {
     const config = {
         method: "PUT",

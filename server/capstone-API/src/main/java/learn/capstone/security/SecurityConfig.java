@@ -33,7 +33,7 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.GET, "/api/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/**").hasAnyAuthority("USER", "ADMIN")
                 .antMatchers(HttpMethod.PUT, "/api/**").hasAnyAuthority("USER", "ADMIN")
-                .antMatchers(HttpMethod.DELETE, "/api/**").hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/api/**").hasAnyAuthority("USER", "ADMIN")
 
                 .antMatchers("/**").denyAll()
                 .and().addFilter(new JwtRequestFilter(authenticationManager(authConfig), converter))

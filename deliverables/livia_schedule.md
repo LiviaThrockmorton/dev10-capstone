@@ -34,7 +34,7 @@
 - X Create an outfit 1hrs
 
 ## Wednesday April 5th, 2023
-- Delete outfit (hide and undo) 1hr
+- X Delete outfit (hide and undo) 1hr
 - Post or make private 2hrs
 - Comment 2hrs
 - X Login 2hrs
