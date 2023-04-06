@@ -19,7 +19,7 @@ function Profile() {
             .then(setOutfits)
             .catch(() => setError(true));
         console.log(auth.user);
-    }, [auth.user.app_user_id, navigate]);
+    }, [auth.user, auth.user.app_user_id, navigate]);
 
     return (
         <div className="container">
