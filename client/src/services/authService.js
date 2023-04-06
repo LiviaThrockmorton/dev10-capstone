@@ -41,6 +41,15 @@ export async function authenticate(credentials) {
     return Promise.reject();
 }
 
+//Bea's changes
+export async function findAppUser(appUserId) {
+    const response = await fetch(`${url}/${appUserId}`)
+    if (response.ok) {
+        return response.json();
+    }
+    return Promise.reject(`Could not find appUser id: ${appUserId}`)
+}
+
 export async function refresh() {
 
     const config = {
