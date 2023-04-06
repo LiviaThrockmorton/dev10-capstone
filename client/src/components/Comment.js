@@ -7,7 +7,7 @@ import AuthContext from "../contexts/AuthContext";
 import { findById } from "../services/OutfitService";
 
 
-function Comment({ comment }) {
+function Comment({ comment, commentUserId }) {
 
     const [outfit, setOutfit] = useState([]);
 
@@ -36,7 +36,7 @@ function Comment({ comment }) {
     }, [comment, navigate]);
     
 
-    const username = comment.userId
+    const username = commentUserId
 
 
 

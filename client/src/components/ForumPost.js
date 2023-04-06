@@ -16,16 +16,26 @@ function ForumPost() {
   const [outfit, setOutfit] = useState([]);
   const { outfitId } = useParams();
   const auth = useContext(AuthContext);
+  const canDelete = auth.user && auth.user.hasAnyAuthority("ADMIN");
+  const [saveResult, setSaveResult] = useState();
 
   function handleSubmit(evt) {
     evt.preventDefault();
-    const nextComment = { ...comments };
-    console.log("saved not fully implemented yet.")
 
-    save(nextComment, auth)
-      .then(console.log("saved!"))
-      .catch(() => setError(true));
+
+    if (auth.user) {
+      const nextComment = { ...comments };
+      nextComment.userId = auth.user.app_user_id;
+
+      save(nextComment)
+        .then(() => setSaveResult("Success! Comment saved."))
+        .catch(() => setSaveResult("Failure to save comment."))
+    } else {
+      navigate("/login")
+    }
+
   }
+  
 
 
 
@@ -66,7 +76,7 @@ function ForumPost() {
             < div >
 
               {comments.map((comment) => (
-                <Comment key={comment.commentId} comment={comment} userId={comment.userId} />
+                <Comment key={comment.commentId} comment={comment} commentUserId={comment.userId} />
               ))}
 
             </div>
@@ -75,8 +85,8 @@ function ForumPost() {
             <div className="add-comment">
               <div>
                 <form onSubmit={handleSubmit}>
-                  <input type="text" placeholder="Add a comment..."></input>
-                  <button type="submit" className="btn btn-success">Add</button>
+                  <input class="form-control form-outline-light form"  placeholder="Add a comment..."></input>
+                  <button  className="btn btn-success">Add</button>
                 </form>
               </div>
               <div>
@@ -94,7 +104,7 @@ function ForumPost() {
 
         <div className="col-6">
           <div style={{ width: "800px", height: "1000px" }}>
-            {<Outfit key={outfit.outfitId} outfit={outfit} userId={outfit.userId} viewOutfit={false} />}
+            {<Outfit key={outfit.outfitId} outfit={outfit} viewOutfit={false} />}
           </div>
         </div>
       </div >
@@ -103,8 +113,4 @@ function ForumPost() {
 }
 
 export default ForumPost;
-
-
-//TODO
-///Showing the outfit-- id is undefined but is part of the url
 
