@@ -43,6 +43,7 @@
 
 
 ## Thursday April 6th, 2023
+- Animate 1.5hrs
 - Work on presentation 3hrs
 - X Refine clothing items, maybe add a few more 5hrs
 - X Make site icon
@@ -58,6 +59,6 @@
 - Edit outfit 2hrs
 
 ## Passwords
-- "P@ssw0rd!"
-- password "user"
-- password "admin"
+- P@ssw0rd!
+- user
+- admin
