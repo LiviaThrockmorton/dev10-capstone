@@ -12,6 +12,7 @@ const baseComment = { commentId: "", userId: "", content: "", dateTime: null, hi
 function ForumPost() {
 
   const [comments, setComments] = useState([]);
+  const [comment, setComment] = useState(baseComment);
   const navigate = useNavigate();
   const [error, setError] = useState(false);
   const [outfit, setOutfit] = useState([]);
@@ -28,7 +29,9 @@ function ForumPost() {
     if (auth.user) {
       const nextComment = { ...comments };
       nextComment.userId = auth.user.app_user_id;
-      // setContent = nextComment.content;
+      nextComment.content = comments.content;
+
+
 
       console.log(auth.user)
 
@@ -96,7 +99,7 @@ function ForumPost() {
 
                 <form >
 
-                  <input class="form-control form-outline-light form" placeholder="Add a comment..."></input>
+                  <input type="text" value={comments.content} class="form-control" id="content" name="content" placeholder="Add a comment..."></input>
 
                   <button className="btn btn-success " onClick={handleSubmit}>Add</button>
 
