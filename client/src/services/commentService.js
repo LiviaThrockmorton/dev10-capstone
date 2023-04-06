@@ -24,31 +24,7 @@ export async function deleteById(commentId) {
     return Promise.reject(`Could not find comment id: ${commentId}`)
 }
 
-async function update(comment) {
-
-    const config = {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(comment)
-    };
-
-    const response = await fetch(`${url}/${comment.commentId}`, config);
-
-    if (response.ok) {
-        return;
-    }
-
-    if (response.status === 400) {
-        const errors = await response.json();
-        return Promise.reject(errors);
-    }
-
-    return Promise.reject();
-}
-
-async function add(comment) {
+export async function add(comment) {
 
     const config = {
         method: "POST",
@@ -71,12 +47,4 @@ async function add(comment) {
     }
 
     return Promise.reject();
-}
-
-export async function save(comment) {
-    if (comment.Id) {
-        return update(comment);
-    } else {
-        return add(comment);
-    }
 }

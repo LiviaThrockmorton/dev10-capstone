@@ -1,10 +1,11 @@
-import noDuck from "./images/not-found-duck.png";
+import sadDuck from "./images/sad-duck.svg";
 
 function NotFound() {
   return (
     <>
+    
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-      <img src={noDuck} alt="Not Found Duck" width="550" height="700"  />
+      <img src={sadDuck} alt="Not Found" width="60%" />
       </div>
     </>
   );
