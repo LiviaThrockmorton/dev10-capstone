@@ -104,6 +104,9 @@ function ForumPost() {
 
       <div className="col-6">
 
+
+        
+
         <div style={{ width: "800px", height: "1000px" }}>
           {<Outfit key={outfit.outfitId} outfit={outfit} viewOutfit={false} />}
         </div>

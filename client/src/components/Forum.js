@@ -4,6 +4,8 @@ import AuthContext from "../contexts/AuthContext";
 import { findAll } from "../services/OutfitService";
 import { useNavigate } from "react-router-dom";
 
+
+
 function Forum() {
   const [outfits, setOutfits] = useState([]);
   const auth = useContext(AuthContext);

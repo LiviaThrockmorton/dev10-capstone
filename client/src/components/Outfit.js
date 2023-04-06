@@ -59,3 +59,5 @@ function Outfit({ outfit, canDelete, viewOutfit, handleView, viewHome, profileVi
 }
 
 export default Outfit;
+
+
