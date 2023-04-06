@@ -16,7 +16,7 @@ function DressUpDuck({ handleDelete }) {
     const [hats, setHats] = useState([]);
     const [shirts, setShirts] = useState([]);
     const [pants, setPants] = useState([]);
-    const [outfit, setOutfit] = useState(baseOutfit);
+    const [outfit, setOutfit] = useState([]);
     const { outfitId } = useParams();
     const navigate = useNavigate();
     const auth = useContext(AuthContext);
@@ -77,7 +77,7 @@ function DressUpDuck({ handleDelete }) {
             nextOutfit.userId = auth.user.app_user_id;
 
             save(nextOutfit)
-                .then(() => setSaveResult("Succes! Outfit saved."))
+                .then(() => setSaveResult("Success! Outfit saved."))
                 .catch(() => setSaveResult("Failure to save outfit."))
         } else {
             navigate("/login")
@@ -94,7 +94,7 @@ function DressUpDuck({ handleDelete }) {
                         <div className="col d-flex flex-row">
                             {ducks.map(d => <Duck key={d.duckId} duck={d} handleChange={handleChange} handleDelete={handleDelete} canDelete={canDelete} />)}
                         </div>
-                        {error && <p className="col mt-4 text-danger d-none">The ducks got loose!</p>}
+                        {error && <p className="col mt-4 text-danger">The ducks got loose!</p>}
                     </div>
 
                     <div className="row mb-2">
@@ -110,7 +110,7 @@ function DressUpDuck({ handleDelete }) {
                         <div className="col d-flex flex-row">
                             {shirts.map(s => <ClothingItem key={s.itemId} item={s} handleChange={handleChange} handleDelete={handleDelete} canDelete={canDelete} />)}
                         </div>
-                        {error && <p className="col mt-4 text-danger d-none">The shirts fell in the duck pond!</p>}
+                        {error && <p className="col mt-4 text-danger">The shirts fell in the duck pond!</p>}
                     </div>
 
                     <div className="row mb-2">
@@ -118,18 +118,18 @@ function DressUpDuck({ handleDelete }) {
                         <div className="col d-flex flex-row">
                             {pants.map(p => <ClothingItem key={p.itemId} item={p} handleChange={handleChange} handleDelete={handleDelete} canDelete={canDelete} />)}
                         </div>
-                        {error && <p className="col mt-4 text-danger d-none">How would a duck even wear pants?</p>}
+                        {error && <p className="col mt-4 text-danger">How would a duck even wear pants?</p>}
                     </div>
 
                     <div className="row mb-2">
                         <button className="btn btn-primary" onClick={handleSave}>Save Outfit</button>
                     </div>
-                    {saveResult && <p className="col mt-4 text-danger d-none">{saveResult}</p>}
+                    {saveResult && <p className="col mt-4">{saveResult}</p>}
                 </div>
 
                 <div className="col-6">
                     <div style={{ width: "800px", height: "1000px" }}>
-                        {<Outfit key={outfit.outfitId} outfit={outfit} viewOutfit={false} viewHome={false} />}
+                        {<Outfit key={outfit.outfitId} outfit={outfit} viewOutfit={false} viewHome={false} profileView={false} />}
                     </div>
                 </div>
             </div>

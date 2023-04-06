@@ -31,6 +31,7 @@ function Forum() {
             outfit={o}
             canDelete={canDelete}
             viewOutfit={true}
+            profileView={false}
           />
         ))}
       </div>
