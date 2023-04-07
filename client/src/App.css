@@ -205,7 +205,7 @@
   font-weight: bold;
   color: #999;
   left: 8px;
-  /* position the "Posted" text to the left */
+  /* position the "Private" text to the left */
   z-index: 1;
 }
 
@@ -217,7 +217,7 @@
   font-weight: bold;
   color: #fff;
   right: 4px;
-  /* position the "Private" text to the right */
+  /* position the "Posted" text to the right */
   z-index: 1;
   text-align: right;
   /* align the text to the right */
