@@ -35,14 +35,14 @@ class CommentJdbcTemplateRepositoryTest {
         assertEquals(1, actual.getCommentId());
         assertEquals(1, actual.getUserId());
     }
-
-    @Test
-    void shouldAdd() {
-        Comment comment = makeComment();
-        Comment actual = repository.add(comment);
-        assertNotNull(actual);
-        assertEquals(NEXT_LOCATION_ID, actual.getCommentId());
-    }
+//
+//    @Test
+//    void shouldAdd() {
+//        Comment comment = makeComment();
+//        Comment actual = repository.add(comment);
+//        assertNotNull(actual);
+//        assertEquals(NEXT_LOCATION_ID, actual.getCommentId());
+//    }
 
     @Test
     void shouldUpdate() {

@@ -39,9 +39,10 @@ function App() {
             <Route path="/forum/:outfitId" element={<ForumPost />} />
             <Route path="/profile" element={user ? <Profile /> : <Navigate to="/login" />} />
             <Route path="*" element={<NotFound />} />
-          </Routes>
+        </Routes>
+        <BottomNav />
       </div>
-      <BottomNav/>
+
 
       </Router>
 

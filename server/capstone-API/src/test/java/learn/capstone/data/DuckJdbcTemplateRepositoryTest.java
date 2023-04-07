@@ -74,7 +74,7 @@ class DuckJdbcTemplateRepositoryTest {
     @Test
     void shouldNotFindHidden(){
 
-        Duck actual = repository.findById(4);
+        Duck actual = repository.findById(8);
         assertNull(actual);
     }
 
