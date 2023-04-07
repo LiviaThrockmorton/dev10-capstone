@@ -30,8 +30,10 @@ function DressUpDuck({ handleDelete }) {
     //ANIMATION
     useLayoutEffect(() => {
         let ctx = gsap.context(() => {
-            gsap.to(".arm", {duration: 1, rotation: 40});
-            gsap.to(".arm", {duration: 1, rotation: 0, delay: 1});
+            gsap.to(".arm", {duration: .25, rotation: 40});
+            gsap.to(".arm", {duration: .25, rotation: 20, delay: .25});
+            gsap.to(".arm", {duration: .25, rotation: 40, delay: .5});
+            gsap.to(".arm", {duration: .5, rotation: 0, delay: .75});
             return () => ctx.revert();});
     }, [navigate]);
 
@@ -140,8 +142,8 @@ function DressUpDuck({ handleDelete }) {
 
                 <div className="col-6">
                     <div style={{ width: "800px", height: "1000px" }}>
-                        <img src={yellowDuck} className="duck-no-arm" alt="duck" style={{ height: "800px", position: "absolute" }} />
-                        <img src={duckArm} className="arm" alt="duck" style={{ height: "800px", position: "absolute" }} />
+                        <img src={yellowDuck} className="duck-no-arm" alt="duck" style={{ height: "600px", position: "absolute" }} />
+                        <img src={duckArm} className="arm" alt="duck" style={{ height: "600px", position: "absolute" }} />
                         {<Outfit key={outfit.outfitId} outfit={outfit} viewOutfit={false} viewHome={false} profileView={false} />}
                     </div>
                 </div>

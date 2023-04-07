@@ -6,6 +6,9 @@ import { findById } from "../services/OutfitService";
 import AuthContext from "../contexts/AuthContext";
 import Comment from "./Comment";
 
+import { findAppUser } from "../services/authService";
+
+
 const baseComment = { commentId: "", userId: "", content: "", outfitId: "", dateTime: "", hidden: "false" }
 
 
@@ -21,6 +24,18 @@ function ForumPost() {
   const [commentResult, setCommentResult] = useState();
   const canAdd = auth.user !== null;
 
+    //Bea's changes -- I also added the imports at the top
+    const [user, setUser] = useState({});
+    const [error, setError] = useState(false);
+
+
+    //Bea's changes
+    useEffect(() => {
+      findAppUser(outfit.userId)
+        .then(setUser)
+        .catch(() => setError(true));
+      console.log(outfit.userId);
+    }, [outfit.userId]);
 
   useEffect(() => {
     findById(outfitId)
@@ -103,11 +118,11 @@ function ForumPost() {
       </div>
 
       <div className="col-6">
+        <h2>Posted by: {user.username}</h2>
 
         <div style={{ width: "800px", height: "1000px" }}>
           {<Outfit key={outfit.outfitId} outfit={outfit} viewOutfit={false} />}
         </div>
-
         {displayResult && <p className="col mt-4">{displayResult}</p>}
 
       </div>

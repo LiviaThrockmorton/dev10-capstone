@@ -1,3 +1,5 @@
+import { findByUser } from "./OutfitService";
+
 const url = "http://localhost:8080";
 
 function convertJwtToUser(jwt) {
@@ -43,7 +45,7 @@ export async function authenticate(credentials) {
 
 //Bea's changes
 export async function findAppUser(appUserId) {
-    const response = await fetch(`${url}/user/${appUserId}`)
+    const response = await fetch(`${url}/api/user/${appUserId}`)
     if (response.ok) {
         return response.json();
     }
