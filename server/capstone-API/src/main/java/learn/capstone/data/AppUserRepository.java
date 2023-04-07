@@ -1,6 +1,9 @@
 package learn.capstone.data;
 
+import learn.capstone.data.mappers.CommentMapper;
+import learn.capstone.data.mappers.AppUserMapper;
 import learn.capstone.models.AppUser;
+import learn.capstone.models.Comment;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.security.core.GrantedAuthority;
@@ -29,10 +32,27 @@ public class AppUserRepository {
                 + "from app_user "
                 + "where username = ? and hidden = 0;";
 
-        return jdbcTemplate.query(sql, new learn.capstone.data.AppUserMapper(roles), username)
+        return jdbcTemplate.query(sql, new AppUserMapper(roles), username)
                 .stream()
                 .findFirst().orElse(null);
     }
+
+
+    @Transactional
+    public AppUser findById(int appUserId) {
+        List<String> roles = getRolesById(appUserId);
+
+
+
+        final String sql = "select app_user_id, username, password_hash, email, hidden, enabled "
+                + "from app_user "
+                + "where app_user_id = ? and hidden = 0;";
+
+        return jdbcTemplate.query(sql, new AppUserMapper(roles), appUserId)
+                .stream()
+                .findFirst().orElse(null);
+    }
+
 
     @Transactional
     public AppUser create(AppUser user) {
@@ -93,7 +113,19 @@ public class AppUserRepository {
                 + "inner join app_user au on ur.app_user_id = au.app_user_id "
                 + "where au.username = ?";
         return jdbcTemplate.query(sql, (rs, rowId) -> rs.getString("name"), username);
+
+
+
     }
+    private List<String> getRolesById(int appUserId) {
+        final String sql = "select r.name " +
+                "from app_user_authority ur " +
+                "inner join app_authority r on ur.app_authority_id = r.app_authority_id  " +
+                "inner join app_user au on ur.app_user_id = au.app_user_id where au.app_user_id = ?;";
+
+        return jdbcTemplate.query(sql, (rs, rowId) -> rs.getString("name"), appUserId);
+    }
+
 
 
     //

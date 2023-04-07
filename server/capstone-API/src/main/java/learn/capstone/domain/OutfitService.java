@@ -36,6 +36,11 @@ public class OutfitService {
             return result;
         }
 
+        if (outfit.getUserId() == 0) {
+            result.addMessage("Outfit needs a user", ResultType.INVALID);
+            return result;
+        }
+
         if (outfit.getOutfitId() != 0) {
             result.addMessage("outfitId cannot be set for `add` operation", ResultType.INVALID);
             return result;

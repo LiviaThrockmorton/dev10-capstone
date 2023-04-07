@@ -4,8 +4,9 @@ import AuthContext from "../contexts/AuthContext";
 import { findAll } from "../services/OutfitService";
 import { useNavigate } from "react-router-dom";
 
-function Forum() {
 
+
+function Forum() {
   const [outfits, setOutfits] = useState([]);
   const auth = useContext(AuthContext);
   const canDelete = auth.user && auth.user.hasAnyAuthority("ADMIN");
@@ -19,18 +20,28 @@ function Forum() {
   }, [navigate]);
 
   return (
-    <div className="container">
-      <div className="text-center">
-        <h1>Forum</h1>
-        <h4>Get inspiration and comment on posts</h4>
+    <div className="flex-container">
+      <div>
+        <h1 className="text-center">Forum</h1>
+        <h4 className="text-center mb-5">Get inspiration and comment on posts!</h4>
       </div>
 
-      <div className="row">
-        <div className="col d-flex flex-row">
-          {outfits.map(o => <Outfit key={o.outfitId} outfit={o} canDelete={canDelete} viewOutfit={true} />)}
-        </div>
-        {error && <p className="text-danger">The ducks are tired of modeling, so they're napping right now</p>}
+      <div className="d-flex flex-wrap">
+        {outfits.map((o) => (
+          <Outfit
+            key={o.outfitId}
+            outfit={o}
+            canDelete={canDelete}
+            viewOutfit={true}
+            profileView={false}
+          />
+        ))}
       </div>
+      {error && (
+        <p className="text-danger">
+          The ducks are tired of modeling, so they're napping right now
+        </p>
+      )}
     </div>
   );
 }

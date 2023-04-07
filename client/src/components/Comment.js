@@ -1,97 +1,51 @@
-import { Link, useNavigate } from "react-router-dom";
-
-import { findByOutfit } from "../services/commentService";
-import Outfit from "./Outfit";
-import { useContext, useEffect, useState } from "react";
-import AuthContext from "../contexts/AuthContext";
-import { findById } from "../services/OutfitService";
-
+import { findAppUser } from "../services/authService";
+import { useEffect, useState } from "react";
 
 function Comment({ comment }) {
 
-    const [outfit, setOutfit] = useState([]);
-
-    const [outfitUser, setOutfitUser] = useState();
+    //Bea's changes -- I also added the imports at the top
+    const [user, setUser] = useState([]);
     const [error, setError] = useState(false);
-    const { user } = useContext(AuthContext);
 
-    // const navigate = useNavigate();
+    function getMonthName(monthNumber) {
+        const date = new Date();
+        date.setMonth(monthNumber - 1);
+        return date.toLocaleString('en-US', { month: 'long' });
+    }
 
-    // const handleDelete = () => {
-    //     navigate(`/delete/${comment.commentId}`)
-    // };
+    var date = new Date(comment.dateTime);
+    date = getMonthName(date.getDay()) + ' ' + (date.getMonth()+ 3) + ', ' + date.getFullYear();
 
-    // const handleEdit = () => {
-    //     navigate(`/edit/${comment.commentId}`)
-    // };
-
-
-
+//Bea's changes
     useEffect(() => {
-
-        findById(comment.outfitId)
-            .then(setOutfit)
+        findAppUser(comment.userId)
+            .then(setUser)
             .catch(() => setError(true));
-
-    }, [comment.outfitId, navigate]);
-
-
+        console.log(comment.userId);
+    }, [comment.userId]);
 
 
 
+//Bea's changes-- I also changed the user.username below in 2 places
     return (
-
-        <div className="card border-primary w-25 m-3" >
-
-
-            <div className="comment">
-                <div className="username-date"> {comment.date}
-                    <span className="username">{comment.commentUsername}</span>
-                    <span className="date">April 2, 2023</span>
-                </div>
-                <div className="comment-text">
-                    <p>{comment.content}</p>
-                </div>
+        <div className="card-container border-light .bg-transparent " >
+            <div className="card-header .bg-transparent text-white d-flex w-100 justify-content-between">
+                {error ? <h5 className="mb-1">User Post</h5> : <h5 className="mb-1">{user.username}</h5>}
+                
+                <small>{date}</small>
             </div>
-
-
-            //Get the outfit
-
-            {/* <div className="col-6">
-                <div style={{ width: "800px", height: "1000px" }}>
-                    {<Outfit key={outfit.outfitId} outfit={outfit} viewOutfit={false} />}
-                </div>
-            </div> */}
+            <div className="card-body .bg-transparent">
+                <p>{comment.content}</p>
+            </div>
+            <hr className="hr" />
+            <div className="d-none">{user.username}</div>
+            <div className="d-none">{comment.userId}</div>
+            <div className="d-none">{comment.outfitId}</div>
+            <div className="d-none">{comment.hidden}</div>
         </div >
-
-
-
     );
 }
-
-
-
-
 
 export default Comment;
 
 
-
-
-//TODO
-
-// get outfit userId
-    //get user's username from userId
-    //place in 'username here' spot
-
-// get outfit and place where background image is
-
-// get comments per outfit(comments has an outfitId section) - use a map
-    // --Get comment userId 
-    // --Get comment content
-    // --Get comment date
-    // --Display comment userId 
-    // --Display comment content
-    // --Display comment date
-
-// make form for adding a comment save the comment onSubmit

@@ -1,6 +1,6 @@
 package learn.capstone.domain;
 
-import learn.capstone.data.AppUserRepositoryInterface;
+
 import learn.capstone.security.AppUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,8 +14,6 @@ class AppUserServiceTest {
     @Autowired
     AppUserService service;
 
-    @MockBean
-    AppUserRepositoryInterface appUserRepositoryInterface;
 
 //    @Test
 //    void shouldAdd() {

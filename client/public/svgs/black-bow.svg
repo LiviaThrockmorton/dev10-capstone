@@ -1,0 +1,11 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000">
+	<title>z-template-duck-svg</title>
+	<style>
+		.s0 { fill: #545454;stroke: #000000 } 
+	</style>
+	<g id="Folder 2">
+		<path id="Shape 10" class="s0" d="m521.2 282.9l-49.5-67.6 83.7-4.7z"/>
+		<path id="Shape 10 copy" class="s0" d="m406.4 235.3l26.7-79.4 52.1 65.6z"/>
+		<path id="Shape 11" class="s0" d="m478.5 242c-13 0-23.5-10.5-23.5-23.5 0-13 10.5-23.5 23.5-23.5 13 0 23.5 10.5 23.5 23.5 0 13-10.5 23.5-23.5 23.5z"/>
+	</g>
+</svg>

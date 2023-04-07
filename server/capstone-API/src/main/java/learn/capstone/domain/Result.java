@@ -36,6 +36,11 @@ public class Result<T> {
         this.type = type;
     }
 
+    public void addMessage(String format, ResultType type, Object... args) {
+        messages.add(String.format(format, args));
+        this.type = type;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

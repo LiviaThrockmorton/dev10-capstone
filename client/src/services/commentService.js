@@ -13,7 +13,7 @@ export async function findByHidden() {
     if (response.ok) {
         return response.json();
     }
-    return Promise.reject(`Could not find comment id: ${commentId}`)
+    return Promise.reject(`No comments here.`)
 }
 
 export async function deleteById(commentId) {
@@ -24,36 +24,13 @@ export async function deleteById(commentId) {
     return Promise.reject(`Could not find comment id: ${commentId}`)
 }
 
-async function update(comment) {
-
-    const config = {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(comment)
-    };
-
-    const response = await fetch(`${url}/${comment.commentId}`, config);
-
-    if (response.ok) {
-        return;
-    }
-
-    if (response.status === 400) {
-        const errors = await response.json();
-        return Promise.reject(errors);
-    }
-
-    return Promise.reject();
-}
-
-async function add(comment) {
+export async function add(comment) {
 
     const config = {
         method: "POST",
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem('duckToken')}`
         },
         body: JSON.stringify(comment)
     };
@@ -70,12 +47,4 @@ async function add(comment) {
     }
 
     return Promise.reject();
-}
-
-export async function save(comment) {
-    if (comment.commentId) {
-        return update(comment);
-    } else {
-        return add(comment);
-    }
 }

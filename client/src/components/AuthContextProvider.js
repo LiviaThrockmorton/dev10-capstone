@@ -7,7 +7,9 @@ function AuthContextProvider({ children }) {
     const [user, setUser] = useState();
 
     useEffect(() => {
-        refresh().then(login).catch(logout);
+        if (localStorage.getItem("duckToken")) {
+            refresh().then(login).catch(logout);
+        }
     }, [])
 
     function login(userArg) {

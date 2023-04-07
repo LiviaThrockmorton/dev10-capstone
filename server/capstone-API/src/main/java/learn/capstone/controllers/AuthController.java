@@ -1,6 +1,7 @@
 package learn.capstone.controllers;
 
 import learn.capstone.models.AppUser;
+import learn.capstone.models.Duck;
 import learn.capstone.security.AppUserResult;
 import learn.capstone.security.AppUserService;
 import learn.capstone.security.JwtConverter;
@@ -12,10 +13,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,6 +31,14 @@ public class AuthController {
         this.authenticationManager = authenticationManager;
         this.converter = converter;
         this.appUserService = appUserService;
+    }
+    @GetMapping("/api/user/{appUserId}")
+    public ResponseEntity<AppUser> loadUserById(@PathVariable int appUserId) {
+        AppUser appUser = appUserService.loadUserById(appUserId);
+        if (appUser == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return ResponseEntity.ok(appUser);
     }
 
 

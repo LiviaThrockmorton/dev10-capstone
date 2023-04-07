@@ -13,48 +13,11 @@ import ForumPost from './components/ForumPost';
 import Profile from './components/Profile';
 import NotFound from './components/NotFound';
 import { useContext } from 'react';
+import BottomNav from './components/BottomBar';
 
-// const LOCAL_STORAGE_TOKEN_KEY = "dressUpDuckToken";
+
 
 function App() {
-
-  // const [user, setUser] = useState(null);
-  // const [restoreLoginAttemptCompleted, setRestoreLoginAttemptCompleted] = useState(false);
-
-  // useEffect(() => {
-  //   const token = localStorage.getItem(LOCAL_STORAGE_TOKEN_KEY);
-  //   if (token) {
-  //     login(token);
-  //   }
-  //   setRestoreLoginAttemptCompleted(true);
-  // }, []);
-
-  // const login = (token) => {
-  //   localStorage.setItem(LOCAL_STORAGE_TOKEN_KEY, token);
-  //   const { sub: username, authorities: authoritiesString } = jwtDecode(token);
-  //   const authorities = authoritiesString.split(',');
-
-  //   const user = {
-  //     username,
-  //     authorities,
-  //     token,
-  //     hasAnyAuthority(authority) {
-  //       return this.authorities.includes(authority);
-  //     }
-  //   };
-
-  //   setUser(user);
-  //   return user;
-  // };
-
-  // const logout = () => {
-  //   setUser(null);
-  //   localStorage.removeItem(LOCAL_STORAGE_TOKEN_KEY);
-  // };
-
-  // const auth = { user: user ? { ...user } : null, login, logout };
-
-  // if (!restoreLoginAttemptCompleted) { return null; };
 
   const {user} = useContext(AuthContext);
 
@@ -76,8 +39,11 @@ function App() {
             <Route path="/forum/:outfitId" element={<ForumPost />} />
             <Route path="/profile" element={user ? <Profile /> : <Navigate to="/login" />} />
             <Route path="*" element={<NotFound />} />
-          </Routes>
-        </div>
+        </Routes>
+        <BottomNav />
+      </div>
+
+
       </Router>
 
   );

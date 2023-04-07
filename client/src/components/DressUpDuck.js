@@ -1,14 +1,17 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, useLayoutEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import AuthContext from "../contexts/AuthContext";
 import { findAll } from "../services/DuckService";
 import Duck from "./Duck";
 import ClothingItem from "./ClothingItem";
 import { findByType } from "../services/ClothingItemService";
-import { findById } from "../services/OutfitService";
+import { findById, save } from "../services/OutfitService";
 import Outfit from "./Outfit";
+import yellowDuck from "./images/yellow-duck-no-arm.svg"
+import duckArm from "./images/yellow-duck-arm.svg"
+import { gsap } from "gsap";
 
-const baseOutfit = { outfitId: "", appUserId: "", duckId: 1, shirtId: "", pantsId: "", hatId: "", dateCreated: "", posted: "false", hidden: "false" }
+const baseOutfit = { outfitId: "", userId: "", duckId: "", shirtId: "", pantsId: "", hatId: "", dateCreated: "", posted: "false", hidden: "false" }
 
 function DressUpDuck({ handleDelete }) {
 
@@ -16,12 +19,23 @@ function DressUpDuck({ handleDelete }) {
     const [hats, setHats] = useState([]);
     const [shirts, setShirts] = useState([]);
     const [pants, setPants] = useState([]);
-    const [outfit, setOutfit] = useState(baseOutfit);
+    const [outfit, setOutfit] = useState([]);
     const { outfitId } = useParams();
     const navigate = useNavigate();
     const auth = useContext(AuthContext);
     const canDelete = auth.user && auth.user.hasAnyAuthority("ADMIN");
     const [error, setError] = useState(false);
+    const [saveResult, setSaveResult] = useState();
+
+    //ANIMATION
+    useLayoutEffect(() => {
+        let ctx = gsap.context(() => {
+            gsap.to(".arm", {duration: .25, rotation: 40});
+            gsap.to(".arm", {duration: .25, rotation: 20, delay: .25});
+            gsap.to(".arm", {duration: .25, rotation: 40, delay: .5});
+            gsap.to(".arm", {duration: .5, rotation: 0, delay: .75});
+            return () => ctx.revert();});
+    }, [navigate]);
 
     //GET DUCK AND CLOTHING ITEMS
     useEffect(() => {
@@ -69,26 +83,20 @@ function DressUpDuck({ handleDelete }) {
 
     function handleSave(evt) {
         evt.preventDefault();
-        const nextOutfit = { ...outfit };
-        nextOutfit.userId = auth.user.app_user_id;
 
-        //save
-        fetch('http://localhost:8080/api/outfit', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${localStorage.getItem('duckToken')}`
-            },
-            body: JSON.stringify(nextOutfit)
-          })
-          .then(response => response.json())
-          .then(data => {
-            setOutfit({...nextOutfit, outfitId: data.outfitId});
-          })
-          .catch(error => {
-            console.error('Error:', error);
-          });
+
+        if (auth.user) {
+            const nextOutfit = { ...outfit };
+            nextOutfit.userId = auth.user.app_user_id;
+
+            save(nextOutfit)
+                .then(() => setSaveResult("Success! Outfit saved."))
+                .catch(() => setSaveResult("Failure to save outfit."))
+        } else {
+            navigate("/login")
         }
+
+    }
 
     return (
         <div className="container">
@@ -99,7 +107,7 @@ function DressUpDuck({ handleDelete }) {
                         <div className="col d-flex flex-row">
                             {ducks.map(d => <Duck key={d.duckId} duck={d} handleChange={handleChange} handleDelete={handleDelete} canDelete={canDelete} />)}
                         </div>
-                        {error && <p className="col mt-4 text-danger d-none">The ducks got loose!</p>}
+                        {error && <p className="col mt-4 text-danger">The ducks got loose!</p>}
                     </div>
 
                     <div className="row mb-2">
@@ -115,7 +123,7 @@ function DressUpDuck({ handleDelete }) {
                         <div className="col d-flex flex-row">
                             {shirts.map(s => <ClothingItem key={s.itemId} item={s} handleChange={handleChange} handleDelete={handleDelete} canDelete={canDelete} />)}
                         </div>
-                        {error && <p className="col mt-4 text-danger d-none">The shirts fell in the duck pond!</p>}
+                        {error && <p className="col mt-4 text-danger">The shirts fell in the duck pond!</p>}
                     </div>
 
                     <div className="row mb-2">
@@ -123,17 +131,20 @@ function DressUpDuck({ handleDelete }) {
                         <div className="col d-flex flex-row">
                             {pants.map(p => <ClothingItem key={p.itemId} item={p} handleChange={handleChange} handleDelete={handleDelete} canDelete={canDelete} />)}
                         </div>
-                        {error && <p className="col mt-4 text-danger d-none">How would a duck even wear pants?</p>}
+                        {error && <p className="col mt-4 text-danger">How would a duck even wear pants?</p>}
                     </div>
 
                     <div className="row mb-2">
                         <button className="btn btn-primary" onClick={handleSave}>Save Outfit</button>
                     </div>
+                    {saveResult && <p className="col mt-4">{saveResult}</p>}
                 </div>
 
                 <div className="col-6">
                     <div style={{ width: "800px", height: "1000px" }}>
-                        {<Outfit key={outfit.outfitId} outfit={outfit} viewOutfit={false} viewHome={false} />}
+                        <img src={yellowDuck} className="duck-no-arm" alt="duck" style={{ height: "600px", position: "absolute" }} />
+                        <img src={duckArm} className="arm" alt="duck" style={{ height: "600px", position: "absolute" }} />
+                        {<Outfit key={outfit.outfitId} outfit={outfit} viewOutfit={false} viewHome={false} profileView={false} />}
                     </div>
                 </div>
             </div>

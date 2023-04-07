@@ -1,4 +1,4 @@
-package learn.capstone.data;
+package learn.capstone.data.mappers;
 
 import learn.capstone.models.AppUser;
 import org.springframework.jdbc.core.RowMapper;
@@ -12,6 +12,8 @@ public class AppUserMapper implements RowMapper<AppUser> {
     public AppUserMapper(List<String> roles) {
         this.roles = roles;
     }
+
+
 
     @Override
     public AppUser mapRow(ResultSet rs, int i) throws SQLException {

@@ -1,5 +1,5 @@
 import background from "./images/field_ducklings.jpg";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 const baseUser = { appUserId: "", username: "", passwordHash: "", email: "", hidden: 0, enabled: 1 }
@@ -51,8 +51,6 @@ function CreateAccount() {
                 .catch(setError(true))
         }
     }
-
-
 
     return (
         <div className="container">
