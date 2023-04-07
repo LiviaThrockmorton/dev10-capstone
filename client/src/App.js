@@ -13,6 +13,9 @@ import ForumPost from './components/ForumPost';
 import Profile from './components/Profile';
 import NotFound from './components/NotFound';
 import { useContext } from 'react';
+import BottomNav from './components/BottomBar';
+
+
 
 function App() {
 
@@ -37,7 +40,9 @@ function App() {
             <Route path="/profile" element={user ? <Profile /> : <Navigate to="/login" />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
-        </div>
+      </div>
+      <BottomNav/>
+
       </Router>
 
   );

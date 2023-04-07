@@ -1,3 +1,5 @@
+import { findByUser } from "./OutfitService";
+
 const url = "http://localhost:8080";
 
 function convertJwtToUser(jwt) {

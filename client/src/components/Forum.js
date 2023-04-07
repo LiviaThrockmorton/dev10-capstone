@@ -20,7 +20,7 @@ function Forum() {
   }, [navigate]);
 
   return (
-    <div className="container">
+    <div className="flex-container">
       <div>
         <h1 className="text-center">Forum</h1>
         <h4 className="text-center">Get inspiration and comment on posts!</h4>

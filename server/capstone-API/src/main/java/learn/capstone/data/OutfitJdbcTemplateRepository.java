@@ -39,7 +39,7 @@ public class OutfitJdbcTemplateRepository implements OutfitRepository {
                 "from outfit " +
                 "where hidden = 0 " +
                 "and posted = 1 " +
-                "order by date_created desc;";
+                "order by date_created asc;";
         return jdbcTemplate.query(sql, new OutfitMapper());
     }
 
@@ -59,7 +59,7 @@ public class OutfitJdbcTemplateRepository implements OutfitRepository {
                 "from outfit " +
                 "where outfit_id = ? " +
                 "and hidden = 0 " +
-                "order by date_created desc;";
+                "order by date_created asc;";
 
         Outfit outfit = jdbcTemplate.query(sql, new OutfitMapper(), outfitId).stream()
                 .findFirst().orElse(null);

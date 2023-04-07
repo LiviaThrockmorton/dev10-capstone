@@ -59,7 +59,7 @@ function OutfitView({ duck, hat, shirt, pants, outfit, canDelete, error, profile
                     <div className="card-body">{<ToggleSwitch outfitId={outfit.outfitId} posted={outfit.posted} handleChange={handleChange} />}</div>
                     <div className="card-body"><button onClick={handleDelete} className="btn btn-danger mt-2">Delete</button></div>
                     {result && <p className="text-success">{result}</p>}
-                    {user.username}
+
                 </div>
                 :
                 
@@ -75,9 +75,6 @@ function OutfitView({ duck, hat, shirt, pants, outfit, canDelete, error, profile
                     </div>
                 </div>
             }
-
-
-
 
             <div>{error && <p className="text-danger">This duck doesn't want to wear clothes</p>}</div>
             <div className="d-none">{outfit.outfitId}</div>

@@ -118,16 +118,11 @@ function ForumPost() {
       </div>
 
       <div className="col-6">
-
-
-        
+        <h2>Posted by: {user.username}</h2>
 
         <div style={{ width: "800px", height: "1000px" }}>
-
           {<Outfit key={outfit.outfitId} outfit={outfit} viewOutfit={false} />}
         </div>
-        {user.username}
-
         {displayResult && <p className="col mt-4">{displayResult}</p>}
 
       </div>

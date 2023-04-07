@@ -142,8 +142,8 @@ function DressUpDuck({ handleDelete }) {
 
                 <div className="col-6">
                     <div style={{ width: "800px", height: "1000px" }}>
-                        <img src={yellowDuck} className="duck-no-arm" alt="duck" style={{ height: "800px", position: "absolute" }} />
-                        <img src={duckArm} className="arm" alt="duck" style={{ height: "800px", position: "absolute" }} />
+                        <img src={yellowDuck} className="duck-no-arm" alt="duck" style={{ height: "600px", position: "absolute" }} />
+                        <img src={duckArm} className="arm" alt="duck" style={{ height: "600px", position: "absolute" }} />
                         {<Outfit key={outfit.outfitId} outfit={outfit} viewOutfit={false} viewHome={false} profileView={false} />}
                     </div>
                 </div>
