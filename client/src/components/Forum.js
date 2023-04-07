@@ -23,7 +23,7 @@ function Forum() {
     <div className="flex-container">
       <div>
         <h1 className="text-center">Forum</h1>
-        <h4 className="text-center">Get inspiration and comment on posts!</h4>
+        <h4 className="text-center mb-5">Get inspiration and comment on posts!</h4>
       </div>
 
       <div className="d-flex flex-wrap">

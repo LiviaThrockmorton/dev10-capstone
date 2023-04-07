@@ -63,16 +63,17 @@ function OutfitView({ duck, hat, shirt, pants, outfit, canDelete, error, profile
                 </div>
                 :
                 
-                <div className="d-flex flex-wrap">
-                    <button onClick={handleView} style={{ border: "none", backgroundColor: "white", margin: "0 120px 300px", padding: "20px" }}>
+                <div style={{height: "350px", width: "275px", marginBottom: "50px"}}>
+                    <p style={{margin: "0px 0px 0px 105px"}}>{user.username}</p>
+                    <button onClick={handleView} style={{ border: "none", backgroundColor: "white", padding: "0px"}}>
+                    
                         {outfit.duckId && <img src={duck.duckImage} alt="duck" style={{ height: "300px", position: "absolute" }} />}
                         {hat && <img src={hat.clothingItemImage} alt="hat" style={{ height: "300px", position: "absolute" }} />}
                         {pants && <img src={pants.clothingItemImage} alt="pants" style={{ height: "300px", position: "absolute" }} />}
                         {shirt && <img src={shirt.clothingItemImage} alt="shirt" style={{ height: "300px", position: "absolute" }} />}
+                        
                     </button>
-                    <div>
-                    {user.username}
-                    </div>
+                    
                 </div>
             }
 
