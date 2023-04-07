@@ -83,9 +83,10 @@ function ForumPost() {
 
   return (
     <div className="row">
+      <h1 className="text-center mb-5">Posted by: {user.username}</h1>
       <div className="col-6">
         <div className="comment-container">
-
+            <h4 className="text-center text-light">Comments</h4>
           <div>
             {comments.map((c) => (<Comment key={c.commentId} comment={c} canAdd={canAdd} />))}
             {displayResult && <p className="col mt-4">{displayResult}</p>}
@@ -118,7 +119,7 @@ function ForumPost() {
       </div>
 
       <div className="col-6">
-        <h2>Posted by: {user.username}</h2>
+        
 
         <div style={{ width: "800px", height: "1000px" }}>
           {<Outfit key={outfit.outfitId} outfit={outfit} viewOutfit={false} />}
